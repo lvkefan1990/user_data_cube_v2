@@ -44,6 +44,8 @@ def user_basic_info(phone_number):
         "is_header_user": "该数据缺失",
         "is_risk_user": "该数据缺失",
         "phone_type": "该数据缺失",
+        "is_complaint_user":"该数据缺失",
+        "is_discontent_user": "该数据缺失",
         "error_text": "正常",
     }
     try:
@@ -97,6 +99,14 @@ def user_basic_info(phone_number):
             dict_user_basic["is_risk_user"] = "否";
         else:
             dict_user_basic["is_risk_user"] = "是";
+        if single_UsrCompltRecord.if_complaint_user != 1:
+            dict_user_basic["is_complaint_user"] = "否";
+        else:
+            dict_user_basic["is_complaint_user"] = "是";
+        if single_UsrCompltRecord.if_discontent_user != 1:
+            dict_user_basic["is_discontent_user"] = "否";
+        else:
+            dict_user_basic["is_discontent_user"] = "是";
     return dict_user_basic;
 
 
@@ -106,13 +116,8 @@ def wlgz_submit(request):
     dict_single_user = {
         "coverage": "该数据缺失",
         "rsrp": "该数据缺失",
-        "app": "该数据缺失",
         "dl_speed": "该数据缺失",
         "call_success": "该数据缺失",
-        "arpu": "该数据缺失",
-        "dou": "该数据缺失",
-        "call_time": "该数据缺失",
-        "portrait": "该数据缺失",
         "yhczxq":"该数据缺失",#用户常驻小区
         "fgl":"该数据缺失",#覆盖率
         "cphrl":"该数据缺失",#差phr率
@@ -156,26 +161,6 @@ def wlgz_submit(request):
             dict_single_user["rsrp"] = single_UsrCoverPecpt.avg_rsrp;
             dict_single_user["cphrl"]=single_UsrCoverPecpt.bad_phr_rate;
 
-    #app偏好
-    try:
-        single_UsrAppRank = UsrAppRank.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
-    except ValueError:
-        pass
-    except UsrAppRank.DoesNotExist:
-        pass;
-    else:
-        app_list={"app_top1":single_UsrAppRank.top1_app_name,
-                  "app_top1_data":single_UsrAppRank.top1_data,
-                  "app_top2":single_UsrAppRank.top2_app_name,
-                  "app_top2_data": single_UsrAppRank.top2_data,
-                  "app_top3": single_UsrAppRank.top3_app_name,
-                  "app_top3_data": single_UsrAppRank.top3_data,
-                  "app_top4": single_UsrAppRank.top4_app_name,
-                  "app_top4_data": single_UsrAppRank.top4_data,
-                  "app_top5": single_UsrAppRank.top5_app_name,
-                  "app_top5_data": single_UsrAppRank.top5_data,
-                  };
-        dict_single_user["app"] = app_list;
     #用户上下行速率，大包速率
     try:
         single_UsrSpeedPecpt = UsrSpeedPecpt.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
@@ -226,17 +211,6 @@ def wlgz_submit(request):
         dict_single_user["tcpwxcgl"] = single_UsrEtePecpt.tcp_radio_rate;
         dict_single_user["tcpwxsy"] = single_UsrEtePecpt.tcp_radio_delay;
         dict_single_user["ymxysy"]=single_UsrEtePecpt.page_res_delay;
-    #arpu,dou查询
-    try:
-        single_UsrExpenses = UsrExpenses.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
-    except ValueError:
-        pass
-    except UsrExpenses.DoesNotExist:
-        pass;
-    else:
-        dict_single_user["arpu"] = single_UsrExpenses.last3m_avg_arpu;
-        dict_single_user["dou"] = single_UsrExpenses.last3m_avg_dou;
-        dict_single_user["call_time"] = 30;
     #用户得分
     try:
         single_UsrScoreReturn = UsrScoreReturn.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
@@ -455,5 +429,72 @@ def lssj_submit(request):
 def scpg_submit(request):
     get_value = request.POST["phone_number"];
     request.session["phone_number"] = get_value;
-    wlgz_dict = user_basic_info(get_value);
-    return HttpResponse(json.dumps(wlgz_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+    user_basic_info_dict = user_basic_info(get_value);
+    #查询用户app数据
+    scpg_dict={
+        "app":"该数据缺失",
+        "arpu": "该数据缺失",
+        "dou": "该数据缺失",
+        "call_time": "该数据缺失",
+        "ztcmc": "该数据缺失", #主套餐名称
+        "lldy500M":"该数据缺失", #流量大于500M用户
+        "xykh":"该数据缺失", #校园客户
+        "ctcyh": "该数据缺失",  # 超套餐用户
+        "yjarpu":"该数据缺失",#月均arpu
+        "qarpuyh":"该数据缺失",#前30%arpu用户
+        "yjdou":"该数据缺失",#月均dou
+        "doupm":"该数据缺失",#dou排名
+        "zdpp":"该数据缺失",#终端品牌
+        "zdxh":"该数据缺失",#终端型号
+        "lwyj":"该数据缺失",#离网预警用户
+        "tsyh":"该数据缺失",#投诉用户
+        "bmyyh":"该数据缺失",#不满意用户
+    };
+    try:
+        single_UsrAppRank = UsrAppRank.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
+    except ValueError:
+        pass
+    except UsrAppRank.DoesNotExist:
+        pass;
+    else:
+        scpg_dict["app"]=[{"name":single_UsrAppRank.top1_app_name,"value":single_UsrAppRank.top1_data,},
+                          {"name":single_UsrAppRank.top2_app_name,"value":single_UsrAppRank.top2_data,},
+                          {"name":single_UsrAppRank.top3_app_name,"value":single_UsrAppRank.top3_data,},
+                          {"name":single_UsrAppRank.top4_app_name,"value":single_UsrAppRank.top4_data,},
+                          {"name":single_UsrAppRank.top5_app_name,"value":single_UsrAppRank.top5_data,},],
+        print(scpg_dict["app"]);
+    # arpu,dou查询
+    try:
+        single_UsrExpenses = UsrExpenses.objects.get(msisdn=get_value, rounds=RECENT_ROUND);
+    except ValueError:
+        pass
+    except UsrExpenses.DoesNotExist:
+        pass;
+    else:
+        scpg_dict["arpu"] = [single_UsrExpenses.last3m_avg_arpu/500];
+        scpg_dict["dou"] = [single_UsrExpenses.last3m_avg_dou/30000];
+        scpg_dict["call_time"] = "3000min";
+        scpg_dict["ztcmc"]=single_UsrExpenses.packages_name;
+        scpg_dict["lldy500M"]=single_UsrExpenses.up_500m_user;
+        if single_UsrExpenses.college_user == 1:
+            scpg_dict["xykh"]= "是";
+        else:
+            scpg_dict["xykh"] = "否";
+        scpg_dict["ctcyh"]=single_UsrExpenses.over_packges_user;
+        scpg_dict["yjarpu"]=single_UsrExpenses.last3m_avg_arpu;
+        if single_UsrExpenses.if_30_arpu==1:
+            scpg_dict["qarpuyh"]="是";
+        else:
+            scpg_dict["qarpuyh"]="否";
+        scpg_dict["yjdou"]=single_UsrExpenses.last3m_avg_dou;
+        if single_UsrExpenses.if_30_dou==1:
+            scpg_dict["doupm"]="是";
+        else:
+            scpg_dict["doupm"]="否";
+        scpg_dict["zdpp"]=user_basic_info_dict["phone_brand"];
+        scpg_dict["zdxh"] = user_basic_info_dict["phone_type"];
+        scpg_dict["lwyj"]=user_basic_info_dict["is_risk_user"];
+        scpg_dict["tsyh"]=user_basic_info_dict["is_complaint_user"];
+        scpg_dict["bmyyh"]=user_basic_info_dict["is_discontent_user"];
+    scpg_dict.update(user_basic_info_dict);
+    return HttpResponse(json.dumps(scpg_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");

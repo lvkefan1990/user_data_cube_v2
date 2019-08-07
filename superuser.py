@@ -19,5 +19,5 @@ modles = ('AuthGroup','AuthPermission','AuthUser','AuthUserGroups','AuthUserUser
           'UsrLocation','UsrLogin','UsrResidentCell','UsrScoreReturn','UsrSpeedPecpt'
           )
 
-b=[1,2,3,4,5,6,7,8,9]
-print(b[0:4])
+b=[1,2,3,4,5,6,7,8,9];
+print(b);

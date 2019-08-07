@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>市场评估</title>
     <link rel="stylesheet" type="text/css" href="../static/css/scpg.css" />
+    <script type="text/javascript" src="../static/js/echarts.js"></script>
+    <script type="text/javascript" src="../static/js/echarts_theme.js"></script>
+    <script type="text/javascript" src="../static/js/echarts-liquidfill.js"></script>
 </head>
 <body>
 	
@@ -113,10 +116,8 @@
 	           	     </div>
 	           	     
 	           	     <div class="content_img">
-		   	 	    	<div class="content_img_ico" id="app_echarts">
-		   	 	    		<!--默认数据为空-->
-		   	 	    	<!--	<span class="null_date">暂无数据</span>-->
-		   	 	    		<!--echarts替换img标签-->
+		   	 	    	<div class="content_img_ico" id="app">
+
 		   	 	    	</div>
 		   	 	    </div>
 	           	  </div>
@@ -128,10 +129,7 @@
 	           	     </div>
 	           	     
 	           	     <div class="content_img">
-		   	 	    	<div class="content_img_ico" id="apru_echarts">
-		   	 	    		<!--默认数据为空-->
-		   	 	    		<!--<span class="null_date">暂无数据</span>-->
-		   	 	    		<!--echarts替换img标签-->
+		   	 	    	<div class="content_img_ico" id="apru">
 		   	 	    	</div>
 		   	 	    </div>
 	           	  </div>
@@ -146,7 +144,7 @@
 	           	     </div>
 	           	     
 	           	     <div class="content_img">
-		   	 	    	<div class="content_img_ico" id="dou_echarts">
+		   	 	    	<div class="content_img_ico" id="dou">
 		   	 	    	</div>
 		   	 	    </div>
 	           	  </div>
@@ -163,7 +161,7 @@
 		   	 	    		<!--<span class="null_date">暂无数据</span>-->
 		   	 	    		<!--echarts替换img标签-->
 		   	 	    	    <div style="display: inline-block;">
-		   	 	    		   <img class="fl"  src="../static/img/thsc.png" style="	margin-top: 113px;margin-right: 16px;">
+		   	 	    		   <img class="fl"  src="../static/img/thsc.png" style="margin-top: 113px;margin-right: 16px;">
 		   	 	    	       <span class="content_img_ico_word fl" id="call_time">2000min</span>
 		   	 	    	    </div>
 		   	 	    	</div>
@@ -177,14 +175,14 @@
 	          	 <div class="content_l_b   ">
 	           	   <div class="content_l_title">
 	           	   	<p class="fl">详细信息</p>
-		   	 	     <a class="search fr">导出</a>
+		   	 	     <a class="search fr" id="export_excel_href">导出</a>
 		   	 	   <div class="clear"></div>
 	           	   </div>
 	          	
 	          	<div style="width:calc(100% - 40px);margin:0 20px;"> 
 		    	 <div style="width:100%;height: 100%;overflow-y:hidden;overflow-x:auto;"> 
 		    	 	
-		    	 <table style="width:2200px;">
+		    	 <table style="width:2200px;" id="export_table">
 					<thead>
 					 <tr class="gl2_table_1 ">	
 					  <td class="date">日期</td>
@@ -192,12 +190,11 @@
 					  <td class="ztcmc">主套餐名称</td>
 					  <td class="lldy">流量大于500M</td>
 					  <td class="xykh">校园客户</td>
-					  <td class="cctcll">超出套餐流量</td>
+					  <td class="cctcll">超套餐用户</td>
 					  <td class="yjarpu">近三个月月均ARPU</td>
-					  <td class="arpupm">ARPU月排名</td>
 					  <td class="qarpuyh">前30%ARPU用户</td>
 					  <td class="yjdou">近三个月月均DOU </td>
-					  <td class="doupm">DOU月排名</td>
+					  <td class="doupm">前30%DOU用户</td>
 					  <td class="zdpp">终端品牌</td>
 					  <td class="zdxh">终端型号</td>
 					  <td class="lwyj">离网预警</td>
@@ -213,27 +210,24 @@
 					</tbody>-->
 					<tbody>
 					 <tr class="gl2_table_2 ">	
-					  <td class="date">2019/7/10 15:00:00</td>
-					  <td class="yhdh">16725438964</td>					 
-					  <td class="ztcmc">4G自选套餐148元(48元语音模组（新）+100元流量模组)</td>
-					  <td class="lldy">是</td>
-					  <td class="xykh">是</td>
-					  <td class="cctcll">是</td>
-					  <td class="yjarpu">139.81元</td>
-					  <td class="arpupm">27682544</td>
-					  <td class="qarpuyh">是</td>
-					  <td class="yjdou">313.77MB </td>
-					  <td class="doupm">26083443</td>
-					  <td class="zdpp">深圳五洲无线股份有限公司</td>
-					  <td class="zdxh">V328</td>
-					  <td class="lwyj">否</td>
-					  <td class="tsyh">否</td>
-					  <td class="bmyyh">是</td>	    
+					  <td class="date" id="date"></td>
+					  <td class="yhdh" id="yhdh"></td>
+					  <td class="ztcmc" id="ztcmc"></td>
+					  <td class="lldy" id="lldy500M"></td>
+					  <td class="xykh" id="xykh"></td>
+					  <td class="cctcll" id="ctcyh"></td>
+					  <td class="yjarpu" id="yjarpu"></td>
+					  <td class="qarpuyh" id="qarpuyh"></td>
+					  <td class="yjdou" id="yjdou"></td>
+					  <td class="doupm" id="doupm"></td>
+					  <td class="zdpp" id="zdpp"></td>
+					  <td class="zdxh" id="zdxh"></td>
+					  <td class="lwyj" id="lwyj"></td>
+					  <td class="tsyh" id="tsyh"></td>
+					  <td class="bmyyh" id="bmyyh"></td>
 					 </tr>
 					</tbody>
-				   </table>  
-				   
-				
+				   </table>
 				 </div>  
 		    	</div>
 		    	
@@ -247,4 +241,6 @@
 </body>
 </html>
 <script type="text/javascript" src="../static/js/scpg_define.js"></script>
+<script type="text/javascript" src="../static/js/scpg_option.js"></script>
 <script type="text/javascript" src="../static/js/scpg_setoption.js"></script>
+<script type="text/javascript" src="../static/js/scpg_export_excel.js"></script>

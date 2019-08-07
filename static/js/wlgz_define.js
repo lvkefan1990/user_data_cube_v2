@@ -23,7 +23,7 @@ var phone_type_td = document.getElementById('phone_type');
 var error_td = document.getElementById('error');
 
 //定义图表
-var cover = echarts.init(document.getElementById('coverage'),"dark");
+var app = echarts.init(document.getElementById('app'),"dark");
 var rsrp = echarts.init(document.getElementById('rsrp'),"dark");
 var dl_speed = echarts.init(document.getElementById('dl_speed'),"dark");
 var call_success = echarts.init(document.getElementById('call_success'),"dark");

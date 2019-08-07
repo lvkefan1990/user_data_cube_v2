@@ -26,11 +26,16 @@ function chaxun() {
                     writeText(is_header_user_td,wlgz_obj.is_header_user);
                     writeText(is_risk_user_td,wlgz_obj.is_risk_user);
                     writeText(phone_type_td,wlgz_obj.phone_type);
+                    alert(wlgz_obj.coverage);
                     coverage_option.series.data = wlgz_obj.coverage;
+                    //cover.clear();
                     cover.setOption(coverage_option);
                     rsrp_option.series.data[0].value = wlgz_obj.rsrp-140;
+                    //rsrp.clear();
                     rsrp.setOption(rsrp_option);
+                    //dl_speed.clear();
                     dl_speed.setOption(dl_speed_option);
+                    //call_success.clear();
                     call_success.setOption(call_success_option);
                     writeText(date_td,time);
                     writeText(yhdh_td,phone_number);
@@ -66,4 +71,4 @@ function chaxun() {
 
     }
     xhr.send('phone_number='+phone_number);
-    }
+}

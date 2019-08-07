@@ -21,3 +21,26 @@ var is_header_user_td = document.getElementById('is_header_user');
 var is_risk_user_td = document.getElementById('is_risk_user');
 var phone_type_td = document.getElementById('phone_type');
 var error_td = document.getElementById('error');
+
+ //定义市场echarts图表
+var app = echarts.init(document.getElementById('app'),"dark");
+var apru = echarts.init(document.getElementById('apru'),"dark");
+var dou = echarts.init(document.getElementById('dou'),"dark");
+var call_time = document.getElementById('call_time');
+
+//定义查询结果表格
+var date_td = document.getElementById('date');
+var yhdh_td = document.getElementById('yhdh');
+var ztcmc_td = document.getElementById('ztcmc');
+var lldy500M_td = document.getElementById('lldy500M');
+var xykh_td = document.getElementById('xykh');
+var ctcyh_td = document.getElementById('ctcyh');
+var yjarpu_td = document.getElementById('yjarpu');
+var qarpuyh_td = document.getElementById('qarpuyh');
+var yjdou_td = document.getElementById('yjdou');
+var doupm_td = document.getElementById('doupm');
+var zdpp_td = document.getElementById('zdpp');
+var zdxh_td = document.getElementById('zdxh');
+var lwyj_td = document.getElementById('lwyj');
+var tsyh_td = document.getElementById('tsyh');
+var bmyyh_td = document.getElementById('bmyyh');
