@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="translated-ltr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no,minimal-ui">
+<title>用户数据魔方</title>
+<script type="text/javascript" src="../.project"></script>
+<link rel="stylesheet" href="../static/css/login.css">
+<script src="../static/js/simplex-noise.js"></script>
+<script src="../static/js/lvrjwz.js"></script>
+<script src="../static/js/login.js"></script>
+</head>
+
+<body>
+<div class="content">
+	<div class="login">
+		<div  style="display:inline-block;height: 60px;margin-bottom: 80px;">
+			<div class="logo fl"></div>
+		<p class="title fl">用户数据魔方</p>
+        </div>
+        <form action="/login_submit/" method="post">{% csrf_token %}
+            <div class="login_k">
+                <div class="login_input ">
+                            <div class="login_name"></div>
+                            <input  type="text" id="username" name="user_id" placeholder="用户名"/><!--placeholder是占位符-->
+                </div>
+                <div class="login_input ">
+                            <div class="login_psd"></div>
+                            <input  type="password" id="password" name="password" placeholder="密码"/>
+                </div>
+                <div style="width: 100%;height: 46px;margin-bottom: 30px;">
+                  <div class="login_input fl"style="width: 280px;">
+                            <div class="login_yzm"></div>
+                            <input  type="text"  placeholder="验证码"/>
+                  </div >
+                  <div class="login_input fr yzm">
+                    <img src="../static/img/yzm.png"/>
+                  </div>
+                </div>
+                <div class="login_input login_but"style="margin-bottom: 0;">
+                    <input  type="submit"  value="登 录"/>
+                </div>
+            </div>
+        </form>
+        <p style="color: red;font-size: 20px">{{ error }}</p>
+     </div>
+</div>
+<canvas style="position: absolute;z-index: 1; top: 0px; left: 0px; width: 100%; height: 100%;" width="2560" height="1304"></canvas>
+<canvas width="1440" height="374" style="position: absolute; z-index:1;top: 0px; left: 0px; width: 100%; height: 100%;"></canvas>
+<!--这两行代码不清除什么意思-->
+
+
+</body>
+</html>

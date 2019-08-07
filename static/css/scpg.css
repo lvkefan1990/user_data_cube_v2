@@ -1,0 +1,497 @@
+@charset "utf-8";
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+img,
+input,
+select,
+button {
+	vertical-align: middle;
+}
+
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover{
+	cursor: pointer;
+}
+
+*:focus {
+	outline: none;
+}
+
+.clear{ clear: both;}
+ 
+ font{
+ 	font-family: "微软雅黑";
+ }
+
+
+ .fl{
+ 	float: left;
+ }
+ 
+ .fr{
+ 	float: right;
+ }
+ 
+  /*- scrollbar -*/
+       ::-webkit-scrollbar {
+          
+            background-color: #15131d;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color:#282735;
+        }
+        ::-webkit-scrollbar-thumb:vertical:hover{
+            background-color: #2c2d3b;
+        }
+        ::-webkit-scrollbar-thumb:vertical:active{
+            background-color: #2c2d3b;
+        }
+        ::-webkit-scrollbar-button{
+            display: none;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: none;
+        }
+ /*- scrollbar -*/
+
+
+ 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:   rgba(255,255,255,0.5);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    rgba(255,255,255,0.5);
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:  rgba(255,255,255,0.5);
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    rgba(255,255,255,0.5);
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:     rgba(255,255,255,0.5);
+}
+
+
+
+.content_t{
+	position:fixed;
+	z-index: 9;
+	background-color: #fff;
+	padding: 20px;
+	top:0;
+	left:0;
+	width: calc(100% - 40px);
+	 box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+	 background-color: #1e1d2b;
+	
+}
+
+.content_t_title{
+	color: #fff;
+	font-size: 16px;
+	display: inline-block;
+	margin-bottom: 24px;
+	
+}
+
+.help{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-top: 3px;
+	margin-left: 10px;
+	background-image: url(../img/help.png);
+}
+
+.help:hover{
+	cursor: pointer;
+}
+
+.timeslecet_title {
+    line-height: 32px;
+    margin-right: 5px;
+    color: rgba(255,255,255,0.75);
+}
+
+.search_list {
+    height: 32px ;
+    width: 240px;
+    position: relative;
+    margin-right: 16px;
+}
+
+.search_w2 {
+    width: 100%;
+    height: 32px;
+    font-size: 13px;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: 微软雅黑;
+    background-color: #272634;
+    line-height: 32px ;
+    border: 1px solid #272634;
+    padding: 0px 36px 0px 10px;
+    border-radius: 2px;
+}
+
+.search{
+	display: inline-block;
+	border-radius: 2px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #fff;
+	background-color:#01cffd ;
+	padding: 0 20px;
+}
+
+.search:hover{
+	background-color:#1ca8eb ;
+}
+
+
+.content_l{
+	margin-top: 133px;
+	
+}
+
+.content_k{
+	width: 100%;	
+	height: 350px;
+	margin-bottom: 16px;
+	background-color: #1e1d2b;
+}
+
+
+.content_l_t{
+	height: 390px;
+	border-top: none;
+	margin-bottom: 16px;
+}
+
+.content_l_title{
+	padding: 20px;
+}
+
+.content_l_title p{
+	font-size: 16px;
+	color: #fff;
+}
+
+.content_l_t_mok {
+    background-color: #1e1d2b;
+    width: calc(50% - 8px);
+    height: 100%;
+}
+
+.content_img {
+    padding: 30px;
+    width: calc(100% - 60px);
+    height: 290px;
+}
+
+.content_k_con{
+	 padding: 30px 20px;
+    width: calc(100% - 40px);
+    height: 250px;
+}
+
+.content_k_con_fl{
+	width: 65%;
+	height: 100%;
+}
+
+.jcxx_list{
+	height: 50px;
+	line-height: 50px;
+	font-size: 14px;
+	color: #fff;
+	margin-right: 5%;
+}
+
+.jcxx_list_zb{
+	color: rgba(255,255,255,0.5);
+	margin-right: 10px;
+	width: 98px;
+}
+
+.jcxx_list_word{
+	width: calc(100% - 108px);
+}
+
+.zc{
+	width: 35%;
+}
+
+.zj{
+	width: 29%;
+}
+
+.zd{
+	width: 26%;
+	margin-right: 0;
+}
+
+.jcxx_list_zb,.jcxx_list_word{
+	    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;
+}
+
+.content_k_con_fr{
+	width: calc(35% - 60px);
+	margin-left: 60px;
+	height: 100%;
+}
+
+.map{
+	width: 100%;
+	height: 250px;
+	}
+
+.content_img_ico {
+    height: 290px;
+    width: 100%;
+    text-align: center;
+}
+
+.content_img_ico_bg{
+	width: 460px;
+	height: 290px;
+	margin: auto;
+}
+
+.content_img_ico_word{
+	color: #01cffd;
+	font-family: arial;
+	font-size: 60px;
+	letter-spacing: 3px;
+	line-height: 290px;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+.null_date{
+	font-size: 14px;
+	color: rgba(255,255,255,0.5);
+	line-height: 290px;
+}
+
+.content_l_b{
+	padding-bottom: 20px;
+	border-top: none;
+	background-color: #1e1d2b;
+	
+}
+
+.gl2_table_1 {
+    height: 60px;
+    line-height: 60px;
+    text-align: left;
+    border: 0;
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+    background-color: #282735;
+    font-size: 14px;
+}
+
+.gl2_table_1 td {
+    display: inline-block;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;
+    height: 60px;
+}
+
+.gl2_table_2 {
+    height: 60px;
+    line-height: 60px;
+    text-align: left;
+    border: 0;
+    display: inline-block;
+    width: 100%;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+}
+
+.gl2_table_2 td {
+    display: inline-block;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;
+    height: 60px;
+}
+
+.zwsj{
+	
+	text-align: center;
+	width: 100%;
+}
+
+
+.date{
+	width:130px;
+}
+
+.yhdh{
+	width:105px;
+}
+
+.ztcmc{
+	width:300px;
+}
+
+.lldy{
+	width:100px;
+	text-align: center;
+}
+
+.xykh{
+	width:56px;
+	text-align: center;
+}
+
+.cctcll{
+	width:85px;
+	text-align: center;
+}
+
+.yjarpu{
+	width:125px;
+}
+
+.arpupm{
+	width:82px;
+}
+
+.qarpuyh{
+	width:110px;
+	text-align: center;
+}
+
+.yjdou{
+	width:122px;
+}
+
+.doupm{
+	width:75px;
+}
+
+.zdpp{
+	width:200px;
+}
+
+.zdxh{
+	width:100px;
+}
+
+.lwyj{
+	width:56px;
+	text-align: center;
+}
+
+.tsyh{
+	width:56px;
+	text-align: center;
+}
+
+.bmyyh{
+	width:70px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

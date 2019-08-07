@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+
+		<title>javascript传递参数到html页面示例</title>
+	</head>
+
+	<body>
+		<select id="fruit">
+			<option value="苹果">苹果</option>
+			<option value="香蕉">香蕉</option>
+			<option value="李子">李子</option>
+
+		</select>
+		<a href="http://www.baidu.com" id="chooseurl">这是一个动态的网址 根据你的选择会跳转到不同的网站</a>
+		<button type="submit" id="btn" onclick="btn_three()">用户投诉记录</button>
+		<button type="submit" id="btn34" onclick="btn_three()">查看选择</button>
+	</body>
+	<!-- 需要引入jquery-->
+	<script src="../static/js/jquery-3.4.1.js"></script>
+
+	<script type="text/javascript">
+		function btn_three(){
+			alert("hh")
+		}
+		function check(){
+			alert("hh")
+			var options = $("#fruit option:selected");
+			var choosefruit = options.val();
+			alert("你选择的水果是：" + choosefruit);
+
+
+			if(choosefruit=="苹果"){
+				var url= "http://www.w3school.com.cn";
+				//通过id找到位置  href表示属性,表示参数
+				$("#chooseurl").attr("href", url);
+			}
+
+			if(choosefruit=="香蕉"){
+				var url= "https://bbs.csdn.net/topics/392037352";
+				$("#chooseurl").attr("href", url);
+			}
+
+			if(choosefruit=="李子"){
+				var url= "https://www.cnblogs.com/robinunix/p/6958402.html";
+				$("#chooseurl").attr("href", url);
+			}
+
+		}
+	</script>
+</html>

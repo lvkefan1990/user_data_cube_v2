@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>市场评估</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/scpg.css" />
+</head>
+<body>
+	
+	
+	<div class="content">
+		
+		<div class="content_t">
+		  
+		   <p class="content_t_title fl" >市场评估</p>
+		   <span class="help fl"></span>
+		   <div class="clear"></div>
+		   
+		   <div style="font-size: 14px;display: inline-block;">
+		   	<span class="fl timeslecet_title" >用户：</span>
+		   	<div class="search_list fl">
+				<input type="text" placeholder="搜索用户号码" id="phone_number" class="search_w2">
+			</div>
+		   	 
+		   	 <div style="display: inline-block;"class="fl">
+		   	 	<a class="search" onclick="chaxun()">查询</a><p id="error" style="color:red;font-weight:bold"></p>
+		   	 </div>
+		   	 
+		   </div>
+           
+		</div>
+		
+		
+		
+		
+		<div class="content_l">
+			
+			     <div class=" content_k">
+			     	<div class="content_l_title">
+	           	     	<p class="fl">基础信息</p>
+	           	     </div>
+	           	     
+	           	     
+	           	    <!-- 默认以下模块隐藏，输入号码显示-->
+	           	     <div class="content_k_con">
+	           	     	<div class="content_k_con_fl fl">
+	           	     		<ul style="display: inline-block;">
+	           	     			<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">用户电话：</span>
+	           	     				<span class="fl jcxx_list_word" id="phonemuber"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">地市：</span>
+	           	     				<span class="fl jcxx_list_word" id="city"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">区县：</span>
+	           	     				<span class="fl jcxx_list_word" id="district"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb">乡镇：</span>
+	           	     				<span class="fl jcxx_list_word" id="county"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">农村城市属性：</span>
+	           	     				<span class="fl jcxx_list_word" id="citizen_or_villager"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">客户星级：</span>
+	           	     				<span class="fl jcxx_list_word" id="star"></span>
+	           	     			</li>
+	           	     				<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">入网时间：</span>
+	           	     				<span class="fl jcxx_list_word" id="begin"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">在网时长：</span>
+	           	     				<span class="fl jcxx_list_word" id="length_of_time"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">号码归属地：</span>
+	           	     				<span class="fl jcxx_list_word" id="belong"></span>
+                                </li>
+	           	     				<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">用户终端品牌：</span>
+	           	     				<span class="fl jcxx_list_word" id="phone_brand"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">是否头部客户：</span>
+	           	     				<span class="fl jcxx_list_word" id="is_header_user"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">是否高危用户：</span>
+	           	     				<span class="fl jcxx_list_word" id="is_risk_user"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zc ">
+	           	     				<span class="fl jcxx_list_zb ">用户终端型号：</span>
+	           	     				<span class="fl jcxx_list_word" id="phone_type"></span>
+	           	     			</li>
+	           	     		</ul>
+	           	     	</div>
+	           	     	<div class="content_k_con_fr fr">
+	           	     		<img class="map" src="../static/img/map.png">
+	           	     	</div>
+	           	     </div>
+			     </div>
+	           
+	           <div class="content_l_t ">
+	           	  
+	           	  <div class="content_l_t_mok fl">
+	           	  	 <div class="content_l_title">
+	           	     	<p class="fl">APP业务占比</p>
+	           	     </div>
+	           	     
+	           	     <div class="content_img">
+		   	 	    	<div class="content_img_ico" id="app_echarts">
+		   	 	    		<!--默认数据为空-->
+		   	 	    	<!--	<span class="null_date">暂无数据</span>-->
+		   	 	    		<!--echarts替换img标签-->
+		   	 	    	</div>
+		   	 	    </div>
+	           	  </div>
+	           	  
+	           	   
+	           	  <div class="content_l_t_mok fr">
+	           	  	  <div class="content_l_title">
+	           	     	<p class="fl">用户APRU</p>
+	           	     </div>
+	           	     
+	           	     <div class="content_img">
+		   	 	    	<div class="content_img_ico" id="apru_echarts">
+		   	 	    		<!--默认数据为空-->
+		   	 	    		<!--<span class="null_date">暂无数据</span>-->
+		   	 	    		<!--echarts替换img标签-->
+		   	 	    	</div>
+		   	 	    </div>
+	           	  </div>
+	  	
+	           </div>
+	           
+	           <div class="content_l_t ">
+	           	  
+	           	  <div class="content_l_t_mok fl">
+	           	  	 <div class="content_l_title">
+	           	     	<p class="fl">用户DOU</p>
+	           	     </div>
+	           	     
+	           	     <div class="content_img">
+		   	 	    	<div class="content_img_ico" id="dou_echarts">
+		   	 	    	</div>
+		   	 	    </div>
+	           	  </div>
+	           	  
+	           	   
+	           	  <div class="content_l_t_mok fr">
+	           	  	  <div class="content_l_title">
+	           	     	<p class="fl">单月通话时长</p>
+	           	     </div>
+	           	     
+	           	     <div class="content_img">
+		   	 	    	<div class="content_img_ico">
+		   	 	    		<!--默认数据为空-->
+		   	 	    		<!--<span class="null_date">暂无数据</span>-->
+		   	 	    		<!--echarts替换img标签-->
+		   	 	    	    <div style="display: inline-block;">
+		   	 	    		   <img class="fl"  src="../static/img/thsc.png" style="	margin-top: 113px;margin-right: 16px;">
+		   	 	    	       <span class="content_img_ico_word fl" id="call_time">2000min</span>
+		   	 	    	    </div>
+		   	 	    	</div>
+		   	 	    </div>
+	           	  </div>
+	  	
+	           </div>
+	           
+
+	          
+	          	 <div class="content_l_b   ">
+	           	   <div class="content_l_title">
+	           	   	<p class="fl">详细信息</p>
+		   	 	     <a class="search fr">导出</a>
+		   	 	   <div class="clear"></div>
+	           	   </div>
+	          	
+	          	<div style="width:calc(100% - 40px);margin:0 20px;"> 
+		    	 <div style="width:100%;height: 100%;overflow-y:hidden;overflow-x:auto;"> 
+		    	 	
+		    	 <table style="width:2200px;">
+					<thead>
+					 <tr class="gl2_table_1 ">	
+					  <td class="date">日期</td>
+					  <td class="yhdh">用户电话</td>
+					  <td class="ztcmc">主套餐名称</td>
+					  <td class="lldy">流量大于500M</td>
+					  <td class="xykh">校园客户</td>
+					  <td class="cctcll">超出套餐流量</td>
+					  <td class="yjarpu">近三个月月均ARPU</td>
+					  <td class="arpupm">ARPU月排名</td>
+					  <td class="qarpuyh">前30%ARPU用户</td>
+					  <td class="yjdou">近三个月月均DOU </td>
+					  <td class="doupm">DOU月排名</td>
+					  <td class="zdpp">终端品牌</td>
+					  <td class="zdxh">终端型号</td>
+					  <td class="lwyj">离网预警</td>
+					  <td class="tsyh">投诉用户</td>
+					  <td class="bmyyh">不满意用户</td>					 
+					 </tr>	
+					</thead>
+					<!--	默认无数据-->
+				<!--	<tbody>
+					 <tr class="gl2_table_2 ">	
+					    <td class="zwsj"> 暂无数据</td>
+					 </tr>
+					</tbody>-->
+					<tbody>
+					 <tr class="gl2_table_2 ">	
+					  <td class="date">2019/7/10 15:00:00</td>
+					  <td class="yhdh">16725438964</td>					 
+					  <td class="ztcmc">4G自选套餐148元(48元语音模组（新）+100元流量模组)</td>
+					  <td class="lldy">是</td>
+					  <td class="xykh">是</td>
+					  <td class="cctcll">是</td>
+					  <td class="yjarpu">139.81元</td>
+					  <td class="arpupm">27682544</td>
+					  <td class="qarpuyh">是</td>
+					  <td class="yjdou">313.77MB </td>
+					  <td class="doupm">26083443</td>
+					  <td class="zdpp">深圳五洲无线股份有限公司</td>
+					  <td class="zdxh">V328</td>
+					  <td class="lwyj">否</td>
+					  <td class="tsyh">否</td>
+					  <td class="bmyyh">是</td>	    
+					 </tr>
+					</tbody>
+				   </table>  
+				   
+				
+				 </div>  
+		    	</div>
+		    	
+	           	   
+	           </div>
+			
+		</div>
+		
+	</div>
+ 
+</body>
+</html>
+<script type="text/javascript" src="../static/js/scpg_define.js"></script>
+<script type="text/javascript" src="../static/js/scpg_setoption.js"></script>

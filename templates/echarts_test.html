@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="../static/js/echarts.js"></script>
+    <script src="../static/js/echarts_theme.js"></script>
+</head>
+<body>
+    <div id='app' style="width:900px;height: 600px;background-color:springgreen"></div>
+<script type="text/javascript">
+    var app = echarts.init(document.getElementById('app'),'chalk');
+    alert(app);
+    var coverage_option ={
+                    tooltip: {
+                        //formatter: '{b}:{d}%'
+                        formatter: '{a}:{b}:{c}:{d}',
+                    },
+                    title: {
+                        text: '用户覆盖率',
+                    },
+                    series :
+                        {
+                            type : 'pie',
+                            percentPrecision: 1,
+                            data : [{name:"优",value:1},
+                            {name:"良",value:1},
+                            {name:"差",value:1}],
+                            label: {
+                                normal: {
+                                    formatter: '{b} 占 {d}%'
+                                }
+                            }
+                        }
+                };
+    app.setOption(coverage_option);
+</script>
+</body>
+</html>
+
+
+

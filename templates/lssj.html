@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>历史数据</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/lssj.css" />
+    <script type="text/javascript" src="../static/js/echarts.js"></script>
+    <script type="text/javascript" src="../static/js/echarts_theme.js"></script>
+    <script src="../static/js/jquery-3.4.1.js"></script>
+</head>
+<body>
+	
+	
+	<div class="content">
+		
+		<div class="content_t">
+		  
+		   <p class="content_t_title fl" >历史数据</p>
+		   <span class="help fl"></span>
+		   <div class="clear"></div>
+		   
+		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;"class="fl">
+		   	<span class="fl timeslecet_title" >时间：</span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">2019/07/28</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<span class="fl" style="width: 10px;height: 1px;display: inline-block;background-color: rgba(255,255,255,0.25);margin: auto 5px;margin-top: 15px;"></span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">--</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   </div>
+		   
+		   <div style="font-size: 14px;display: inline-block;"class="fl">
+		   	<span class="fl timeslecet_title" >用户：</span>
+		   	<div class="search_list fl">
+				<input type="text" placeholder="搜索用户号码" id="phone_number" class="search_w2">
+			</div>
+		   	 
+		   	 <div style="display: inline-block;"class="fl">
+		   	 	<a class="search" onclick="chaxun()">查询</a><p id="error" style="color:red;font-weight:bold"></p>
+		   	 </div>
+		   </div>
+		</div>
+
+		<div class="content_l">
+			
+			     <div class=" content_k">
+			     	<div class="content_l_title">
+	           	     	<p class="fl">基础信息</p>
+	           	     </div>
+	           	     
+	           	     
+	           	    <!-- 默认以下模块隐藏，输入号码显示-->
+	           	     <div class="content_k_con">
+	           	     	<div class="content_k_con_fl fl">
+	           	     		<ul style="display: inline-block;">
+	           	     			<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">用户电话：</span>
+	           	     				<span class="fl jcxx_list_word" id="phonemuber"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">地市：</span>
+	           	     				<span class="fl jcxx_list_word" id="city"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">区县：</span>
+	           	     				<span class="fl jcxx_list_word" id="district"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb">乡镇：</span>
+	           	     				<span class="fl jcxx_list_word" id="county"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">农村城市属性：</span>
+	           	     				<span class="fl jcxx_list_word" id="citizen_or_villager"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">客户星级：</span>
+	           	     				<span class="fl jcxx_list_word" id="star"></span>
+	           	     			</li>
+	           	     				<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">入网时间：</span>
+	           	     				<span class="fl jcxx_list_word" id="begin"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">在网时长：</span>
+	           	     				<span class="fl jcxx_list_word" id="length_of_time"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">号码归属地：</span>
+	           	     				<span class="fl jcxx_list_word" id="belong"></span>
+	           	     			</li>
+	           	     				</li>
+	           	     				<li class="jcxx_list fl zc">
+	           	     				<span class="fl jcxx_list_zb ">用户终端品牌：</span>
+	           	     				<span class="fl jcxx_list_word" id="phone_brand"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zj">
+	           	     				<span class="fl jcxx_list_zb ">是否头部客户：</span>
+	           	     				<span class="fl jcxx_list_word" id="is_header_user"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zd">
+	           	     				<span class="fl jcxx_list_zb ">是否高危用户：</span>
+	           	     				<span class="fl jcxx_list_word" id="is_risk_user"></span>
+	           	     			</li>
+	           	     			<li class="jcxx_list fl zc ">
+	           	     				<span class="fl jcxx_list_zb ">用户终端型号：</span>
+	           	     				<span class="fl jcxx_list_word" id="phone_type"></span>
+	           	     			</li>
+	           	     		</ul>
+	           	     	</div>
+	           	     	<div class="content_k_con_fr fr">
+	           	     		<img class="map" src="../static/img/map.png">
+	           	     	</div>
+	           	     </div>
+			     </div>
+	           
+	           
+	           
+	           <div class="content_l_t content_k">
+	           	
+	           	  <div class="content_l_t_tabs">
+	           	  	<ul>
+	           	  		<li id="fggz_li" onclick="fggz()">覆盖感知</li>
+	           	  		<li id="thgz_li" onclick="thgz()">通话感知</li>
+	           	  		<li id="slgz_li" onclick="slgz()">速率感知</li>
+	           	  		<li id="zfnl_li" onclick="zfnl()">资费能力</li>
+	           	  	</ul>
+	           	  </div>
+	           	  
+	           	  <div class="content_l_t_content">
+	           	  	<!--默认数据为空-->
+	           	  	 <!--<span style="font-size: 14px;color: rgba(255,255,255,0.5);display: inline-block;line-height: 390px;">暂无数据</span>-->
+	           	  	 
+	           	  	 <div class="content_img" id="lssj_echarts">
+
+	           	  	 </div>
+	           	  	 
+	           	  </div>
+	           	  	
+	           </div>
+	           
+
+	          
+	          	 <div class="content_l_b   ">
+	           	   <div class="content_l_title">
+	           	   	<p class="fl">详细信息</p>
+		   	 	     <a class="search fr" id="lssj_export">导出</a>
+		   	 	   <div class="clear"></div>
+	           	   </div>
+	          	
+	          	<div style="width:calc(100% - 40px);margin:0 20px;max-height: 660px;margin-bottom: 20px;"> 
+		    	 <div style="width:100%;height: 100%;overflow-y:hidden;overflow-x:auto;"> 
+		    	 	
+		    	 <table style="width:2840px;color:white;background-color:#1e1d2b" id="lssj_table">
+					<thead>
+					 <tr class="gl2_table_1">
+					  <td style="width: 130px">日期</td>
+					  <td style="width: 105px">用户电话</td>
+					  <td style="width: 250px">用户常驻小区</td>
+					  <td style="width: 50px">覆盖率%</td>
+					  <td style="width: 100px">平均rsrp(dbm)</td>
+					  <td style="width: 60px">差PHR率</td>
+					  <td style="width: 70px">寻呼成功率</td>
+					  <td style="width: 50px">掉话率</td>
+					  <td style="width: 140px">全业务上行速率(kbps)</td>
+					  <td style="width: 140px">全业务下行速率(kbps)</td>
+					  <td style="width: 126px">大包上行速率(kbps)</td>
+					  <td style="width: 126px">大包下行速率(kbps)</td>
+					  <td style="width: 106px">HTTP响应成功率</td>
+					  <td style="width: 132px">TCP核心网成功率(%)</td>
+					  <td style="width: 125px">TCP核心网时延(ms)</td>
+					  <td style="width: 118px">TCP无线成功率(%)</td>
+					  <td style="width: 112px">TCP无线时延(ms)</td>
+					  <td style="width: 85px">页面响应时延</td>
+					  <td style="width: 92px">切换成功率(%)</td>
+					  <td style="width: 98px">服务请求成功率</td>
+					  <td style="width: 70px">附着成功率</td>
+					  <td style="width: 72px">TAU成功率</td>
+					 </tr>
+					</thead>
+				<!--	默认无数据-->
+					<!--<tbody>
+					 <tr class="gl2_table_2 ">	
+					    <td class="zwsj"> 暂无数据</td>
+					 </tr>
+					</tbody>-->
+					<tbody id="lssj_table_tbody" class="gl2_table_1">
+					 <tr>
+					 </tr>
+					</tbody>
+				   </table>
+				 </div>  			
+		    	</div>
+		    	
+		    	<div style="width: 100%;"> 
+	          	<div class="page fr">
+				<a>上一页</a>
+				<a class="dq">1</a>
+				<a>2</a>
+				<a>3</a>
+				<a>4</a>
+				<a>下一页</a>
+			   </div> 
+			   <div class="clear"></div> 
+	          	 	          	 
+	       </div>
+	           </div>
+		</div>
+	</div>
+ 
+</body>
+</html>
+<script type="text/javascript" src="../static/js/lssj_define.js"></script>
+<script type="text/javascript" src="../static/js/lssj_option.js"></script>
+<script type="text/javascript" src="../static/js/lssj_setoption.js"></script>
+<script type="text/javascript" src="../static/js/lssj_export_table.js"></script>

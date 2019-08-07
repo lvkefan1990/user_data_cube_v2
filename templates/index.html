@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>用户数据魔方主页</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+</head>
+<body>
+ <div class="tsgl">
+   <div class="head-div">
+			<div class="fl">
+			<div class=" fl logo">
+				<div class="logo_ico fl"></div>
+			    <p class="head-bt fl">用户数据魔方</p>
+			</div>
+			<ul class="fl top_select">
+				<!--class=select_dh为选中的当前的样式类-->
+						<li class="top_select_li select_dh">
+							<span class="fl top_select_word">单个用户分析</span>
+						</li>
+
+						<li class="top_select_li">
+							<span class="fl top_select_word">聚类用户分析</span>								
+						</li>
+						
+						<li class="top_select_li">
+							<span class="fl top_select_word">自定义查询</span>
+								
+						</li>
+						
+					</ul>
+			</div>
+			
+			<div class="fr top_right">
+		    
+					<span class="fl hi">更新时间：<span id="time"></span></span>
+					<span class="fl hi">Hi，{{ user_name }}</span>
+					<a class="btn_xgmm fl">修改密码</a>
+					<a class="btn_tc fr">退出</a>
+				</div>
+						
+		</div>
+    <div class="pg-content">
+        <div class="menu left">
+        	
+        	<ul class="daohang">
+        		<!--class=menu_select为选中的当前的样式类-->
+				<li class="menu_select">
+					<a href="/wlgz/"target="iframe_right">
+					 <span class="menu_ico1 "></span>
+					 <span class="text">网络感知</span>
+					 </a>
+				</li>
+				<li>
+					<a href="/scpg/"target="iframe_right">
+					<span class="menu_ico2"></span>
+					<span class="text">市场评估</span>
+					</a>
+				</li>	
+				<li>
+					<a href="/yhty/"target="iframe_right">
+					<span class="menu_ico3"></span>
+					<span class="text">用户体验</span>
+					</a>
+				</li>	
+				<li>
+					<a href="/lssj/"target="iframe_right">
+					<span class="menu_ico4"></span>
+					<span class="text">历史数据</span>
+					</a>
+				</li>	
+			</ul>
+        </div>
+        <div class="content right" >
+            <div class="clear"></div>
+			<!--内容引入-->
+			<iframe src="/wlgz/" name="iframe_right" frameborder="0" id="right" >
+              <div></div>
+		    </iframe>
+        </div>
+    </div>
+   </div>
+</body>
+</html>
+<script>
+        var now_time=new Date;
+        var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
+        document.getElementById("time").innerText = time;
+</script>
