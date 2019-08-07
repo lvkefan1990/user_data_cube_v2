@@ -27,6 +27,7 @@ urlpatterns = [
     path(r'lssj/', jump.lssj,name="lssj"),#跳转至历史事件界面
     path(r'scpg/', jump.scpg,name="scpg"),#跳转至市场评估界面
     path(r'yhty/', jump.scpg,name="yhty"),#跳转至用户体验界面
+    path(r'xgmm/', jump.xgmm,name="xgmm"),#跳转至修改密码界面
     path(r'exit/', jump.exit),#跳转至退出
     path(r'change_password/', jump.change_password),#修改密码
     path(r'login_submit/', submit.login_submit),#提交用户名和密码

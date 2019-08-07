@@ -20,6 +20,11 @@ def index(request):
     return render_to_response("index.html",{"user_name":request.user.username});
 
 @login_required
+def xgmm(request):
+    print(request.session["phone_number"])
+    return render(request,"xgmm.html")
+
+@login_required
 def wlgz(request):
     print(request.session["phone_number"]);
     return render(request,"wlgz.html");
