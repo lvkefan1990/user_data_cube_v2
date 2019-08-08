@@ -65,4 +65,3 @@ function chaxun() {
     }
     xhr.send('phone_number='+phone_number);
 }
-app.setOption(app_option);

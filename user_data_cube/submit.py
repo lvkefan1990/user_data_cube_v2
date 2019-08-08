@@ -16,8 +16,6 @@ for ronud_item in rounds_nomean:
 
 RECENT_ROUND=RONUD_LIST[-1];#最近的轮次
 
-
-
 def login_submit(request):
     if request.method == 'POST':
         username = request.POST["user_id"];
@@ -46,6 +44,7 @@ def user_basic_info(phone_number):
         "phone_type": "该数据缺失",
         "is_complaint_user":"该数据缺失",
         "is_discontent_user": "该数据缺失",
+        "resident_cell":"该数据缺失",
         "error_text": "正常",
     }
     try:
@@ -107,6 +106,16 @@ def user_basic_info(phone_number):
             dict_user_basic["is_discontent_user"] = "否";
         else:
             dict_user_basic["is_discontent_user"] = "是";
+    #查询用户常驻基站
+    try:
+        resident_l = UsrResidentCell.objects.get(msisdn=phone_number);
+    except ValueError:
+        pass
+    except UsrResidentCell.DoesNotExist:
+        pass;
+    else:
+        resident_cell = CellParaTable.objects.filter(enodeb_id=resident_l.enodeb_id).values('enodeb_name').distinct();
+        dict_user_basic["resident_cell"]=resident_cell[0]['enodeb_name'];
     return dict_user_basic;
 
 
@@ -498,3 +507,42 @@ def scpg_submit(request):
         scpg_dict["bmyyh"]=user_basic_info_dict["is_discontent_user"];
     scpg_dict.update(user_basic_info_dict);
     return HttpResponse(json.dumps(scpg_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+
+@login_required
+@csrf_exempt
+def yhty_submit(request):
+    get_value = request.POST["phone_number"];
+    print(get_value);
+    request.session["phone_number"] = get_value;
+    user_basic_info_dict = user_basic_info(get_value);
+    yhty_dict={
+        "round":[],
+        "avg_score":0,
+        "data":[],
+    };
+    worth_list=[];
+    cover_list=[];
+    speed_list=[];
+    ete_list=[];
+    sensitivity_list=[];
+    try:
+        score_list=UsrScoreReturn.objects.filter(msisdn=get_value,rounds__in=RONUD_LIST);
+    except ValueError:
+        pass;
+    except UsrScoreReturn.DoesNotExist:
+        pass;
+    else:
+        i=0;
+        while i<score_list.__len__():
+            yhty_dict["data"].append({"name":RONUD_LIST[i],
+                              "value":[score_list[i].score_usr_worth,
+                                       score_list[i].score_usr_cover_pecpt,
+                                       score_list[i].score_usr_speed_pecpt,
+                                       score_list[i].score_usr_ete_pecpt,
+                                       score_list[i].score_usr_sensitivity]})
+            i+=1;
+    yhty_dict["round"]=RONUD_LIST;
+    yhty_dict["avg_score"]=round((score_list.last().score_usr_worth+score_list.last().score_usr_cover_pecpt+\
+            score_list.last().score_usr_speed_pecpt+score_list.last().score_usr_ete_pecpt+score_list.last().score_usr_sensitivity)/5);
+    yhty_dict.update(user_basic_info_dict);
+    return HttpResponse(json.dumps(yhty_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");

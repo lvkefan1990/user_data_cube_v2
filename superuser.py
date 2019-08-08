@@ -18,6 +18,3 @@ modles = ('AuthGroup','AuthPermission','AuthUser','AuthUserGroups','AuthUserUser
           'UsrCallPecpt','UsrCompltRecord','UsrCorePecpt','UsrCoverPecpt','UsrEtePecpt','UsrExpenses',
           'UsrLocation','UsrLogin','UsrResidentCell','UsrScoreReturn','UsrSpeedPecpt'
           )
-
-b=[1,2,3,4,5,6,7,8,9];
-print(b);
