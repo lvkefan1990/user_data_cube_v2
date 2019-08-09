@@ -34,4 +34,8 @@ urlpatterns = [
     path(r'scpg_submit/', submit.scpg_submit),  # 市场评估提交用户名和密码
     path(r'lssj_submit/', submit.lssj_submit),#历史数据提交用户名和密码
     path(r'yhty_submit/', submit.yhty_submit),#历史数据提交用户名和密码
+    path(r'wlgz_onload/',jump.wlgz_onload),#网络感知加载动作
+    path(r'lssj_onload/',jump.lssj_onload),#历史数据加载动作
+    path(r'scpg_onload/',jump.scpg_onload),#市场评估加载动作
+    path(r'yhty_onload/',jump.yhty_onload),#市场评估加载动作
 ]
