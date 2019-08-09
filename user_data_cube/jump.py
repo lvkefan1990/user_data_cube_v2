@@ -29,7 +29,7 @@ def xgmm(request):
 
 @login_required
 def wlgz(request):
-    print("网络感知时刻："+str(request.session["phone_number"]));
+    #print("网络感知时刻："+str(request.session["phone_number"]));
     return render(request,"wlgz.html");
 
 @login_required

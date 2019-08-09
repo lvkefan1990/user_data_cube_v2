@@ -36,8 +36,8 @@ def checkio(s):
         and len(s)  >= 8       # ...字符串长度至少为8位
         and not fs.isalpha()    # ... 至少有一个数字
         and not fs.isdigit())    # ... 至少有一个字母
-'''and not fs.islower()    # ... 不是所有的字符都是小写
-        and not fs.isupper())    # ... 不是所有的字符都是大写'''
+"""and not fs.islower()    # ... 不是所有的字符都是小写,
+and not fs.isupper())    # ... 不是所有的字符都是大写"""
 
 @login_required
 def change_password(request):
