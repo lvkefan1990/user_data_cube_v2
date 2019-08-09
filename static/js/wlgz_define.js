@@ -23,14 +23,11 @@ var phone_type_td = document.getElementById('phone_type');
 var error_td = document.getElementById('error');
 
 //定义图表
-var app = echarts.init(document.getElementById('app'),"dark");
+var cover = echarts.init(document.getElementById('coverage'),"dark");
 var rsrp = echarts.init(document.getElementById('rsrp'),"dark");
 var dl_speed = echarts.init(document.getElementById('dl_speed'),"dark");
 var call_success = echarts.init(document.getElementById('call_success'),"dark");
-//var app = echarts.init(document.getElementById('app'));
-//var apu = echarts.init(document.getElementById('apu'));
-//var dou = echarts.init(document.getElementById('dou'));
-//var call_time = echarts.init(document.getElementById('call_time'));
+
 //var portrait = echarts.init(document.getElementById('portrait'));
 
 //定义查询结果表格

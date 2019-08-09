@@ -20,7 +20,6 @@ var coverage_option ={
             ]
         },
 };
-
 //第二个是rsrp图，使用仪表图
 var rsrp_option = {
     tooltip : {

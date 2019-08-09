@@ -4,10 +4,16 @@
     <meta charset="utf-8" />
     <title>用户体验</title>
     <link rel="stylesheet" type="text/css" href="../static/css/yhty.css" />
+<<<<<<< HEAD
+=======
+    <script type="text/javascript" src="../static/js/yhty_define.js"></script>
+    <script type="text/javascript" src="../static/js/yhty_option.js"></script>
+    <script type="text/javascript" src="../static/js/yhty_setoption.js"></script>
+    <script type="text/javascript" src="../static/js/echarts.js"></script>
+    <script type="text/javascript" src="../static/js/echarts_theme.js"></script>
+>>>>>>> origin/master
 </head>
 <body>
-	
-	
 	<div class="content">
 		
 		<div class="content_t">
@@ -19,13 +25,12 @@
 		   <div style="font-size: 14px;display: inline-block;">
 		   	<span class="fl timeslecet_title" >用户：</span>
 		   	<div class="search_list fl">
-				<input type="text" placeholder="搜索用户号码" id="search_w" class="search_w2">   		 
+				<input type="text" placeholder="搜索用户号码" id="phone_number" class="search_w2">
 			</div>
 		   	 
 		   	 <div style="display: inline-block;"class="fl">
-		   	 	<a class="search">查询</a>
+		   	 	<a class="search" onclick="chaxun()">查询</a><p id="error" style="color:red;font-weight:bold"></p>
 		   	 </div>
-		   	 
 		   </div>
            
 		</div>
@@ -101,7 +106,6 @@
 	           	     		</ul>
 	           	     	</div>
 	           	     	<div class="content_k_con_fr fr">
-	           	     		<img class="map" src="img/map.png">
 	           	     	</div>
 	           	     </div>
 			     </div>
@@ -118,28 +122,17 @@
 		   	 	    		<!--默认数据为空-->
 		   	 	    		<!--<span class="null_date">暂无数据</span>-->
 		   	 	    	<div class="fl content_img_ico_fl">
-		   	 	    		<span class="pjdf_f">89</span>
+		   	 	    		<span class="pjdf_f" id="pjdf_f"></span>
 		   	 	    		<span class="pjdf">平均得分</span>
 		   	 	    	</div>
-		   	 	    	<div class="fr content_img_ico_fr">
-		   	 	    		<!--echarts替换img标签-->
-		   	 	    		<img class="content_img_ico_bg" src="img/yhgzldt.png">
+		   	 	    	<div class="fr content_img_ico_fr" id="portrait">
 		   	 	    	</div>
 		   	 	    		
 		   	 	    	</div>
 		   	 	    </div>
 	           	  </div>
-	           	  
-	           	   
-	  	
 	           </div>
-	           
-	           
-	           
-
-			
 		</div>
-		
 	</div>
  
 </body>
