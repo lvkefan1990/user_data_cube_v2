@@ -294,8 +294,8 @@ a:hover {
  	margin-top: 16px;
  }
 
-.menu_select a > .menu_ico2{
-	background-image: url(../img/xqsj_2.png) !important;
+.menu_select a >{
+	color:blue !important;
 }
 
   .daohang li a{

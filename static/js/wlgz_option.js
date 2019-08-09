@@ -23,26 +23,70 @@ var coverage_option ={
 //第二个是rsrp图，使用仪表图
 var rsrp_option = {
     tooltip : {
-        formatter: "{b} : {c}dbm"
+        formatter: "{c}dbm"
     },
     series:
         {
             type: 'gauge',
-            detail: {formatter:'{value}dbm'},
-            data: [{value: -67, name: 'rsrp'}],
+            min:-140,
+            max:-50,
+            splitNumber:3,
+            radius: '88%',
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    color: [[0.33, '#e69d87'],[0.48, '#759aa0'],[1, '#dd6b66']],
+                    width: 12,
+                }
+            },
+            pointer:{
+                 width:6,
+            },
+            splitLine: {           // 分隔线
+                length :18,         // 属性length控制线长
+            },
+            axisTick: {            // 坐标轴小标记
+                length :12,        // 属性length控制线长
+            },
+            detail: {
+                formatter:'{value}dbm',
+                fontSize:20,
+            },
+            data: [{value: -67, name: ''}],
         }
 };
 
 //第三个下载速率图，使用水球图
 var dl_speed_option = {
     tooltip : {
-        formatter: "{c}M/s"
+        formatter: "{c}k/s"
     },
     series:
         {
             type: 'gauge',
-            detail: {formatter:'{value}M/s'},
-            data: [{value: 30, name: 'rsrp'}],
+            min:0,
+            max:30000,
+            splitNumber:3,
+            radius: '88%',
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    color: [[0.33, '#e69d87'],[0.66, '#759aa0'],[1, '#dd6b66']],
+                    width: 12,
+                }
+            },
+            pointer:{
+                 width:6,
+            },
+            splitLine: {           // 分隔线
+                length :18,         // 属性length控制线长
+            },
+            axisTick: {            // 坐标轴小标记
+                length :12,        // 属性length控制线长
+            },
+            detail: {
+                formatter:'{value}k/s',
+                fontSize:20,
+            },
+            data: [{value: 6677, name: ''}],
         }
 };
 //第四个通话成功率图，使用仪表盘
@@ -53,137 +97,29 @@ var call_success_option = {
     series:
         {
             type: 'gauge',
-            detail: {formatter:'{value}%'},
-            data: [{value: 99, name: 'rsrp'}],
+            min:0,
+            max:100,
+            splitNumber:4,
+            radius: '88%',
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    color: [[0.9, '#e69d87'],[0.95, '#759aa0'],[1, '#dd6b66']],
+                    width: 12,
+                }
+            },
+            pointer:{
+                 width:6,
+            },
+            splitLine: {           // 分隔线
+                length :18,         // 属性length控制线长
+            },
+            axisTick: {            // 坐标轴小标记
+                length :12,        // 属性length控制线长
+            },
+            detail: {
+                formatter:'{value}%',
+                fontSize:20,
+            },
+            data: [{value: 100, name: ''}],
         }
 };
-//第五个app图，使用饼图（实心）
-var app_option={
-                    tooltip: {
-                        formatter: '{d}%'
-                    },
-                    title: {
-                        textStyle:{
-                            fontWeight:'normal',
-                            fontFamily:'Microsoft YaHei',
-                            fontSize:14,
-                            color:'#000000',
-                        },
-                        text: '前五位app'
-                    },
-                    series :
-                        [{
-                            type : 'pie',
-                            percentPrecision: 1,
-                            data : [1235, 6332, 2433],
-                            label: {
-                                normal: {
-                                    formatter: '{c} 占 {d}%'
-                                }
-                            }
-                        }]
-                };
-//第六个dou图，使用仪表图
-var dou_option={
-                    tooltip: {
-                        formatter: '{d}%'
-                    },
-                    title: {
-                        textStyle:{
-                            fontWeight:'normal',
-                            fontFamily:'Microsoft YaHei',
-                            fontSize:14,
-                            color:'#000000',
-                        },
-                        text: '用户月均流量'
-                    },
-                    series :
-                        [{
-                            type : 'pie',
-                            percentPrecision: 1,
-                            data : [1235, 6332, 2433],
-                            label: {
-                                normal: {
-                                    formatter: '{c} 占 {d}%'
-                                }
-                            }
-                        }]
-                };
-//第七个apu图，使用仪表图
-var apu_option ={
-                    tooltip: {
-                        formatter: '{d}%'
-                    },
-                    title: {
-                        textStyle:{
-                            fontWeight:'normal',
-                            fontFamily:'Microsoft YaHei',
-                            fontSize:14,
-                            color:'#000000',
-                        },
-                        text: '用户月均消费量'
-                    },
-                    series :
-                        [{
-                            type : 'pie',
-                            percentPrecision: 1,
-                            data : [1235, 6332, 2433],
-                            label: {
-                                normal: {
-                                    formatter: '{c} 占 {d}%'
-                                }
-                            }
-                        }]
-                };
-//第八个通话时长图，使用仪表图
-var call_time_option = {
-                    tooltip: {
-                        formatter: '{d}%'
-                    },
-                    title: {
-                        textStyle:{
-                            fontWeight:'normal',
-                            fontFamily:'Microsoft YaHei',
-                            fontSize:14,
-                            color:'#000000',
-                        },
-                        text: '用户通话时长'
-                    },
-                    series :
-                        [{
-                            type : 'pie',
-                            percentPrecision: 1,
-                            data : [1235, 6332, 2433],
-                            label: {
-                                normal: {
-                                    formatter: '{c} 占 {d}%'
-                                }
-                            }
-                        }]
-                };
-//第九个用户画像图，使用雷达
-var portrait_option= {
-                    tooltip: {
-                        formatter: '{d}%'
-                    },
-                    title: {
-                        textStyle:{
-                            fontWeight:'normal',
-                            fontFamily:'Microsoft YaHei',
-                            fontSize:14,
-                            color:'#000000',
-                        },
-                        text: '用户画像图'
-                    },
-                    series :
-                        [{
-                            type : 'pie',
-                            percentPrecision: 1,
-                            data : [1235, 6332, 2433],
-                            label: {
-                                normal: {
-                                    formatter: '{c} 占 {d}%'
-                                }
-                            }
-                        }]
-                };

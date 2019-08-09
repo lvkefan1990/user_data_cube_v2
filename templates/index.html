@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>用户数据魔方主页</title>
     <link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+    <script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>
 </head>
 <body>
  <div class="tsgl">
@@ -45,26 +46,26 @@
         	
         	<ul class="daohang">
         		<!--class=menu_select为选中的当前的样式类-->
-				<li class="menu_select">
-					<a href="/wlgz/"target="iframe_right">
+				<li class="menu_select" id="wlgz_li">
+					<a href="/wlgz/"target="iframe_right" onclick="wlgz()">
 					 <span class="menu_ico1 "></span>
 					 <span class="text">网络感知</span>
 					 </a>
 				</li>
-				<li>
-					<a href="/scpg/"target="iframe_right">
+				<li id="scpg_li">
+					<a href="/scpg/"target="iframe_right" onclick="scpg()">
 					<span class="menu_ico2"></span>
 					<span class="text">市场评估</span>
 					</a>
-				</li>	
-				<li>
-					<a href="/yhty/"target="iframe_right">
+				</li>
+				<li id="yhty_li">
+					<a href="/yhty/"target="iframe_right" onclick="yhty()">
 					<span class="menu_ico3"></span>
 					<span class="text">用户体验</span>
 					</a>
 				</li>	
-				<li>
-					<a href="/lssj/"target="iframe_right">
+				<li id="lssj_li">
+					<a href="/lssj/"target="iframe_right" onclick="lssj()">
 					<span class="menu_ico4"></span>
 					<span class="text">历史数据</span>
 					</a>
@@ -83,7 +84,35 @@
 </body>
 </html>
 <script>
-        var now_time=new Date;
-        var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
-        document.getElementById("time").innerText = time;
+    var now_time=new Date;
+    var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
+    document.getElementById("time").innerText = time;
+    function wlgz(){
+    $("#wlgz_li").removeClass("menu_select");
+    $("#scpg_li").removeClass("menu_select");
+    $("#yhty_li").removeClass("menu_select");
+    $("#lssj_li").removeClass("menu_select");
+    $("#wlgz_li").addClass("menu_select");
+}
+function scpg(){
+    $("#wlgz_li").removeClass("menu_select");
+    $("#scpg_li").removeClass("menu_select");
+    $("#yhty_li").removeClass("menu_select");
+    $("#lssj_li").removeClass("menu_select");
+    $("#scpg_li").addClass("menu_select");
+}
+function yhty(){
+    $("#wlgz_li").removeClass("menu_select");
+    $("#scpg_li").removeClass("menu_select");
+    $("#yhty_li").removeClass("menu_select");
+    $("#lssj_li").removeClass("menu_select");
+    $("#yhty_li").addClass("menu_select");
+}
+function lssj(){
+    $("#wlgz_li").removeClass("menu_select");
+    $("#scpg_li").removeClass("menu_select");
+    $("#yhty_li").removeClass("menu_select");
+    $("#lssj_li").removeClass("menu_select");
+    $("#lssj_li").addClass("menu_select");
+}
 </script>
