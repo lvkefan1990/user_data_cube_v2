@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>自定义查询</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/zdycx.css" />
+</head>
+<body>
+ <div class="tsgl">
+   
+        <div class="head-div">
+			<div class="fl">
+			<div class=" fl logo">
+				<div class="logo_ico fl"></div>
+			    <p class="head-bt fl">用户数据魔方</p>
+			</div>
+			<ul class="fl top_select">
+				<!--class=select_dh为选中的当前的样式类-->
+						<li class="top_select_li ">
+							<a href="/index/" style="color:white">
+                            <span class="fl top_select_word">单个用户分析</span>
+                            </a>
+						</li>
+						
+						<li class="top_select_li ">
+							<a href="/jlyhfx/" style="color:white">
+							<span class="fl top_select_word">聚类用户分析</span>
+                            </a>
+						</li>
+						
+						<li class="top_select_li select_dh">
+							<a href="/zdycx/" style="color:white">
+							<span class="fl top_select_word">自定义查询</span>
+							</a>
+						</li>
+						
+					</ul>
+			</div>
+			
+			<div class="fr top_right">
+		    
+					<span class="fl hi">更新时间：<span>2019/07/27</span></span>
+					<span class="fl hi">Hi，{{user_name}}</span>
+					<a class="btn_xgmm fl">修改密码</a>
+					<a class="btn_tc fr">退出</a>
+				</div>
+						
+		</div>
+		
+		
+		
+		<div class="content">
+		
+		<div class="content_t">
+		  
+		  <div style="width:calc(100% - 80px);height:128px;padding:20px 40px;background-color: #1e1d2b;">
+		  	
+		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
+		   	<span class="fl timeslecet_title">地市：</span>
+		   	    <div class="xz_select_kuang fl">
+		   	    <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">怀化</span>
+		   	 		<a class="arrow_select fr"></a>		   	 		
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li>长沙</li>
+								<li>株洲</li>
+								<li>湘潭</li>
+								<li>张家界</li>
+								<li class="select">怀化</li>
+								<li>常德</li>
+								<li>郴州</li>
+								<li>永州</li>						
+							</ul>
+		   	 		</div>-->
+		   	 	</div>
+		   </div>
+		   
+		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
+		   	<span class="fl timeslecet_title">区县：</span>
+		   	   <div class="xz_select_kuang fl">
+		   	   <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">全部</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li>长沙</li>
+								<li>株洲</li>
+								<li>湘潭</li>
+								<li>张家界</li>
+								<li class="select">怀化</li>
+								<li>常德</li>
+								<li>郴州</li>
+								<li>永州</li>						
+							</ul>
+		   	 		</div>-->
+		   </div>
+		   </div>
+		   
+		   <div style="font-size: 14px;display: inline-block;" class="fl">
+		   	<span class="fl timeslecet_title">上网行为：</span>
+		   	    <div class="xz_select_kuang fl">
+		   	   <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">浏览下载</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li class="select">浏览下载</li>
+								<li>即时通信</li>
+								<li>微博社区</li>
+								<li>导航</li>
+								<li >视频</li>
+								<li>音乐</li>					
+								<li>应用商店</li>					
+								<li>游戏</li>					
+								<li>支付</li>					
+								<li>动漫</li>					
+								<li>邮箱</li>					
+								<li>P2P业务</li>					
+								<li>VoIP业务</li>					
+								<li>彩信</li>					
+								<li>财经</li>					
+								<li>安全杀毒</li>					
+								<li>购物</li>					
+								<li>出行旅游</li>					
+								<li>网盘云服务</li>					
+								<li>阅读</li>					
+								<li>其他</li>					
+							</ul>
+		   	 		</div>-->
+		   </div>
+		   </div>
+		   
+		   <div class="clear"></div>
+		   
+		   
+		 <div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" >
+		   	<span class="fl timeslecet_title">时间：</span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">2019/07/28</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<span class="fl" style="width: 10px;height: 1px;display: inline-block;background-color: rgba(255,255,255,0.25);margin: auto 5px;margin-top: 15px;"></span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">--</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   </div>
+		   
+		      <div class="clear"></div>
+		    
+		   <div class="select_btn fl">
+		   	<span class="ico_xfnl fl"></span>
+		   	<span class="fl select_btn_word">消费能力指标</span>
+		   	<!--点击展开指标选择-->
+		 <!-- <div class="xfnl_table">
+		   	  <ul style="display: inline-block;">
+		   		 <li class="xfnl_zb"style="margin-right: 0;margin-top: 0;width: 1000px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_1">
+                         <label for="check_1"></label>
+					</span>
+					<span class="fl xfnl_zb_w">星级用户</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_1" name="radio" checked="" class="dx">
+                                        <label for="radio_1"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">1星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_2" name="radio" checked="" class="dx">
+                                        <label for="radio_2"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">2星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_3" name="radio" checked="" class="dx">
+                                        <label for="radio_3"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">3星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_4" name="radio" checked="" class="dx">
+                                        <label for="radio_4"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">4星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_5" name="radio" checked="" class="dx">
+                                        <label for="radio_5"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">5星金</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_6" name="radio" checked="" class="dx">
+                                        <label for="radio_6"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">5星银</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_7" name="radio" checked="" class="dx">
+                                        <label for="radio_7"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">5星砖</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_8" name="radio" checked="" class="dx">
+                                        <label for="radio_8"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">准星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_9" name="radio" checked="" class="dx">
+                                        <label for="radio_9"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">未评级</span>
+						</li>
+					</ul>					
+		   		 </li>
+		   		 
+		   		 <div class="clear"></div>
+		   		 
+		   		 <li class="xfnl_zb"style="margin-right: 0;width:1000px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_2">
+                         <label for="check_2"></label>
+					</span>
+					<span class="fl xfnl_zb_w">终端品牌</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_1" name="radio" checked="" class="dx">
+                                        <label for="radio_1"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">苹果</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_2" name="radio" checked="" class="dx">
+                                        <label for="radio_2"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">华为</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_3" name="radio" checked="" class="dx">
+                                        <label for="radio_3"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">三星</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_4" name="radio" checked="" class="dx">
+                                        <label for="radio_4"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">诺基亚</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_5" name="radio" checked="" class="dx">
+                                        <label for="radio_5"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">魅族</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_6" name="radio" checked="" class="dx">
+                                        <label for="radio_6"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">小米</span>
+						</li>	
+					</ul>
+		   		 </li>
+		   		 
+		   		 <div class="clear"></div>
+		   		 
+		   		  <li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_3">
+                         <label for="check_3"></label>
+					</span>
+					<span class="fl xfnl_zb_w">校园用户</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_01" name="radio" checked="" class="dx">
+                                        <label for="radio_01"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_02" name="radio" checked="" class="dx">
+                                        <label for="radio_02"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		 </li>
+		   		 
+		   		 	<li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_4">
+                         <label for="check_4"></label>
+					</span>
+					<span class="fl xfnl_zb_w">头部用户</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_001" name="radio" checked="" class="dx">
+                                        <label for="radio_001"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_002" name="radio" checked="" class="dx">
+                                        <label for="radio_002"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		 </li>
+		   		 
+		   		 <li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_5">
+                         <label for="check_5"></label>
+					</span>
+					<span class="fl xfnl_zb_w">前30%APRU用户</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_001" name="radio" checked="" class="dx">
+                                        <label for="radio_001"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_002" name="radio" checked="" class="dx">
+                                        <label for="radio_002"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		 </li>
+		   		 
+		   		 <li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_6">
+                         <label for="check_6"></label>
+					</span>
+					<span class="fl xfnl_zb_w">前30%DOU值用户</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_001" name="radio" checked="" class="dx">
+                                        <label for="radio_001"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_002" name="radio" checked="" class="dx">
+                                        <label for="radio_002"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		 </li>
+		   		 
+		   		 <li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_7">
+                         <label for="check_7"></label>
+					</span>
+					<span class="fl xfnl_zb_w">超套餐流量客户</span>
+					
+				<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_001" name="radio" checked="" class="dx">
+                                        <label for="radio_001"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_002" name="radio" checked="" class="dx">
+                                        <label for="radio_002"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		 </li>
+		   		 
+		   		 <li class="xfnl_zb fl">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_8">
+                         <label for="check_8"></label>
+					</span>
+					<span class="fl xfnl_zb_w">新用户</span>
+					
+					<ul class="fl">
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_001" name="radio" checked="" class="dx">
+                                        <label for="radio_001"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_002" name="radio" checked="" class="dx">
+                                        <label for="radio_002"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>			
+					</ul>
+		   		</li>
+		   	  </ul>
+		   	  <div class="clear"></div>
+		   	  <a class="search "style="margin-top: 24px;height: 26px;line-height: 26px;padding: 0 16px;">确定</a>
+		   </div>-->
+		   </div>
+		   
+		   
+		   
+		   <div class="select_btn fl">
+		   	<span class="ico_yhgz fl"></span>
+		   	<span class="fl select_btn_word">用户感知指标</span>
+		   		<!--点击展开指标选择   选择多选之后才会展示单选框-->
+		   <!--<div class="xfnl_table">
+		   	  <ul style="display: inline-block;">
+		   		 <li class="xfnl_zb fl"style="margin-top: 0;width:310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a1">
+                         <label for="check_a1"></label>
+					</span>
+					<span class="fl xfnl_zb_w">覆盖率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_111" name="radio" checked="" class="dx">
+                                        <label for="radio_111"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_112" name="radio" checked="" class="dx">
+                                        <label for="radio_112"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_113" name="radio" checked="" class="dx">
+                                        <label for="radio_113"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   		  <li class="xfnl_zb fl"style="margin-top: 0;width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a2">
+                         <label for="check_a2"></label>
+					</span>
+					<span class="fl xfnl_zb_w">掉话率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_211" name="radio" checked="" class="dx">
+                                        <label for="radio_211"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_212" name="radio" checked="" class="dx">
+                                        <label for="radio_212"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_213" name="radio" checked="" class="dx">
+                                        <label for="radio_213"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   		  <li class="xfnl_zb fl"style="margin-top: 0;width: 310px;margin-right: 0;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a3">
+                         <label for="check_a3"></label>
+					</span>
+					<span class="fl xfnl_zb_w">切换成功率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_311" name="radio" checked="" class="dx">
+                                        <label for="radio_311"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_312" name="radio" checked="" class="dx">
+                                        <label for="radio_312"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_313" name="radio" checked="" class="dx">
+                                        <label for="radio_313"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a4">
+                         <label for="check_a4"></label>
+					</span>
+					<span class="fl xfnl_zb_w">寻呼成功率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_411" name="radio" checked="" class="dx">
+                                        <label for="radio_411"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_412" name="radio" checked="" class="dx">
+                                        <label for="radio_412"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_413" name="radio" checked="" class="dx">
+                                        <label for="radio_413"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a5">
+                         <label for="check_a5"></label>
+					</span>
+					<span class="fl xfnl_zb_w">大包下行速率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_511" name="radio" checked="" class="dx">
+                                        <label for="radio_511"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_512" name="radio" checked="" class="dx">
+                                        <label for="radio_512"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_513" name="radio" checked="" class="dx">
+                                        <label for="radio_513"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;margin-right: 0;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a6">
+                         <label for="check_a6"></label>
+					</span>
+					<span class="fl xfnl_zb_w">大包上行速率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_611" name="radio" checked="" class="dx">
+                                        <label for="radio_611"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_612" name="radio" checked="" class="dx">
+                                        <label for="radio_612"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_613" name="radio" checked="" class="dx">
+                                        <label for="radio_613"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li> 
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a7">
+                         <label for="check_a7"></label>
+					</span>
+					<span class="fl xfnl_zb_w">HTTP响应成功率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_711" name="radio" checked="" class="dx">
+                                        <label for="radio_711"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_712" name="radio" checked="" class="dx">
+                                        <label for="radio_712"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_713" name="radio" checked="" class="dx">
+                                        <label for="radio_713"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li> 
+		   		 
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a8">
+                         <label for="check_a8"></label>
+					</span>
+					<span class="fl xfnl_zb_w">TCP核心网成功率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_811" name="radio" checked="" class="dx">
+                                        <label for="radio_811"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_812" name="radio" checked="" class="dx">
+                                        <label for="radio_812"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_813" name="radio" checked="" class="dx">
+                                        <label for="radio_113"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li> 
+		   		 
+		   		 
+		   		  <li class="xfnl_zb fl"style="width: 310px;margin-right: 0;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a9">
+                         <label for="check_a9"></label>
+					</span>
+					<span class="fl xfnl_zb_w">附着成功率</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_911" name="radio" checked="" class="dx">
+                                        <label for="radio_911"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">好</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_912" name="radio" checked="" class="dx">
+                                        <label for="radio_912"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">中</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_913" name="radio" checked="" class="dx">
+                                        <label for="radio_913"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">差</span>
+						</li>
+						
+					</ul>					
+		   		 </li> 
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a10">
+                         <label for="check_a10"></label>
+					</span>
+					<span class="fl xfnl_zb_w">投诉用户</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_101" name="radio" checked="" class="dx">
+                                        <label for="radio_101"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_102" name="radio" checked="" class="dx">
+                                        <label for="radio_102"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>											
+					</ul>					
+		   		 </li> 
+		   		 
+		   		 
+		   		 <li class="xfnl_zb fl"style="width: 310px;">
+		   		 	<span class="check_box_2 fl">
+						 <input type="checkbox" id="check_a11">
+                         <label for="check_a11"></label>
+					</span>
+					<span class="fl xfnl_zb_w">离网预警</span>
+					
+					<ul class="fl" >
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_1011" name="radio" checked="" class="dx">
+                                        <label for="radio_1011"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">是</span>
+						</li>
+						<li class="fl dx_btn_li">
+									<span class="radio_box fl">
+										<input type="radio" id="radio_1012" name="radio" checked="" class="dx">
+                                        <label for="radio_1012"></label>
+									</span>
+									<span class="fl xfnl_zb_w2">否</span>
+						</li>											
+					</ul>					
+		   		 </li>
+		   		 
+		   		 
+		   	  </ul>
+		   	  <div class="clear"></div>
+		   	  <a class="search "style="margin-top: 24px;height: 26px;line-height: 26px;padding: 0 16px;">确定</a>
+		   </div>-->
+		   </div>
+		   
+		   
+		    <div style="display: inline-block;margin-top: 16px;"class="fl">
+		   	 	<a class="search">查询</a>
+		   	 </div>
+		   
+          </div>
+		</div>
+		
+			
+		
+		<div class="content_l">
+						                 
+	          	 <div class="content_l_b   ">
+	           	   <div class="content_l_title">
+	           	   	<p class="fl">查询结果</p>
+		   	 	     <a class="search fr">导出</a>
+		   	 	   <div class="clear"></div>
+	           	   </div>
+	          	
+	          	<div style="width:calc(100% - 80px);margin:0 40px;max-height: 660px;margin-bottom: 20px;"> 
+		    	 <div style="width:100%;max-height: 660px;overflow-y:hidden;overflow-x:auto;"> 
+		    	 	
+		    	 <table style="width: 100%;">
+					<thead>
+					 <tr class="gl2_table_1 ">	
+					  <td class="date">日期</td>
+					   <td class="ds">地市</td>
+					  <td class="qx">区县</td>
+					  <td class="id">用户电话</td>					 
+					  <td class="swxw">上网行为</td>
+					  <td class="xj">星级</td>
+					  <td class="xyyh">校园用户</td>					  
+					  <td class="fgl">覆盖率</td>
+					  <td class="dhl">掉话率</td>
+
+					
+					  
+					 </tr>	
+					</thead>
+				<!--	默认无数据-->
+					<!--<tbody>
+					 <tr class="gl2_table_2 ">	
+					    <td class="zwsj"> 暂无数据</td>
+					 </tr>
+					</tbody>-->
+					<tbody>
+					 <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					  <tr class="gl2_table_2 ">	
+					   <td class="date">2019/08/31</td>
+					    <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="id">13786985423</td>					 
+					   <td class="swxw">浏览下载</td>
+					    <td class="xj">1星</td>
+					   <td class="xyyh">是</td>	
+					  <td class="fgl">好</td>
+					  <td class="dhl">好</td> 
+					 </tr>
+					 
+					 
+				
+					</tbody>
+				   </table>  
+				   
+				
+				 </div>  			
+		    	</div>
+		    	
+		    	<div style="width: 100%;"> 
+	          	<div class="page fr">
+				<a>上一页</a>
+				<a class="dq">3</a>
+				<a>4</a>
+				<a>5</a>
+				<a>6</a>
+				<a>7</a>
+				<a>下一页</a>
+			   </div> 
+			   <div class="clear"></div> 
+	          	 	          	 
+	       </div>
+		    	
+	           	   
+	           </div>
+			
+		</div>
+		
+	</div>
+    
+    
+    
+    
+    
+    
+   </div>
+   
+   	
+	
+</body>
+</html>

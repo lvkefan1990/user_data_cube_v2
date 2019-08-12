@@ -11,7 +11,7 @@ function chaxun() {
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
                 if(xhr.readyState == 4&& xhr.status == 200){
-                wlgz_obj= JSON.parse(xhr.responseText);
+                    wlgz_obj= JSON.parse(xhr.responseText);
                 if (wlgz_obj.error_text == "正常"){
                     writeText(error_td,"");
                     writeText(phonemuber_td,wlgz_obj.phonemuber);
@@ -62,13 +62,10 @@ function chaxun() {
                 else{
                     writeText(error_td,wlgz_obj.error_text);
                 }
-                this.disabled=false;
-            }else{
-                    this.disabled = true;
-                }
 
-    }
-    xhr.send('phone_number='+phone_number);
+            }
+        }
+        xhr.send('phone_number='+phone_number);
 }
 //onload事件
 function wlgz_onload(){

@@ -44,3 +44,6 @@ var zdxh_td = document.getElementById('zdxh');
 var lwyj_td = document.getElementById('lwyj');
 var tsyh_td = document.getElementById('tsyh');
 var bmyyh_td = document.getElementById('bmyyh');
+
+//定义按钮
+var search = document.getElementById('search');

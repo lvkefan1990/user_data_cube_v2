@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>聚类用户分析</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/jlyhfx.css" />
+</head>
+<body>
+ <div class="tsgl">
+
+        <div class="head-div">
+			<div class="fl">
+			<div class=" fl logo">
+				<div class="logo_ico fl"></div>
+			    <p class="head-bt fl">用户数据魔方</p>
+			</div>
+			<ul class="fl top_select">
+				<!--class=select_dh为选中的当前的样式类-->
+						<li class="top_select_li ">
+                            <a href="/index/" style="color:white">
+							<span class="fl top_select_word">单个用户分析</span>
+                            </a>
+						</li>
+
+						<li class="top_select_li select_dh">
+                            <a href="/jlyhfx/" style="color:white">
+							<span class="fl top_select_word">聚类用户分析</span>
+                            </a>
+						</li>
+
+						<li class="top_select_li">
+                            <a href="/zdycx/" style="color:white">
+							<span class="fl top_select_word">自定义查询</span>
+                            </a>
+						</li>
+
+					</ul>
+			</div>
+
+			<div class="fr top_right">
+
+					<span class="fl hi">更新时间：<span>2019/07/27</span></span>
+					<span class="fl hi">Hi，{{ user_name }}</span>
+					<a class="btn_xgmm fl">修改密码</a>
+					<a class="btn_tc fr">退出</a>
+				</div>
+
+		</div>
+
+
+
+		<div class="content">
+
+		<div class="content_t">
+
+		  <div style="width:calc(100% - 80px);height:80px;padding:20px 40px;background-color: #1e1d2b;">
+
+		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
+		   	<span class="fl timeslecet_title">地市：</span>
+		   	    <div class="xz_select_kuang fl">
+		   	    <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">怀化</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li>长沙</li>
+								<li>株洲</li>
+								<li>湘潭</li>
+								<li>张家界</li>
+								<li class="select">怀化</li>
+								<li>常德</li>
+								<li>郴州</li>
+								<li>永州</li>
+							</ul>
+		   	 		</div>-->
+		   	 	</div>
+		   </div>
+
+		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
+		   	<span class="fl timeslecet_title">区县：</span>
+		   	   <div class="xz_select_kuang fl">
+		   	   <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">全部</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li>长沙</li>
+								<li>株洲</li>
+								<li>湘潭</li>
+								<li>张家界</li>
+								<li class="select">怀化</li>
+								<li>常德</li>
+								<li>郴州</li>
+								<li>永州</li>
+							</ul>
+		   	 		</div>-->
+		   </div>
+		   </div>
+
+		   <div style="font-size: 14px;display: inline-block;" class="fl">
+		   	<span class="fl timeslecet_title">聚类查询：</span>
+		   	    <div class="xz_select_kuang fl">
+		   	   <div class=" time_select_kuang">
+		   	 		 <span class="word_select fl">感知差的头部用户</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<!--下拉框-->
+		   	 		<!--<div class="xz_kuang">
+		   	 			<ul>
+								<li class="select">感知差的头部用户</li>
+								<li>超套餐流量感知优用户</li>
+								<li>超套餐流量感知差用户</li>
+								<li>校园网超套餐流量用户</li>
+								<li >感知好流量小用户</li>
+								<li>高价值感知差用户</li>
+							</ul>
+		   	 		</div>-->
+		   </div>
+		   </div>
+
+		   <div class="clear"></div>
+
+
+
+		  <div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" class="fl">
+		   	<span class="fl timeslecet_title">时间：</span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">2019/07/28</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   	 	<span class="fl" style="width: 10px;height: 1px;display: inline-block;background-color: rgba(255,255,255,0.25);margin: auto 5px;margin-top: 15px;"></span>
+		   	    <div class="fl time_select_kuang">
+		   	 		 <span class="word_select fl">--</span>
+		   	 		<a class="arrow_select fr"></a>
+		   	 	</div>
+		   </div>
+
+		    <div style="display: inline-block;margin-top: 16px;"class="fl">
+		   	 	<a class="search">查询</a>
+		   	 </div>
+
+          </div>
+		</div>
+
+
+
+
+		<div class="content_l">
+
+
+	          	 <div class="content_l_b   ">
+	           	   <div class="content_l_title">
+	           	   	<p class="fl">查询结果</p>
+		   	 	     <a class="search fr">导出</a>
+		   	 	   <div class="clear"></div>
+	           	   </div>
+
+	          	<div style="width:calc(100% - 80px);margin:0 40px;max-height: 660px;margin-bottom: 20px;">
+		    	 <div style="width:100%;max-height: 660px;overflow-y:hidden;overflow-x:auto;">
+
+		    	 <table style="width: 100%;">
+					<thead>
+					 <tr class="gl2_table_1 ">
+					  <td class="date">日期</td>
+					  <td class="id">用户电话</td>
+					  <td class="ds">地市</td>
+					  <td class="qx">区县</td>
+					  <td class="tbyh">头部用户</td>
+					  <td class="fgl">覆盖率</td>
+					  <td class="dhl">掉话率</td>
+					  <td class="qhcgl">切换成功率</td>
+					  <td class="dbxxsl">大包下行速率</td>
+					  <td class="dbsxsl">大包上行速率</td>
+					  <td class="fzcgl">附着成功率</td>
+
+					 </tr>
+					</thead>
+				<!--	默认无数据-->
+					<!--<tbody>
+					 <tr class="gl2_table_2 ">
+					    <td class="zwsj"> 暂无数据</td>
+					 </tr>
+					</tbody>-->
+					<tbody>
+					 <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					 <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					 <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+					  <tr class="gl2_table_2 ">
+					   <td class="date">2019/08/31</td>
+					  <td class="id">13786985423</td>
+					  <td class="ds">怀化</td>
+					   <td class="qx">中方县</td>
+					  <td class="tbyh">是</td>
+					  <td class="fgl">99.2%</td>
+					  <td class="dhl">12.1%</td>
+					  <td class="qhcgl">99.32%</td>
+					  <td class="dbxxsl">1.5M</td>
+					  <td class="dbsxsl">1.5M</td>
+					  <td class="fzcgl">99.32%</td>
+					 </tr>
+
+
+
+
+
+
+					</tbody>
+				   </table>
+
+
+				 </div>
+		    	</div>
+
+		    	<div style="width: 100%;">
+	          	<div class="page fr">
+				<a>上一页</a>
+				<a class="dq">3</a>
+				<a>4</a>
+				<a>5</a>
+				<a>6</a>
+				<a>7</a>
+				<a>下一页</a>
+			   </div>
+			   <div class="clear"></div>
+
+	       </div>
+
+
+	           </div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+   </div>
+
+
+
+</body>
+</html>

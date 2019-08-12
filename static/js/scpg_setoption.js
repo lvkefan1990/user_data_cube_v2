@@ -57,11 +57,9 @@ function chaxun() {
                 else{
                     writeText(error_td,scpg_obj.error_text);
                 }
-            }else{
-                }
-
+            }
     }
-    xhr.send('phone_number='+phone_number);
+        xhr.send('phone_number='+phone_number);
 }
 //onload事件
 function scpg_onload(){

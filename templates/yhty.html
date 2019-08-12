@@ -4,55 +4,49 @@
     <meta charset="utf-8" />
     <title>用户体验</title>
     <link rel="stylesheet" type="text/css" href="../static/css/yhty.css" />
-<<<<<<< HEAD
-=======
-    <script type="text/javascript" src="../static/js/yhty_define.js"></script>
-    <script type="text/javascript" src="../static/js/yhty_option.js"></script>
-    <script type="text/javascript" src="../static/js/yhty_setoption.js"></script>
     <script type="text/javascript" src="../static/js/echarts.js"></script>
     <script type="text/javascript" src="../static/js/echarts_theme.js"></script>
->>>>>>> origin/master
 </head>
-<body>
+<body onload="yhty_onload()">
 	<div class="content">
-		
+
 		<div class="content_t">
-		  
+
 		   <p class="content_t_title fl" >用户体验</p>
 		   <span class="help fl"></span>
 		   <div class="clear"></div>
-		   
+
 		   <div style="font-size: 14px;display: inline-block;">
 		   	<span class="fl timeslecet_title" >用户：</span>
 		   	<div class="search_list fl">
 				<input type="text" placeholder="搜索用户号码" id="phone_number" class="search_w2">
 			</div>
-		   	 
+
 		   	 <div style="display: inline-block;"class="fl">
-		   	 	<a class="search" onclick="chaxun()">查询</a><p id="error" style="color:red;font-weight:bold"></p>
+		   	 	<a class="search" onclick="chaxun()" id="search">查询</a><p id="error" style="color:red;font-weight:bold"></p>
 		   	 </div>
 		   </div>
-           
+
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="content_l">
-			
+
 			     <div class=" content_k">
 			     	<div class="content_l_title">
 	           	     	<p class="fl">基础信息</p>
 	           	     </div>
-	           	     
-	           	     
+
+
 	           	    <!-- 默认以下模块隐藏，输入号码显示-->
 	           	     <div class="content_k_con">
 	           	     	<div class="content_k_con_fl fl">
 	           	     		<ul style="display: inline-block;">
 	           	     			<li class="jcxx_list fl zc">
 	           	     				<span class="fl jcxx_list_zb ">用户电话：</span>
-	           	     				<span class="fl jcxx_list_word" id="phonemuber"></span>
+	           	     				<span class="fl jcxx_list_word" id="phonenumber"></span>
 	           	     			</li>
 	           	     			<li class="jcxx_list fl zj">
 	           	     				<span class="fl jcxx_list_zb ">地市：</span>
@@ -109,14 +103,14 @@
 	           	     	</div>
 	           	     </div>
 			     </div>
-	           
+
 	           <div class="content_l_t ">
-	           	  
+
 	           	  <div class="content_l_t_mok ">
 	           	  	 <div class="content_l_title">
 	           	     	<p class="fl">得分概览</p>
 	           	     </div>
-	           	     
+
 	           	     <div class="content_img">
 		   	 	    	<div class="content_img_ico">
 		   	 	    		<!--默认数据为空-->
@@ -127,13 +121,16 @@
 		   	 	    	</div>
 		   	 	    	<div class="fr content_img_ico_fr" id="portrait">
 		   	 	    	</div>
-		   	 	    		
+
 		   	 	    	</div>
 		   	 	    </div>
 	           	  </div>
 	           </div>
 		</div>
 	</div>
- 
+
 </body>
 </html>
+<script type="text/javascript" src="../static/js/yhty_define.js"></script>
+<script type="text/javascript" src="../static/js/yhty_option.js"></script>
+<script type="text/javascript" src="../static/js/yhty_setoption.js"></script>

@@ -468,11 +468,6 @@ def yhty_db_search(get_value):
         "avg_score": 0,
         "data": [],
     };
-    worth_list = [];
-    cover_list = [];
-    speed_list = [];
-    ete_list = [];
-    sensitivity_list = [];
     try:
         score_list = UsrScoreReturn.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
     except ValueError:

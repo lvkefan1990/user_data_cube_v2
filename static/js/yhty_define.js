@@ -7,7 +7,7 @@ function writeText(element,content){
     }
 }
  //定义用户基础表格
-var phonemuber_td = document.getElementById('phonemuber');
+var phonenumber_td = document.getElementById('phonenumber');
 var city_td = document.getElementById('city');
 var district_td = document.getElementById('district');
 var county_td = document.getElementById('county');
@@ -25,4 +25,7 @@ var error_td = document.getElementById('error');
 //定义图表
 var portrait = echarts.init(document.getElementById('portrait'),'dark');
 var pjdf_f = document.getElementById('pjdf_f');
+
+//定义按钮
+var search = document.getElementById('search');
 

@@ -53,3 +53,6 @@ var qhcgl_td = document.getElementById('qhcgl');
 var fwqqcgl_td = document.getElementById('fwqqcgl');
 var fzcgl_td = document.getElementById('fzcgl');
 var tau_td = document.getElementById('tau');
+
+//定义按钮
+var search = document.getElementById('search');
