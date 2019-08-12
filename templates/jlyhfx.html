@@ -5,6 +5,7 @@
     <title>聚类用户分析</title>
     <link rel="stylesheet" type="text/css" href="../static/css/jlyhfx.css" />
 </head>
+<script type="text/javascript" src="../static/js/select_option.js"></script>
 <body>
  <div class="tsgl">
 
@@ -59,7 +60,25 @@
 		   	<span class="fl timeslecet_title">地市：</span>
 		   	    <div class="xz_select_kuang fl">
 		   	    <div class=" time_select_kuang">
-		   	 		 <span class="word_select fl">怀化</span>
+                    <!--2.确定事件，通过函数传参的方式拿到改变后的城市-->
+               <select onchange="changeCity(this.value)" class="word_select fl" >
+                    <option>--请选择--</option>
+                    <option id="长沙市" value="0" >长沙市</option>
+                    <option id="株洲市" value="1">株洲市</option>
+                    <option id="湘潭市" value="2">湘潭市</option>
+                    <option id="衡阳市" value="3">衡阳市</option>
+                    <option id="邵阳市" value="4">邵阳市</option>
+                    <option id="岳阳市" value="5">岳阳市</option>
+                    <option id="常德市" value="6">常德市</option>
+                    <option id="张家界市"value="7">张家界市</option>
+                    <option id="益阳市" value="8">益阳市</option>
+                    <option id="郴州市" value="9">郴州市</option>
+                    <option id="永州市" value="10">永州市</option>
+                    <option id="怀化市" value="11">怀化市</option>
+                    <option id="娄底市" value="12">娄底市</option>
+                    <option id="湘西土家族苗族自治州" value="13">湘西土家族苗族自治州</option>
+                </select>
+		   	 		 <!--<span class="word_select fl">怀化</span>-->
 		   	 		<a class="arrow_select fr"></a>
 		   	 	</div>
 		   	 	<!--下拉框-->
@@ -82,7 +101,10 @@
 		   	<span class="fl timeslecet_title">区县：</span>
 		   	   <div class="xz_select_kuang fl">
 		   	   <div class=" time_select_kuang">
-		   	 		 <span class="word_select fl">全部</span>
+                    <select id="city">
+                       <option>--请选择--</option>
+                    </select>
+		   	 		 <!--<span class="word_select fl">全部</span>-->
 		   	 		<a class="arrow_select fr"></a>
 		   	 	</div>
 		   	 	<!--下拉框-->

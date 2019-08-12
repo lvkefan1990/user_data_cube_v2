@@ -27,6 +27,8 @@ urlpatterns = [
     path(r'lssj/', jump.lssj,name="lssj"),#跳转至历史事件界面
     path(r'scpg/', jump.scpg,name="scpg"),#跳转至市场评估界面
     path(r'yhty/', jump.yhty,name="yhty"),#跳转至用户体验界面
+    path(r'jlyhfx/', jump.jlyhfx, name="jlyhfx"),#聚类用户界面
+    path(r'zdycx/', jump.zdycx, name="zdycx"),#用户自定义
     path(r'exit/', jump.exit),#跳转至退出
     path(r'xgmm/', jump.xgmm),#跳转至修改密码
     path(r'jlyhfx/',jump.jlyhfx),#跳转至聚类用户分析页面

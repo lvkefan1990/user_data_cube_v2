@@ -38,7 +38,12 @@ def scpg(request):
 @login_required
 def yhty(request):
     return render(request,"yhty.html");
-
+@login_required
+def jlyhfx(requset):
+    return render(requset,"jlyhfx.html")
+@login_required
+def zdycx(requset):
+    return render(requset,"zdycx.html")
 @login_required
 def change_password(request):
     request.session["phone_number"]="";
