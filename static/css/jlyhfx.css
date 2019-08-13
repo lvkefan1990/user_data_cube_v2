@@ -1,5 +1,4 @@
 
-
 *{
 	margin: 0px;
 	padding: 0px;
@@ -295,7 +294,7 @@ min-width: 1280px;
     width: 180px;
     height: 32px;
     font-size: 13px;
-    background-color: #272634;
+    background-color: #15131d;
     box-sizing: border-box;
     font-family: 微软雅黑;
     line-height: 32px;
@@ -558,7 +557,14 @@ min-width: 1280px;
 	width: 8%;
 }
 
-
+.city_district_select{
+    background-color: #15131d;
+    color:#ffffff;
+    font-size:14px;
+    font-family: 微软雅黑;
+    border:none;
+    width:160px;
+}
 
 
 

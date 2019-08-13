@@ -719,7 +719,14 @@ min-width: 1280px;
 	margin-top: -10px;
 }
 
-
+.city_district_select{
+    background-color: #272634;
+    color:#ffffff;
+    font-size:14px;
+    font-family: 微软雅黑;
+    border:none;
+    width:160px;
+}
 
 
 
