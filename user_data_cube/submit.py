@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from user_data_cube.models import *
 from .db_search import *
+from .location import *
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 import json
-from numpy import transpose
+from django.http import JsonResponse
 import datetime
+
 
 # Create your views here.
 
@@ -92,3 +95,33 @@ def yhty_submit(request):
     request.session["phone_number"] = get_value;
     yhty_dict=yhty_db_search(get_value);
     return HttpResponse(json.dumps(yhty_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+
+#分页的测试
+def page(request):
+    return render(request,"paginator_test.html");
+
+@login_required
+@csrf_exempt
+def jlyhfx_submit(request):
+    jlyhfx_dict={
+        "table_head":[],
+        "table_body":[],
+    }
+    #首先，获得用户输入的值
+    if request.method =="POST":
+        city = request.POST["city"];
+        district = request.POST["district"];
+        formwork = request.POST["formwork"];
+        print(city,district,formwork)
+        jlyhfx_dict["table_head"]=formwork_dict[formwork];
+        print(jlyhfx_dict["table_head"]);
+    import pymysql
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
+    cur = conn.cursor();
+    cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RECENT_ROUND));
+    conn.commit();
+    result = cur.fetchall();
+    for row in result:
+        print(row);
+        jlyhfx_dict["table_body"].append(list(row));
+    return HttpResponse(json.dumps(jlyhfx_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");

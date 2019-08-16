@@ -62,7 +62,7 @@
 		   	    <div class="xz_select_kuang fl">
 		   	    <div class=" time_select_kuang">
                     <!--2.确定事件，通过函数传参的方式拿到改变后的城市-->
-               <select onchange="changeCity(this.value)" class="city_district_select">
+               <select onchange="changeCity(this.value)" class="city_district_select" id="city_select">
                     <option>--请选择--</option>
                     <option id="长沙市" value="0" >长沙市</option>
                     <option id="株洲市" value="1">株洲市</option>
@@ -71,7 +71,7 @@
                     <option id="邵阳市" value="4">邵阳市</option>
                     <option id="岳阳市" value="5">岳阳市</option>
                     <option id="常德市" value="6">常德市</option>
-                    <option id="张家界市"value="7">张家界市</option>
+                    <option id="张家界市" value="7">张家界市</option>
                     <option id="益阳市" value="8">益阳市</option>
                     <option id="郴州市" value="9">郴州市</option>
                     <option id="永州市" value="10">永州市</option>
@@ -81,7 +81,6 @@
                 </select>
 		   	 		 <!--<span class="word_select fl">怀化</span>-->
                    <!--怀化-->
-		   	 		<a class="arrow_select fr"></a>
 		   	 	</div>
 		   	 	<!--下拉框-->
 		   	 		<!--<div class="xz_kuang">
@@ -103,7 +102,7 @@
 		   	<span class="fl timeslecet_title">区县：</span>
 		   	   <div class="xz_select_kuang fl">
 		   	   <div class=" time_select_kuang">
-                    <select id="city" class="city_district_select">
+                    <select id="district_select" class="city_district_select">
                         <option>--请选择--</option>
                     </select>
 		   	 		 <!--<span class="word_select fl">全部</span>-->
@@ -129,16 +128,16 @@
 		   	    <div class="xz_select_kuang fl">
 		   	   <div class=" time_select_kuang" style="width:230px">
 		   	 		 <select id="formwork" class="city_district_select" style="width:210px">
-                         <option>感知差头部用户</option>
-                         <option>超套餐流量感知优用户</option>
-                         <option>超套餐流量感知差用户</option>
-                         <option>校园网超套餐流量用户</option>
-                         <option>感知好流量小用户</option>
-                         <option>近三个月网络感知下降用户</option>
-                         <option>近三个月消费能力上升用户</option>
-                         <option>app流量排名聚类</option>
-                         <option>终端型号使用量聚类</option>
-                         <option>头部用户占比</option>
+                         <option value="0">感知差头部用户</option>
+                         <option value="1">超套餐流量感知优用户</option>
+                         <option value="2">超套餐流量感知差用户</option>
+                         <option value="3">校园网超套餐流量用户</option>
+                         <option value="4">感知好流量小用户</option>
+                         <option value="5">近三个月网络感知下降用户</option>
+                         <option value="6">近三个月消费能力上升用户</option>
+                         <option value="7">app流量排名聚类</option>
+                         <option value="8">终端型号使用量聚类</option>
+                         <option value="9">头部用户占比</option>
                      </select>
 		   	 	</div>
 		   	 	<!--下拉框-->
@@ -154,12 +153,12 @@
 		   	 		</div>-->
 		   </div>
 		   </div>
-
+		   	 	<a class="search" id="search" onclick="chaxun()" style="position: relative;left: 15px">查询</a>
 		   <div class="clear"></div>
 
 
 
-		  <div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" class="fl">
+		  <!--<div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" class="fl">
 		   	<span class="fl timeslecet_title">时间：</span>
 		   	    <div class="fl time_select_kuang">
 		   	 		 <input type="text" value="" id="start_datetimepicker" class="city_district_select"/>
@@ -170,11 +169,9 @@
 		   	 		 <input type="text" value="" id="end_datetimepicker" class="city_district_select"/>
 		   	 		<a class="arrow_select fr"></a>
 		   	 	</div>
-		   </div>
+		   </div>-->
 
-		    <div style="display: inline-block;margin-top: 16px;"class="fl">
-		   	 	<a class="search" id="search" onclick="">查询</a>
-		   	 </div>
+
 
           </div>
 		</div>
@@ -192,24 +189,9 @@
 		   	 	   <div class="clear"></div>
 	           	   </div>
 
-	          	<div style="width:calc(100% - 80px);margin:0 40px;max-height: 660px;margin-bottom: 20px;">
-		    	 <div style="width:100%;max-height: 660px;overflow-y:hidden;overflow-x:auto;">
-
-		    	 <table style="width: 100%;">
-					<thead>
-					 <tr class="gl2_table_1 ">
-					  <td class="date">日期</td>
-					  <td class="id">用户电话</td>
-					  <td class="ds">地市</td>
-					  <td class="qx">区县</td>
-					  <td class="tbyh">头部用户</td>
-					  <td class="fgl">覆盖率</td>
-					  <td class="dhl">掉话率</td>
-					  <td class="qhcgl">切换成功率</td>
-					  <td class="dbxxsl">大包下行速率</td>
-					  <td class="dbsxsl">大包上行速率</td>
-					  <td class="fzcgl">附着成功率</td>
-
+		    	 <table style="width: 100%;" id="export_table">
+					<thead class="gl2_table_1 " id="export_table_thead">
+					 <tr>
 					 </tr>
 					</thead>
 				<!--	默认无数据-->
@@ -218,39 +200,25 @@
 					    <td class="zwsj"> 暂无数据</td>
 					 </tr>
 					</tbody>-->
-					<tbody>
-					 <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					  <td class="id">13786985423</td>
-					  <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="tbyh">是</td>
-					  <td class="fgl">99.2%</td>
-					  <td class="dhl">12.1%</td>
-					  <td class="qhcgl">99.32%</td>
-					  <td class="dbxxsl">1.5M</td>
-					  <td class="dbsxsl">1.5M</td>
-					  <td class="fzcgl">99.32%</td>
+					<tbody class="gl2_table_2 " id="export_table_tbody">
+					 <tr>
 					 </tr>
-
 					</tbody>
 				   </table>
 
 
-				 </div>
-		    	</div>
 
 		    	<div style="width: 100%;">
 	          	<div class="page fr">
-				<a>上一页</a>
+				<!--<a>上一页</a>
 				<a class="dq">3</a>
 				<a>4</a>
 				<a>5</a>
 				<a>6</a>
 				<a>7</a>
-				<a>下一页</a>
+				<a>下一页</a>-->
 			   </div>
-			   <div class="clear"></div>
+			   <!--<div class="clear"></div>-->
 
 	       </div>
 
@@ -267,24 +235,5 @@
 </body>
 </html>
 <script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>
-<script src="../static/js/jquery.datetimepicker.full.js"></script>
-<script type="text/javascript">
-    $.datetimepicker.setLocale('zh');
-    $('#start_datetimepicker').datetimepicker({
-    dayOfWeekStart :1,
-    lang:'zh',
-    startDate:	'2016/01/01',
-    value:"",
-    format:'Y/m/d',
-    timepicker:false,
-});
-    $('#end_datetimepicker').datetimepicker({
-    dayOfWeekStart :1,
-    lang:'zh',
-    startDate:	'2016/01/01',
-    value:"",
-    format:'Y/m/d',
-    timepicker:false,
-});
-</script>
 <script type="text/javascript" src="../static/js/jlyhfx/jlyhfx_define.js"></script>
+<script type="text/javascript" src="../static/js/jlyhfx/jlyhfx_search.js"></script>

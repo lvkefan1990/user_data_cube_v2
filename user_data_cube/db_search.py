@@ -1,12 +1,33 @@
 from user_data_cube.models import *
 from numpy import transpose
 
+
+
 RONUD_LIST=[];#轮次列表
+STATE_LITE=[];#时间轮次
 rounds_nomean=RoundsLog.objects.filter();
 for ronud_item in rounds_nomean:
     RONUD_LIST.append(ronud_item.rounds);
+    STATE_LITE.append(ronud_item.sdate);
 
-RECENT_ROUND=RONUD_LIST[-1];#最近的轮次
+RECENT_ROUND = RONUD_LIST[-1];#最近的轮次
+RECENT_TIME = STATE_LITE[-1];#最近一轮的时间
+
+def date_compare(start=(0,0,0),end=(0,0,0)):
+    """
+    :param start:起始时间
+    :param end:结束时间
+    :return:起始时间小于结束时间则返回TRUE
+    """
+    i = 0;
+    while i<start.__len__():
+        if start[i]<=end[i]:
+            i += 1;
+        else:
+            return False;
+    return True;
+
+
 
 #该函数封装了用户基本表的查询功能
 def user_basic_info(phone_number):

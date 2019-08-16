@@ -12,12 +12,12 @@
     cities[10]=new Array("冷水滩区","零陵区","道县","蓝山县","新田县","江永县","双牌县","祁阳县","宁远县","东安县","江华县");
     cities[11]=new Array("鹤城区","洪江市","会同县","沅陵县","辰溪县","溆浦县","中方县","新晃县","芷江县","通道县","麻阳县","靖州县");
     cities[12]=new Array("娄星区","冷水江市","涟源市","新化县","双峰县");
-    cities[13]=new Array("吉首市","龙山县","古丈县","永顺县","凤凰县","凤凰县","保靖县","花垣县");
+    cities[13]=new Array("吉首市","龙山县","古丈县","永顺县","凤凰县","保靖县","花垣县");
 
 //设置点击事件
     function changeCity(val){
         //alert(val);
-        var cityEle=document.getElementById("city");//获取第二个下拉列表对象
+        var cityEle=document.getElementById("district_select");//获取第二个下拉列表对象
         cityEle.options.length=0;//清空第二个下拉列表的option内容
         //1.先遍历省份
         for(var i=0;i<cities.length;i++){

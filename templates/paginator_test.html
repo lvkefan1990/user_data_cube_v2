@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页</title>
+</head>
+<body>
+    <button onclick="fenye()">分页表格</button>
+     <h1>当前页: {{pageobj.number}}</h1>
+        <!--显示内容-->
+    <ul class="content">
+        {% for goods in pageobj.object_list %}
+            <li>
+                <div>
+                    <span> {{goods.name}} - ￥{{goods.price}}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!--分页页码-->
+    <ul class="pageview">
+        {% for index in pageobj.paginator.page_range %}
+            <!--当前页面-->
+            {% if index == pageobj.number %}
+                <li class="active"> {{index}} </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'elema:goodslist' index %}">{{index}}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
+</body>
+</html>
+<script type="text/javascript">
+    function fenye() {
+        alert("helloworld")
+    }
+</script>
