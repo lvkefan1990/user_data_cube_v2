@@ -390,6 +390,13 @@ a:hover{
 	
 }
 
+.lssj_table{
+    width:2880px; !important;
+    color:white;
+    background-color:#1e1d2b
+}
+
+
 .gl2_table_1 {
     height: 60px;
     line-height: 60px;
@@ -537,7 +544,6 @@ a:hover{
     background-color: #01cffd !important;
     color: #fff !important;
 }
-
 
 
 

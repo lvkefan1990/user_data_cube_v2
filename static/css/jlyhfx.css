@@ -403,6 +403,7 @@ min-width: 1280px;
 
 
 .content_l{
+    min-width:1280px;
 	width: 100%;
 	margin-top: 212px;
 }

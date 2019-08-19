@@ -10,7 +10,9 @@ function chaxun() {
         xhr.open(methon="POST",url='/lssj_submit/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-                if(xhr.readyState == 4&& xhr.status == 200){
+            if(xhr.readyState == 4){
+                $("#search").attr("disabled",false).css("pointer-events","auto");
+                if( xhr.status == 200){
                 lssj_obj= JSON.parse(xhr.responseText);
                 if (lssj_obj.error_text == "正常"){
                     writeText(error_td,"");
@@ -57,10 +59,10 @@ function chaxun() {
                 else{
                     writeText(error_td,wlgz_obj.error_text);
                 }
-            }else{
             }
-    }
-    xhr.send('phone_number='+phone_number);
+    }}
+        xhr.send('phone_number='+phone_number);
+        $("#search").attr("disabled",true).css("pointer-events","none");
 }
 function fggz(){
     $("#fggz_li").removeClass("content_l_t_tabs_select");
@@ -110,7 +112,9 @@ function lssj_onload() {
         xhr.open(methon="POST",url='/lssj_onload/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-                if(xhr.readyState == 4&& xhr.status == 200){
+            if(xhr.readyState == 4){
+                $("#search").attr("disabled",false).css("pointer-events","auto");
+                if(xhr.status == 200){
                 lssj_obj= JSON.parse(xhr.responseText);
                 if (lssj_obj.error_text == "正常" && lssj_obj.phonemuber != ""){
                     writeText(error_td,"");
@@ -157,8 +161,8 @@ function lssj_onload() {
                 else{
                     writeText(error_td,wlgz_obj.error_text);
                 }
-            }else{
             }
-    }
-    xhr.send();
+    }}
+        xhr.send();
+        $("#search").attr("disabled",true).css("pointer-events","none");
 }

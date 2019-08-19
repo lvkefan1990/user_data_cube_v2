@@ -1,6 +1,5 @@
 function chaxun() {
         var now_time=new Date;
-        alert("good")
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
         //+ now_time.getHours()+"时"+now_time.getMinutes()+"分";
         var phone_number = document.getElementById("phone_number").value;
@@ -11,7 +10,9 @@ function chaxun() {
         xhr.open(methon="POST",url='/scpg_submit/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-                if(xhr.readyState == 4&& xhr.status == 200){
+            if(xhr.readyState == 4){
+            $("#search").attr("disabled",false).css("pointer-events","auto");
+                if( xhr.status == 200){
                 scpg_obj= JSON.parse(xhr.responseText);
                 if (scpg_obj.error_text == "正常"){
                     writeText(error_td,"");
@@ -58,8 +59,9 @@ function chaxun() {
                     writeText(error_td,scpg_obj.error_text);
                 }
             }
-    }
+    }}
         xhr.send('phone_number='+phone_number);
+        $("#search").attr("disabled",true).css("pointer-events","none");
 }
 //onload事件
 function scpg_onload(){
@@ -73,7 +75,9 @@ function scpg_onload(){
     xhr.open(methon="POST",url='/scpg_onload/',async=true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange=function () {
-        if(xhr.readyState == 4&& xhr.status == 200){
+        if(xhr.readyState == 4){
+        $("#search").attr("disabled",false).css("pointer-events","auto");
+        if(xhr.status == 200){
             scpg_obj= JSON.parse(xhr.responseText);
             if (scpg_obj.error_text == "正常" && scpg_obj.phonemuber != ""){
                 writeText(error_td,"");
@@ -117,6 +121,7 @@ function scpg_onload(){
                 writeText(bmyyh_td,scpg_obj.bmyyh);
                 }
     }
-    }
+    }}
     xhr.send();
+    $("#search").attr("disabled",true).css("pointer-events","none");
 }

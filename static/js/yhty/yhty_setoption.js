@@ -4,7 +4,6 @@ function chaxun() {
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
         //+ now_time.getHours()+"时"+now_time.getMinutes()+"分";
         var phone_number = document.getElementById("phone_number").value;
-        alert(phone_number);
         var xhr;
         if(window.XMLHttpRequest){
             xhr= new XMLHttpRequest();
@@ -12,9 +11,10 @@ function chaxun() {
         xhr.open(methon="POST",url='/yhty_submit/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-                if(xhr.readyState == 4&& xhr.status == 200){
+            if(xhr.readyState == 4){
+            $("#search").attr("disabled",false).css("pointer-events","auto");
+                if(xhr.status == 200){
                 yhty_obj= JSON.parse(xhr.responseText);
-                search.disabled = false;
                 if (yhty_obj.error_text == "正常"){
                     writeText(error_td,"");
                     writeText(phonenumber_td,yhty_obj.phonemuber);
@@ -38,9 +38,9 @@ function chaxun() {
                     writeText(error_td,yhty_obj.error_text);
                 }
             }
-    }
-    search.disabled = true;
-    xhr.send('phone_number='+phone_number);
+    }}
+        xhr.send('phone_number='+phone_number);
+        $("#search").attr("disabled",true).css("pointer-events","none");
 }
 //用户体验onload事件
 function yhty_onload() {
@@ -48,7 +48,6 @@ function yhty_onload() {
         var now_time=new Date;
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
         //+ now_time.getHours()+"时"+now_time.getMinutes()+"分";
-        alert(time);
         var xhr;
         if(window.XMLHttpRequest){
             xhr= new XMLHttpRequest();
@@ -56,11 +55,11 @@ function yhty_onload() {
         xhr.open(methon="POST",url='/yhty_onload/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-            search.disabled = false;
-            yhty_obj= JSON.parse(xhr.responseText);
-                if(xhr.readyState == 4&& xhr.status == 200){
+            if(xhr.readyState == 4){
+                $("#search").attr("disabled",false).css("pointer-events","auto");
+                if(xhr.status == 200){
+                    yhty_obj= JSON.parse(xhr.responseText);
                     if(yhty_obj.error_text == "正常" && yhty_obj.phonemuber != ""){
-                    alert("ajax_success")
                     writeText(error_td,"");
                     writeText(phonenumber_td,yhty_obj.phonemuber);
                     writeText(city_td,yhty_obj.user_city);
@@ -79,8 +78,8 @@ function yhty_onload() {
                     portrait.setOption(portrait_option);
                     writeText(pjdf_f,yhty_obj.avg_score);
                 }}
-            }
-            search.disabled = true;
+            }}
         xhr.send();
+        $("#search").attr("disabled",true).css("pointer-events","none");
     }
 

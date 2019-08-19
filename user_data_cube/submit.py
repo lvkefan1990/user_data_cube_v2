@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 import json
+import xlwt
+from io import BytesIO
 from django.http import JsonResponse
 import datetime
 
@@ -96,10 +98,6 @@ def yhty_submit(request):
     yhty_dict=yhty_db_search(get_value);
     return HttpResponse(json.dumps(yhty_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
 
-#分页的测试
-def page(request):
-    return render(request,"paginator_test.html");
-
 @login_required
 @csrf_exempt
 def jlyhfx_submit(request):
@@ -119,9 +117,43 @@ def jlyhfx_submit(request):
     conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
     cur = conn.cursor();
     cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RECENT_ROUND));
-    conn.commit();
     result = cur.fetchall();
     for row in result:
         print(row);
         jlyhfx_dict["table_body"].append(list(row));
     return HttpResponse(json.dumps(jlyhfx_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+
+def test_export_excel(request):
+    response = HttpResponse(content_type='application/vnd.ms-excel');
+    response['Content-Disposition'] = 'attachment;filename=order.xls';
+    wb = xlwt.Workbook(encoding='utf8');
+    sheet = wb.add_sheet('order-sheet');
+    i=0;
+    while i<formwork_dict["超套餐流量感知优用户"].__len__():
+        sheet.write(0,i,formwork_dict["超套餐流量感知优用户"][i]);
+        i+=1;
+    import pymysql
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
+    cur = conn.cursor();
+    cur.callproc("Find_Goodnet_OverPackegesUser", ("M_怀化", "A_怀化市", RECENT_ROUND));
+    result = cur.fetchall();
+    data_row = 1;
+    while data_row<result.__len__()+1:
+        col_index = 0;
+        while col_index<result[0].__len__():
+            sheet.write(data_row,col_index,result[data_row-1][col_index]);
+            col_index+=1
+        data_row +=1;
+    output = BytesIO();
+    wb.save(output);
+    output.seek(0);
+    response.write(output.getvalue());
+    return response;
+
+
+
+
+
+#分页的测试
+def page(request):
+    return render(request,"paginator_test.html");

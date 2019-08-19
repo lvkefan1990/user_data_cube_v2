@@ -10,8 +10,10 @@ function chaxun() {
         xhr.open(methon="POST",url='/wlgz_submit/',async=true);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
-                if(xhr.readyState == 4&& xhr.status == 200){
-                    wlgz_obj= JSON.parse(xhr.responseText);
+            if(xhr.readyState == 4){
+            $("#search").attr("disabled",false).css("pointer-events","auto");
+                if(xhr.status == 200){
+                  wlgz_obj= JSON.parse(xhr.responseText);
                 if (wlgz_obj.error_text == "正常"){
                     writeText(error_td,"");
                     writeText(phonemuber_td,wlgz_obj.phonemuber);
@@ -62,10 +64,11 @@ function chaxun() {
                 else{
                     writeText(error_td,wlgz_obj.error_text);
                 }
-
+                }
             }
         }
         xhr.send('phone_number='+phone_number);
+        $("#search").attr("disabled",true).css("pointer-events","none");
 }
 //onload事件
 function wlgz_onload(){
@@ -78,10 +81,12 @@ function wlgz_onload(){
      xhr.open(methon="POST",url='/wlgz_onload/',async=true);
      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
      xhr.onreadystatechange=function () {
-         if(xhr.readyState == 4&& xhr.status == 200){
-         wlgz_obj= JSON.parse(xhr.responseText);
+         if(xhr.readyState == 4){
+          $("#search").attr("disabled",false).css("pointer-events","auto");
+         if( xhr.status == 200){
+            wlgz_obj= JSON.parse(xhr.responseText);
          if (wlgz_obj.error_text == "正常" && wlgz_obj.phonemuber != ""){
-             writeText(error_td,"");
+                    writeText(error_td,"");
                     writeText(phonemuber_td,wlgz_obj.phonemuber);
                     writeText(city_td,wlgz_obj.user_city);
                     writeText(district_td,wlgz_obj.district);
@@ -126,8 +131,11 @@ function wlgz_onload(){
                     writeText(fwqqcgl_td,wlgz_obj.fwqqcgl);
                     writeText(fzcgl_td,wlgz_obj.fzcgl);
                     writeText(tau_td,wlgz_obj.tau);
+
          }
      }
      }
+     }
      xhr.send();
+    $("#search").attr("disabled",true).css("pointer-events","none");
 }
