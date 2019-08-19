@@ -98,6 +98,8 @@ def yhty_submit(request):
     yhty_dict=yhty_db_search(get_value);
     return HttpResponse(json.dumps(yhty_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
 
+#先声明一个全局变量
+export_excel = xlwt.Workbook(encoding='utf8');
 @login_required
 @csrf_exempt
 def jlyhfx_submit(request):
@@ -121,22 +123,13 @@ def jlyhfx_submit(request):
     for row in result:
         print(row);
         jlyhfx_dict["table_body"].append(list(row));
-    return HttpResponse(json.dumps(jlyhfx_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
-
-def test_export_excel(request):
-    response = HttpResponse(content_type='application/vnd.ms-excel');
-    response['Content-Disposition'] = 'attachment;filename=order.xls';
+    #以上生成了返回页面的json数据，接下来写excel表格
     wb = xlwt.Workbook(encoding='utf8');
-    sheet = wb.add_sheet('order-sheet');
-    i=0;
-    while i<formwork_dict["超套餐流量感知优用户"].__len__():
-        sheet.write(0,i,formwork_dict["超套餐流量感知优用户"][i]);
-        i+=1;
-    import pymysql
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
-    cur = conn.cursor();
-    cur.callproc("Find_Goodnet_OverPackegesUser", ("M_怀化", "A_怀化市", RECENT_ROUND));
-    result = cur.fetchall();
+    sheet = wb.add_sheet('查询结果');
+    i = 0;
+    while i < formwork_dict[formwork].__len__():
+        sheet.write(0, i, formwork_dict[formwork][i]);
+        i += 1;
     data_row = 1;
     while data_row<result.__len__()+1:
         col_index = 0;
@@ -144,15 +137,20 @@ def test_export_excel(request):
             sheet.write(data_row,col_index,result[data_row-1][col_index]);
             col_index+=1
         data_row +=1;
+    global export_excel;
+    export_excel = wb;
+    return HttpResponse(json.dumps(jlyhfx_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+
+@login_required
+@csrf_exempt
+def jlyhfx_export_excel(request):
+    response = HttpResponse(content_type='application/vnd.ms-excel');
+    response['Content-Disposition'] = 'attachment;filename=search_result.xls';
     output = BytesIO();
-    wb.save(output);
+    export_excel.save(output);
     output.seek(0);
     response.write(output.getvalue());
     return response;
-
-
-
-
 
 #分页的测试
 def page(request):

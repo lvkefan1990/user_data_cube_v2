@@ -259,8 +259,13 @@ def lssj_db_search(get_value):
                 good_cover.append(0);
                 bad_cover.append(0);
                 cover_table_list.append(0);
-            rsrp_list.append(cover.avg_rsrp - 140);
-            bad_phr_list.append(cover.bad_phr_rate);
+            try:
+                rsrp_list.append(cover.avg_rsrp - 140);
+                bad_phr_list.append(cover.bad_phr_rate);
+            except:
+                rsrp_list.append(None);
+                bad_phr_list.append(None);
+
         lssj_dict["good_cover"] = good_cover;
         lssj_dict["bad_cover"] = bad_cover;
     # 查询用户常驻基站

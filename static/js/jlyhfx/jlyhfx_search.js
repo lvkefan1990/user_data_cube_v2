@@ -38,9 +38,15 @@ function chaxun(){
                 }
                 export_table_thead.appendChild(tr_head);
                 alert(table_width);
-                export_table.style.width = table_width.toString()+"px";
+                export_table.style.width = (table_width*1.2).toString()+"px";
                 export_table.style.tableLayout = "fixed";
-                //至此写完了表头,写下来写body
+                //至此写完了表头,写下来写分页的初始化和body
+                numCount=jlyhfx_obj.table_body.length;
+                pageNum = parseInt(numCount/pageCount);
+                if(0 != numCount%pageCount){
+                pageNum += 1;//获得总页数
+                }
+                //表体结构
                 trs_body = export_table_tbody.getElementsByTagName("tr");
                 for(i=trs_body.length-1;i>=0;i--){
                     export_table_tbody.removeChild(trs_body[i]);
@@ -58,6 +64,7 @@ function chaxun(){
                     }
                     export_table_tbody.appendChild(tr_s);
                 }
+                firstPage();
             }
         }}
          xhr.send("city="+city +"&district="+district+"&formwork="+formwork);
