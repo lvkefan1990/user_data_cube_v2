@@ -5,6 +5,8 @@ function chaxun(){
     var district = district_select[district_index].text;//获得区县
     var formwork_index = formwork_select.selectedIndex;
     var formwork = formwork_select[formwork_index].text;//获取模板类型
+    var round_index = round_select.selectedIndex;
+    alert(round_index);
     if(city=="--请选择--" || district =="--请选择--" || district ==""){
         alert("地市和区县不能为空")
     }
@@ -67,7 +69,7 @@ function chaxun(){
                 firstPage();
             }
         }}
-         xhr.send("city="+city +"&district="+district+"&formwork="+formwork);
+         xhr.send("city="+city +"&district="+district+"&formwork="+formwork+"&round="+round_index.toString());
         $("#search").attr("disabled",true).css("pointer-events","none");
     }
 }

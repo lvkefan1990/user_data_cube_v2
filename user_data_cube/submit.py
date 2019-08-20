@@ -109,16 +109,17 @@ def jlyhfx_submit(request):
     }
     #首先，获得用户输入的值
     if request.method =="POST":
+        print(request.POST);
         city = request.POST["city"];
         district = request.POST["district"];
         formwork = request.POST["formwork"];
-        print(city,district,formwork)
+        round = int(request.POST["round"]);
         jlyhfx_dict["table_head"]=formwork_dict[formwork];
         print(jlyhfx_dict["table_head"]);
     import pymysql
     conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
     cur = conn.cursor();
-    cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RECENT_ROUND));
+    cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RONUD_LIST[round]));
     result = cur.fetchall();
     for row in result:
         print(row);

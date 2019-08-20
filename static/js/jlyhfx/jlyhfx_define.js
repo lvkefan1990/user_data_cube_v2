@@ -10,6 +10,7 @@ function writeText(element,content){
 var city_select = document.getElementById("city_select");
 var district_select = document.getElementById("district_select");
 var formwork_select = document.getElementById("formwork");
+var round_select = document.getElementById("round_select");
 
 //定义输出表格及其父容器
 var export_table = document.getElementById("export_table");

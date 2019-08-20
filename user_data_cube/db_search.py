@@ -381,6 +381,7 @@ def lssj_db_search(get_value):
             fzcgl_list.append(core.attach_rate);
             tau_list.append(core.tau_rate);
     # lssj_table表示使用{row0：[各个数据]}，的形式表示各行的数据,顺序不能乱了
+    print(locals());
     lssj_table_1.append(RONUD_LIST);
     lssj_table_1.append(telphone);
     lssj_table_1.append(user_enodeb);
@@ -511,7 +512,10 @@ def yhty_db_search(get_value):
                                                 score_list[i].score_usr_sensitivity]})
             i += 1;
     yhty_dict["round"] = RONUD_LIST;
-    yhty_dict["avg_score"] = round((score_list.last().score_usr_worth + score_list.last().score_usr_cover_pecpt + \
-                                    score_list.last().score_usr_speed_pecpt + score_list.last().score_usr_ete_pecpt + score_list.last().score_usr_sensitivity) / 5);
+    try:
+        yhty_dict["avg_score"] = round((score_list[i-1].score_usr_worth + score_list[i-1].score_usr_cover_pecpt + \
+                                        score_list[i-1].score_usr_speed_pecpt + score_list[i-1].score_usr_ete_pecpt + score_list[i-1].score_usr_sensitivity) / 5);
+    except:
+        yhty_dict["avg_score"] = 0;
     yhty_dict.update(user_basic_info_dict);
     return yhty_dict;
