@@ -178,6 +178,28 @@ class RoundsLog(models.Model):
         db_table = 'rounds_log'
 
 
+class RoundsMsisdnRelation(models.Model):
+    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', max_length=15)  # Field name made lowercase.
+    if_tac_imei_relation = models.IntegerField()
+    if_usr_app_pecpt = models.IntegerField()
+    if_usr_app_rank = models.IntegerField()
+    if_usr_basic_info = models.IntegerField()
+    if_usr_call_pecpt = models.IntegerField()
+    if_usr_complt_record = models.IntegerField()
+    if_usr_core_pecpt = models.IntegerField()
+    if_usr_cover_pecpt = models.IntegerField()
+    if_usr_ete_pecpt = models.IntegerField()
+    if_usr_expenses = models.IntegerField()
+    if_usr_score_return = models.IntegerField()
+    if_usr_speed_pecpt = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'rounds_msisdn_relation'
+
+
 class SelectSumma(models.Model):
     selectid = models.AutoField(db_column='SELECTID', primary_key=True)  # Field name made lowercase.
     s_table = models.CharField(db_column='S_TABLE', max_length=255, blank=True, null=True)  # Field name made lowercase.
@@ -203,16 +225,17 @@ class TableSumma(models.Model):
 
 
 class TacImeiRelation(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     brand = models.CharField(db_column='BRAND', max_length=255, blank=True, null=True)  # Field name made lowercase.
     type = models.CharField(db_column='TYPE', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'tac_imei_relation'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class TestappUserinfo(models.Model):
@@ -229,10 +252,10 @@ class TestappUserinfo(models.Model):
 
 
 class UsrAppPecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     top1_app_name = models.CharField(db_column='TOP1_APP_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
     top1_sp_delay = models.FloatField(db_column='TOP1_SP_DELAY', blank=True, null=True)  # Field name made lowercase.
     top1_b1_speed = models.FloatField(db_column='TOP1_B1_SPEED', blank=True, null=True)  # Field name made lowercase.
@@ -262,13 +285,14 @@ class UsrAppPecpt(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_app_pecpt'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrAppRank(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     top1_app_name = models.CharField(db_column='TOP1_APP_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
     top1_session = models.BigIntegerField(db_column='TOP1_SESSION', blank=True, null=True)  # Field name made lowercase.
     top1_data = models.BigIntegerField(db_column='TOP1_DATA', blank=True, null=True)  # Field name made lowercase.
@@ -288,13 +312,14 @@ class UsrAppRank(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_app_rank'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrBasicInfo(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=200)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     city = models.CharField(db_column='CITY', max_length=200, blank=True, null=True)  # Field name made lowercase.
     area = models.CharField(db_column='AREA', max_length=200, blank=True, null=True)  # Field name made lowercase.
     area1 = models.CharField(db_column='AREA1', max_length=200, blank=True, null=True)  # Field name made lowercase.
@@ -307,26 +332,28 @@ class UsrBasicInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_basic_info'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrCallPecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     paging_rate = models.FloatField(db_column='PAGING_RATE', blank=True, null=True)  # Field name made lowercase.
     dc_rate = models.FloatField(db_column='DC_RATE', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'usr_call_pecpt'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrCompltRecord(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     if_risk_user = models.IntegerField(db_column='IF_RISK_USER', blank=True, null=True)  # Field name made lowercase.
     policy_product = models.CharField(db_column='POLICY_PRODUCT', max_length=255, blank=True, null=True)  # Field name made lowercase.
     if_complaint_user = models.IntegerField(db_column='IF_COMPLAINT_USER', blank=True, null=True)  # Field name made lowercase.
@@ -342,13 +369,14 @@ class UsrCompltRecord(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_complt_record'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrCorePecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     bad_rip_rate = models.FloatField(db_column='BAD_RIP_RATE', blank=True, null=True)  # Field name made lowercase.
     ho_rate = models.FloatField(db_column='HO_RATE', blank=True, null=True)  # Field name made lowercase.
     sr_rate = models.FloatField(db_column='SR_RATE', blank=True, null=True)  # Field name made lowercase.
@@ -360,13 +388,14 @@ class UsrCorePecpt(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_core_pecpt'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrCoverPecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     sum_point = models.IntegerField(db_column='SUM_POINT', blank=True, null=True)  # Field name made lowercase.
     poor_point = models.IntegerField(db_column='POOR_POINT', blank=True, null=True)  # Field name made lowercase.
     weak_point = models.IntegerField(db_column='WEAK_POINT', blank=True, null=True)  # Field name made lowercase.
@@ -379,13 +408,14 @@ class UsrCoverPecpt(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_cover_pecpt'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrEtePecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     http_res_rate = models.FloatField(db_column='HTTP_RES_RATE', blank=True, null=True)  # Field name made lowercase.
     http_att = models.FloatField(db_column='HTTP_ATT', blank=True, null=True)  # Field name made lowercase.
     http_res_delay = models.FloatField(db_column='HTTP_RES_DELAY', blank=True, null=True)  # Field name made lowercase.
@@ -402,13 +432,14 @@ class UsrEtePecpt(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_ete_pecpt'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrExpenses(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     packages_name = models.CharField(db_column='PACKAGES_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
     up_500m_user = models.CharField(db_column='UP_500M_USER', max_length=255, blank=True, null=True)  # Field name made lowercase.
     flows = models.CharField(db_column='FLOWS', max_length=255, blank=True, null=True)  # Field name made lowercase.
@@ -424,6 +455,7 @@ class UsrExpenses(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_expenses'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrLocation(models.Model):
@@ -450,11 +482,9 @@ class UsrLogin(models.Model):
 
 
 class UsrResidentCell(models.Model):
-    id = models.BigIntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    sdate = models.CharField(db_column='SDATE', max_length=255)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=20)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     enodeb_id = models.IntegerField(db_column='ENODEB_ID', blank=True, null=True)  # Field name made lowercase.
-    cell_id = models.IntegerField(db_column='CELL_ID', blank=True, null=True)  # Field name made lowercase.
+    enodeb_name = models.CharField(db_column='ENODEB_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -462,10 +492,10 @@ class UsrResidentCell(models.Model):
 
 
 class UsrScoreReturn(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     score_usr_worth = models.FloatField(db_column='SCORE_USR_WORTH', blank=True, null=True)  # Field name made lowercase.
     score_usr_cover_pecpt = models.FloatField(db_column='SCORE_USR_COVER_PECPT', blank=True, null=True)  # Field name made lowercase.
     score_usr_speed_pecpt = models.FloatField(db_column='SCORE_USR_SPEED_PECPT', blank=True, null=True)  # Field name made lowercase.
@@ -475,13 +505,14 @@ class UsrScoreReturn(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_score_return'
+        unique_together = (('msisdn', 'rounds'),)
 
 
 class UsrSpeedPecpt(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    rounds = models.CharField(db_column='ROUNDS', max_length=4, blank=True, null=True)  # Field name made lowercase.
+    id = models.BigIntegerField(db_column='ID')  # Field name made lowercase.
+    rounds = models.CharField(db_column='ROUNDS', max_length=4)  # Field name made lowercase.
     sdate = models.CharField(db_column='SDATE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    msisdn = models.CharField(db_column='MSISDN', max_length=255)  # Field name made lowercase.
+    msisdn = models.CharField(db_column='MSISDN', primary_key=True, max_length=20)  # Field name made lowercase.
     dl_speed = models.FloatField(db_column='DL_SPEED', blank=True, null=True)  # Field name made lowercase.
     bp_dl_speed = models.FloatField(db_column='BP_DL_SPEED', blank=True, null=True)  # Field name made lowercase.
     bp_dl_data = models.FloatField(db_column='BP_DL_DATA', blank=True, null=True)  # Field name made lowercase.
@@ -494,3 +525,4 @@ class UsrSpeedPecpt(models.Model):
     class Meta:
         managed = False
         db_table = 'usr_speed_pecpt'
+        unique_together = (('msisdn', 'rounds'),)

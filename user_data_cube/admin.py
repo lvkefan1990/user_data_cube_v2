@@ -38,13 +38,11 @@ class UsrSpeedPecptAdmin(admin.ModelAdmin):
 
 @admin.register(UsrResidentCell)
 class UsrRsidentCellAdmin(admin.ModelAdmin):
-    list_display = ('id', 'sdate', 'msisdn', 'enodeb_id')
+    list_display = ('msisdn', 'enodeb_id')
     list_per_page = 100
-    ordering = ('id',)
     actions_on_top = True
     actions_on_bottom = False
     actions_selection_counter = True
-    search_fields = ('id',)
 
 @admin.register(UsrExpenses)
 class UsrExpensesAdmin(admin.ModelAdmin):
