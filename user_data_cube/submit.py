@@ -10,11 +10,19 @@ from django.core.paginator import Paginator
 import json
 import xlwt
 from io import BytesIO
+import decimal
 from django.http import JsonResponse
 import datetime
 
 
 # Create your views here.
+
+#Decimal错误解决办法
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, decimal.Decimal):
+            return float(o)
+        super(DecimalEncoder, self).default(o)
 
 def login_submit(request):
     if request.method == 'POST':
@@ -119,8 +127,12 @@ def jlyhfx_submit(request):
     import pymysql
     conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
     cur = conn.cursor();
-    cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RONUD_LIST[round]));
-    result = cur.fetchall();
+    try:
+        cur.callproc(procedure_dict[formwork],(city_dict[city],area_dict[city][district],RONUD_LIST[round]));
+        result = cur.fetchall();
+    except pymysql.err.InternalError:
+        cur.callproc(procedure_dict[formwork], (city_dict[city], area_dict[city][district]))
+        result = cur.fetchall()
     for row in result:
         print(row);
         jlyhfx_dict["table_body"].append(list(row));
@@ -140,7 +152,7 @@ def jlyhfx_submit(request):
         data_row +=1;
     global export_excel;
     export_excel = wb;
-    return HttpResponse(json.dumps(jlyhfx_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+    return HttpResponse(json.dumps(jlyhfx_dict, cls=DecimalEncoder,ensure_ascii=False), content_type="application/json,charset=utf-8");
 
 @login_required
 @csrf_exempt
