@@ -137,5 +137,6 @@ function wlgz_onload(){
      }
      }
      xhr.send();
-    $("#search").attr("disabled",true).css("pointer-events","none");
+     //查询发生以后，禁用查询
+     $("#search").attr("disabled",true).css("pointer-events","none");
 }

@@ -222,3 +222,17 @@ width: 100%;
 	border: 1px solid #1ca8eb;
 
 }
+
+.button{
+	background-color: #01cffd;
+    width: 100%;
+    height: 46px;
+    border: 1px solid #01cffd;
+    border-radius: 5px;
+    line-height: 46px;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    padding-left: 0 !important;
+}

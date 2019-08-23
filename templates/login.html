@@ -17,7 +17,7 @@
 			<div class="logo fl"></div>
 		<p class="title fl">用户数据魔方</p>
         </div>
-        <form action="/login_submit/" method="post">{% csrf_token %}
+        <form action="/login_submit/" method="post" onsubmit="return isveryfy()">{% csrf_token %}
             <div class="login_k">
                 <div class="login_input ">
                             <div class="login_name"></div>
@@ -30,14 +30,23 @@
                 <div style="width: 100%;height: 46px;margin-bottom: 30px;">
                   <div class="login_input fl"style="width: 280px;">
                             <div class="login_yzm"></div>
-                            <input  type="text"  placeholder="验证码"/>
+                            <input  type="text" id="yzm_input" placeholder="验证码"/>
                   </div >
-                  <div class="login_input fr yzm">
-                    <img src="../static/img/yzm.png"/>
+                  <div class="login_input fr yzm" id="yzm_container">
+                      <script src="../static/js/gVerify.js"></script>
+                      <!--<img src="../static/img/yzm.png">-->
+                      <script>
+                          var verifyCode = new GVerify("yzm_container")
+                          function isveryfy() {
+                              var res = verifyCode.validate(document.getElementById("yzm_input").value);
+                              if (!res){alert("验证码错误！")}
+                              return res;
+                          }
+                      </script>
                   </div>
                 </div>
                 <div class="login_input login_but"style="margin-bottom: 0;">
-                    <input  type="submit"  value="登 录"/>
+                    <input  type="submit" id="submit_login" value="登 录"/>
                 </div>
             </div>
         </form>
