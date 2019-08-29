@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html >
 <head>
@@ -6,13 +5,12 @@
     <title>自定义查询</title>
     <link rel="stylesheet" type="text/css" href="../static/css/zdycx.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/jquery.datetimepicker.css"/>
+    <script src="../static/js/zdycx/zdycx_canshu.js"></script>
 </head>
-<script type="text/javascript" src="../static/js/select_option.js"></script>
 <body>
  <div class="tsgl">
-
+     <!-----------------------------------------第一部分---------------------------------------------->
         <div class="head-div">
-			<div class="fl">
 			<div class=" fl logo">
 				<div class="logo_ico fl"></div>
 			    <p class="head-bt fl">用户数据魔方</p>
@@ -24,44 +22,31 @@
                             <span class="fl top_select_word">单个用户分析</span>
                             </a>
 						</li>
-
 						<li class="top_select_li ">
 							<a href="/jlyhfx/" style="color:white">
 							<span class="fl top_select_word">聚类用户分析</span>
                             </a>
 						</li>
-
 						<li class="top_select_li select_dh">
 							<a href="/zdycx/" style="color:white">
 							<span class="fl top_select_word">自定义查询</span>
 							</a>
 						</li>
-
 					</ul>
-			</div>
-
-			<div class="fr top_right">
-
-					<span class="fl hi">更新时间：<span>2019/07/27</span></span>
+			    <div class="fr top_right">
+					<span class="fl hi">更新时间：<span id="time"></span></span>
 					<span class="fl hi">Hi，{{user_name}}</span>
-					<a class="btn_xgmm fl">修改密码</a>
-					<a class="btn_tc fr">退出</a>
+					<a class="btn_xgmm fl" href="/xgmm/">修改密码</a>
+					<a class="btn_tc fr" href="/exit/" style="position: relative;left:-10px">退出</a>
 				</div>
-
 		</div>
-
+        <!--------------------------------------第二部分--------------------------------------------->
 		<div class="content">
-
 		<div class="content_t">
-
-		  <div style="width:calc(100% - 80px);height:128px;padding:20px 40px;background-color: #1e1d2b;">
-
-		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
-		   	<span class="fl timeslecet_title">地市：</span>
-		   	    <div class="xz_select_kuang fl">
-		   	    <div class=" time_select_kuang">
-                   <!--2.确定事件，通过函数传参的方式拿到改变后的城市-->
-               <select onchange="changeCity(this.value)" class="city_district_select">
+            <p style="font-size: 14px">
+                <span class="timeslecet_title" style="position:absolute;left:20px;top:0;">地市：</span>
+                <select onchange="changeCity(this.value)" class="time_select_kuang city_district_select" style="position:absolute;left:60px;"
+                id = "city_select">
                     <option>--请选择--</option>
                     <option id="长沙市" value="0">长沙市</option>
                     <option id="株洲市" value="1">株洲市</option>
@@ -78,346 +63,500 @@
                     <option id="娄底市" value="12">娄底市</option>
                     <option id="湘西土家族苗族自治州" value="13">湘西土家族苗族自治州</option>
                 </select>
-		   	 		 <!--<span class="word_select fl">怀化</span>-->
-		   	 	</div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li>长沙</li>
-								<li>株洲</li>
-								<li>湘潭</li>
-								<li>张家界</li>
-								<li class="select">怀化</li>
-								<li>常德</li>
-								<li>郴州</li>
-								<li>永州</li>
-							</ul>
-		   	 		</div>-->
-		   	 	</div>
-		   </div>
+                <span class="timeslecet_title" style="position: absolute;left:260px">起始时间: </span>
+                <input type="text" value="" id="start_datetimepicker" class="time_select_kuang city_district_select" style="position: absolute;left:340px"/>
+                <span class="fl timeslecet_title" style="position: absolute;left:550px">终止时间：</span>
+                <input type="text" value="" id="end_datetimepicker" class="time_select_kuang city_district_select" style="position: absolute;left:640px"/>
+                <a class="search" style="position:absolute;left:840px" onclick="zdycx_chaxun()">查询</a>
+            </p>
+            <p style="position:absolute;top:50px;color:white;width: 100%">
+                <span style="position:relative;left:20px;color:rgba(255,255,255,0.75);font-size: 14px;line-height: 32px;">区县：</span>
+                <span id="district_all" style="display: none;position:absolute;top:6px;left:70px;font-size: 14px;">
+                    <label><input type="checkbox" class="" name="district" value="全选" onchange="quanxuan(this,'district')"/><i class=""></i></label>全选
+                </span>
+                <ul id="district_select" style="position:absolute;left:125px;top:50px;width: 100%"></ul>
+            </p>
+            <!-----------------------------------------第三部分--------------------------------------------------------------->
+            <!--命名规则：ul使用表名命名，标题使用表名+title命名，checkbox使用表名+checkbox命名，总体的使用英文+checkbox命名-->
+            <div style="height: 900px;width:340px;overflow-y: auto;overflow-x: auto;position: absolute;top:100px;background-color:rgb(21,19,29);">
+                <ul style="width:260px;">
+                    <li style="position:relative;top:0px;font-size: 12px;color:white">
+                        查询字段选择：<a class="queren" style="position:relative;left:50px" onclick="tiaojian_queren(attr_name_list)">确认</a>
+                    </li>
+                    <li style="position:relative;top:15px;">
+                        <p class="condition_level_1">
+                            <label>
+                                <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_basic_info_xianshi,usr_basic_info_yincang)"
+                                       value="用户基础信息" id="usr_basic_info_checkbox"/><i class="check_display"></i>
+                            </label>
+                            <span style="font-size: 12px">用户基础信息</span>
+                        </p>
+                            <p class="condition_level_2" id="usr_basic_info_title" style="display: none">
+                            <label>
+                                <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_basic_info_table_xianshi,usr_basic_info_table_yincang)"  value="用户基础信息表" id="user_basic_checkbox"/><i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户基础信息表</span>
+                            </p>
+                            <ul style="display:none" id="usr_basic_info">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="全选" onchange="quanxuan(this,'usr_basic_info_attr')"/>全选</li>
+                                <li class="condition_level_3"><input type="checkbox" name="msisdn" value="电话号码" checked="checked" disabled="disabled"/>电话号码<li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="星级"/>星级</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="营业部"/>营业部</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="农村城市属性"/>农村城市属性</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="开户时间"/>开户时间</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_basic_info_attr" value="在网时长"/>在网时长</li>
+                            </ul>
+                            <p class="condition_level_2" id="usr_resident_cell_title" style="display: none">
+                                <label>
+                                    <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_resident_cell_xianshi,usr_resident_cell_yincang)" value="用户常驻小区表" id="usr_resident_cell_checkbox"/><i class="check_display"></i>
+                                </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户常驻基站表</span>
+                            </p>
+                            <ul style="display:none" id="usr_resident_cell">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_resident_cell_attr" value="全选" onchange="quanxuan(this,'usr_resident_cell_attr')"/>全选</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_resident_cell_attr" value="用户常驻基站"/>用户常驻基站
+                                </li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_resident_cell_attr" value="基站ID"/>基站ID
+                                </li>
+                            </ul>
+                    </li>
+                    <li style="position: relative;top:30px;">
+                        <p class="condition_level_1">
+                             <label>
+                                    <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,user_netbehavior_xianshi,user_netbehavior_yincang)" value="用户上网行为" id="user_netbehavior_checkbox"/>
+                                    <i class="check_display"></i>
+                             </label>
+                            <span style="font-size: 12px">用户上网行为</span>
+                        </p>
+                        <p class="condition_level_2" style="display:none" id="usr_app_rank_title">
+                            <label>
+                                <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_app_rank_xianshi,usr_app_rank_yincang)" value="用户APP排名表" id="user_apprank_checkbox"/>
+                                <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户APP排名表</span>
+                        </p>
+                        <ul id="usr_app_rank" style="display:none">
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="全选" onchange="quanxuan(this,'usr_app_rank_attr')"/>全选</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP1APP名称"/>TOP1APP名称</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP1APP流量"/>TOP1APP流量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP1APP点击量"/>TOP1APP点击量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP2APP名称"/>TOP2APP名称</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP2APP流量"/>TOP2APP流量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP2APP点击量"/>TOP2APP点击量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP3APP名称"/>TOP3APP名称</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP3APP流量"/>TOP3APP流量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP3APP点击量"/>TOP3APP点击量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP4APP名称"/>TOP4APP名称</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP4APP流量"/>TOP4APP流量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP4APP点击量"/>TOP4APP点击量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP5APP名称"/>TOP5APP名称</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP5APP流量"/>TOP5APP流量</li>
+                            <li class="condition_level_3"><input type="checkbox" name="usr_app_rank_attr" value="TOP5APP点击量"/>TOP5APP点击量</li>
+                        </ul>
+                    </li>
+                    <li style="position: relative;top:45px;">
+                        <p class="condition_level_1">
+                            <label>
+                                <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,user_netpecpt_xianshi,user_netpecpt_yincang)" value="用户网络感知" id="user_netpecpt_checkbox"/>
+                                <i class="check_display"></i>
+                            </label>
+                            <span style="font-size: 12px">用户网络感知</span>
+                        </p>
+                        <p class="condition_level_2" style="display: none" id="usr_call_pecpt_title">
+                            <label>
+                                <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_call_pecpt_xianshi,usr_call_pecpt_yincang)" value="用户通话感知表" id="usr_call_pecpt_checkbox"/>
+                                <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户通话感知表</span>
+                        </p>
+                            <ul style="display:none" id="usr_call_pecpt">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_call_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_call_pecpt_attr',usr_call_pecpt_input)"/>全选</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_call_pecpt_attr" value="接通率" onchange="tiaojian_shezhi(this,['paging_rate_start','paging_rate_end'])"/>接通率: 范围(0-100)
+                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_start">
+                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_end">%
+                                </li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_call_pecpt_attr" value="掉话率" onchange="tiaojian_shezhi(this,['dc_rate_start','dc_rate_end'])"/>掉话率 范围(0-100):
+                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_start">
+                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_end">%
+                                </li>
+                            </ul>
+                        <p class="condition_level_2" style="display: none" id="usr_app_pecpt_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_app_pecpt_xianshi,usr_app_pecpt_yincang)" value="用户APP速率表" id="usr_app_pecpt_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户APP速率表</span>
+                        </p>
+                            <ul style="display:none" id="usr_app_pecpt">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_app_pecpt_attr')"/>全选</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP1APP名称"/>TOP1APP名称</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP1APP小包时延"/>TOP1APP小包时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP1APP_B1速率"/>TOP1APP_B1速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP1APP_B2速率"/>TOP1APP_B2速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP1APP_B3速率"/>TOP1APP_B3速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP2APP名称"/>TOP2APP名称</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP2APP小包时延"/>TOP2APP小包时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP2APP_B1速率"/>TOP2APP_B1速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP2APP_B2速率"/>TOP2APP_B2速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP2APP_B3速率"/>TOP2APP_B3速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP3APP名称"/>TOP3APP名称</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP3APP小包时延"/>TOP3APP小包时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP3APP_B1速率"/>TOP3APP_B1速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP3APP_B2速率"/>TOP3APP_B2速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP3APP_B3速率"/>TOP3APP_B3速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP4APP名称"/>TOP4APP名称</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP4APP小包时延"/>TOP4APP小包时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP4APP_B1速率"/>TOP4APP_B1速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP4APP_B2速率"/>TOP4APP_B2速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP4APP_B3速率"/>TOP4APP_B3速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP5APP名称"/>TOP5APP名称</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP5APP小包时延"/>TOP5APP小包时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP5APP_B1速率"/>TOP5APP_B1速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP5APP_B2速率"/>TOP5APP_B2速率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_app_pecpt_attr" value="APP感知TOP5APP_B3速率"/>TOP5APP_B3速率</li>
+                            </ul>
+                        <p class="condition_level_2" style="display: none" id="usr_speed_pecpt_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_speed_pecpt_xianshi,usr_speed_pecpt_yincang)" value="用户上网速率表" id="usr_speed_pecpt_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户上网速率表</span>
+                        </p>
+                            <ul style="display:none" id="usr_speed_pecpt">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_speed_pecpt_attr',usr_speed_pecpt_input)"/>全选</li>
+                                <li class="condition_level_3" style="width: 390px;">
+                                    <input type="checkbox" name="usr_speed_pecpt_attr" value="全业务下行速率" onchange="tiaojian_shezhi(this,['dl_speed_start','dl_speed_end'])"/>全业务下行速率 范围(大于0):
+                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_start">
+                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_end">kB/s
+                                </li>
+                                <li class="condition_level_3" style="width: 365px;">
+                                    <input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行速率" onchange="tiaojian_shezhi(this,['bp_dl_speed_start','bp_dl_speed_end'])"/>大包下行速率&nbsp;&nbsp;&nbsp; 范围(大于0):
+                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_start">
+                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_end">kB/s
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行流量"/>大包下行流量</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行时长"/>大包下行时长</li>
+                                <li class="condition_level_3" style="width: 390px;">
+                                    <input type="checkbox" name="usr_speed_pecpt_attr" value="全业务上行速率" onchange="tiaojian_shezhi(this,['ul_speed_start','ul_speed_end'])"/>全业务上行速率 范围(大于0):
+                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_start">
+                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_end">kB/s
+                                </li>
+                                <li class="condition_level_3" style="width: 390px;">
+                                    <input type="checkbox" name="usr_speed_pecpt_attr" value="大包上行速率" onchange="tiaojian_shezhi(this,['bp_ul_speed_start','bp_ul_speed_end'])"/>大包上行速率&nbsp;&nbsp;&nbsp; 范围(大于0):
+                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_start">
+                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_end">kB/s
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="小包下行时延"/>小包下行时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="小包上行时延"/>小包上行时延</li>
+                            </ul>
+                        <p class="condition_level_2" style="display: none" id="usr_ete_pecpt_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_ete_pecpt_xianshi,usr_ete_pecpt_xianshi)" value="用户端到端感知表" id="usr_ete_pecpt_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户端到端感知表</span>
+                        </p>
+                            <ul style="display:none" id="usr_ete_pecpt">
+                                <li class="condition_level_3" style="width: 380px"><input type="checkbox" name="usr_ete_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_ete_pecpt_attr',usr_ete_pecpt_input)"/>全选</li>
+                                <li class="condition_level_3" style="width:500px">
+                                    <input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP响应成功率" onchange="tiaojian_shezhi(this,['http_res_rate_start','http_res_rate_end'])"/>HTTP响应成功率 范围(0-100):
+                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_start">
+                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_end">%
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP请求次数"/>HTTP请求次数</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP响应时延"/>HTTP响应时延</li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_ete_pecpt_attr" value="TCP核心网成功率" onchange="tiaojian_shezhi(this,['tcp_core_rate_start','tcp_core_rate_end'])"/>TCP核心网成功率 范围(0-100):
+                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_start">
+                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_end">%
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP核心网时延"/>TCP核心网时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP无线时延"/>TCP无线时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP下行重传率"/>TCP下行重传率</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP上行重传率"/>TCP上行重传率</li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_ete_pecpt_attr" value="TCP重传率" onchange="tiaojian_shezhi(this,['tcp_radio_rate_start','tcp_radio_rate_end'])"/>TCP重传率&nbsp; 范围(0-100):
+                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_start">
+                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_end">%
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="页面响应时延"/>页面响应时延</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="页面响应次数"/>页面响应次数</li>
+                            </ul>
+                        <p class="condition_level_2" style="display: none" id="usr_core_pecpt_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_core_pecpt_xianshi,usr_core_pecpt_yincang)" value="用户核心网感知表" id="usr_core_pecpt_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户核心网感知表</span>
+                        </p>
+                            <ul style="display:none" id="usr_core_pecpt">
+                                <li class="condition_level_3" style="width: 380px"><input type="checkbox" name="usr_core_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_core_pecpt_attr',usr_core_pecpt_input)"/>全选</li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="差RIP率" onchange="tiaojian_shezhi(this,['bad_rip_rate_start','bad_rip_rate_end'])"/>差RIP率 范围(0-100):
+                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_start">
+                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="切换成功率" onchange="tiaojian_shezhi(this,['ho_rate_start','ho_rate_end'])"/>切换成功率 范围(0-100):
+                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_start">
+                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="服务请求成功率" onchange="tiaojian_shezhi(this,['sr_rate_start','sr_rate_end'])"/>服务请求成功率 范围(0-100):
+                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_start">
+                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="附着成功率" onchange="tiaojian_shezhi(this,['attach_rate_start','attach_rate_end'])"/>附着成功率 范围(0-100):
+                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_start">
+                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="PDN连接成功率" onchange="tiaojian_shezhi(this,['pdn_rate_start','pdn_rate_end'])"/>PDN连接成功率 范围(0-100):
+                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_start" >
+                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="INITIAL成功率" onchange="tiaojian_shezhi(this,['initial_rate_start','initial_rate_end'])"/>INITIAL成功率 范围(0-100):
+                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_start">
+                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_core_pecpt_attr" value="TAU成功率" onchange="tiaojian_shezhi(this,['tau_rate_start','tau_rate_end'])"/>TAU成功率 范围(0-100):
+                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_start">
+                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_end">%
+                                </li>
+                            </ul>
+                        <p class="condition_level_2" style="display: none" id="usr_cover_pecpt_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_cover_pecpt_xianshi,usr_cover_pecpt_yincang)" value="用户覆盖感知表" id="usr_app_pecpt_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户覆盖感知表</span>
+                        </p>
+                            <ul style="display:none" id="usr_cover_pecpt">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_cover_pecpt_attr',usr_cover_pecpt_input)"/>全选</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="MR采样点"/>MR采样点</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="MR弱采样点"/>MR弱采样点</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="低于-100的采样点"/>低于-100的采样点</li>
+                                <li class="condition_level_3" style="width: 400px">
+                                    <input type="checkbox" name="usr_cover_pecpt_attr" value="平均RSRP" onchange="tiaojian_shezhi(this,['avg_rsrp_start','avg_rsrp_end'])"/>平均RSRP 范围(-160至-40):
+                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_start">
+                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_end">dbm
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="MR_RATE_100"/>MR_RATE_100</li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_cover_pecpt_attr" value="MR覆盖率" onchange="tiaojian_shezhi(this,['mr_rate_start','mr_rate_end'])"/>MR覆盖率 范围(0-100):
+                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_start">
+                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_cover_pecpt_attr" value="脱网率" onchange="tiaojian_shezhi(this,['off_rate_start','off_rate_end'])"/>脱网率 范围(0-100):
+                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_start">
+                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_end">%
+                                </li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_cover_pecpt_attr" value="差PHR率" onchange="tiaojian_shezhi(this,['bad_phr_rate_start','bad_phr_rate_end'])"/>差PHR率 范围(0-100):
+                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_start">
+                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_end">%
+                                </li>
+                            </ul>
+                    </li>
+                    <li style="position:relative;top:60px;">
+                        <p class="condition_level_1">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_expensesbehavior_xianshi,usr_expensesbehavior_yincang)" value="用户消费行为" id="usr_expensesbehavior_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="font-size: 12px">用户消费行为</span>
+                        </p>
+                        <p class="condition_level_2" style="display: none" id="usr_expenses_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_expenses_xianshi,usr_expenses_yincang)" value="用户消费行为表" id="usr_expenses_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户消费行为表</span>
+                        </p>
+                            <ul style="display: none" id="usr_expenses">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="全选" onchange="quanxuan_radio(this,'usr_expenses_attr',['是否500M以上流量或套餐订购用户','超套餐流量客户','前30%ARPU用户','前30%DOU值用户'])"/>全选</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="主套餐名称"/>主套餐名称</li>
+                                <li class="condition_level_3" style="width: 400px">
+                                    <input type="checkbox" name="usr_expenses_attr" value="是否500M以上流量或套餐订购用户" onchange="tiaojian_radio(this,'是否500M以上流量或套餐订购用户')"/>是否500M以上流量或套餐订购用户
+                                    <input name="是否500M以上流量或套餐订购用户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否500M以上流量或套餐订购用户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否500M以上流量或套餐订购用户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="主套餐加附加套餐包含流量"/>主套餐加附加套餐包含流量</li>
+                                <li class="condition_level_3" style="width: 400px">
+                                    <input type="checkbox" name="usr_expenses_attr" value="超套餐流量客户" onchange="tiaojian_radio(this,'超套餐流量客户')"/>超套餐流量客户
+                                    <input name="超套餐流量客户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="超套餐流量客户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="超套餐流量客户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="近三个月月均ARPU"/>近三个月月均ARPU</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="ARPU排名"/>ARPU排名</li>
+                                <li class="condition_level_3" style="width: 400px">
+                                    <input type="checkbox" name="usr_expenses_attr" value="前30%ARPU用户" onchange="tiaojian_radio(this,'前30%ARPU用户')"/>前30%ARPU用户
+                                    <input name="前30%ARPU用户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="前30%ARPU用户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="前30%ARPU用户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="近三个月月均DOU"/>近三个月月均DOU</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_expenses_attr" value="DOU排名"/>DOU排名</li>
+                                <li class="condition_level_3" style="width: 400px">
+                                    <input type="checkbox" name="usr_expenses_attr" value="前30%DOU值用户" onchange="tiaojian_radio(this,'前30%DOU值用户')"/>前30%DOU值用户
+                                    <input name="前30%DOU值用户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="前30%DOU值用户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="前30%DOU值用户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                            </ul>
+                    </li>
+                    <li style="position:relative;top:75px;">
+                        <p class="condition_level_1">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,tac_imei_relation_xianshi,tac_imei_relation_yincang)" value="用户终端关系" id="tac_imei_relation_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="font-size: 12px">用户终端关系</span>
+                        </p>
+                        <p class="condition_level_2" style="display: none" id="tac_imei_relation_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,tac_imei_relation_table_xianshi,tac_imei_relation_table_yincang)" value="用户终端关系表" id="tac_imei_relation_table_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户终端关系表</span>
+                        </p>
+                        <ul style="display: none" id="tac_imei_relation">
+                            <li class="condition_level_3"><input type="checkbox" name="tac_imei_relation_attr" value="全选" onchange="quanxuan(this,'tac_imei_relation_attr')"/>全选</li>
+                            <li class="condition_level_3"><input type="checkbox" name="tac_imei_relation_attr" value="终端品牌"/>终端品牌</li>
+                            <li class="condition_level_3"><input type="checkbox" name="tac_imei_relation_attr" value="终端型号"/>终端型号</li>
+                        </ul>
+                    </li>
+                    <li style="position:relative;top:90px;">
+                        <p class="condition_level_1">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_complt_record_xianshi,usr_complt_record_yincang)" value="用户投诉记录" id="usr_complt_record_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="font-size: 12px">用户投诉记录</span>
+                        </p>
+                        <p class="condition_level_2" style="display: none" id="usr_complt_record_title">
+                            <label>
+                            <input class="check_box_css" type="checkbox" onclick="xianshi_yincang(this,usr_complt_record_table_xianshi,usr_complt_record_table_yincang)" value="用户终端关系表" id="usr_complt_record_table_checkbox"/>
+                            <i class="check_display"></i>
+                            </label>
+                            <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户投诉记录表</span>
+                        </p>
+                            <ul style="display: none" id="usr_complt_record">
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="全选" onchange="quanxuan_radio(this,'usr_complt_record_attr',
+                                ['是否离网预警','是否投诉用户','是否校园客户','是否不满意用户','是否超套餐流量客户'])"/>全选</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_complt_record_attr" value="是否离网预警" onchange="tiaojian_radio(this,'是否离网预警')"/>是否离网预警
+                                    <input name="是否离网预警" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否离网预警" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否离网预警" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="离网预警归因"/>离网预警归因</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_complt_record_attr" value="是否投诉用户" onchange="tiaojian_radio(this,'是否投诉用户')"/>是否投诉用户
+                                    <input name="是否投诉用户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否投诉用户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否投诉用户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="投诉原因1"/>投诉原因1</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="投诉原因2"/>投诉原因2</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="投诉业务"/>投诉业务</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_complt_record_attr" value="是否不满意用户" onchange="tiaojian_radio(this,'是否不满意用户')"/>是否不满意用户
+                                    <input name="是否不满意用户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否不满意用户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否不满意用户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="不满意原因"/>不满意原因</li>
+                                <li class="condition_level_3"><input type="checkbox" name="usr_complt_record_attr" value="投诉业务"/>投诉业务</li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_complt_record_attr" value="是否校园客户" onchange="tiaojian_radio(this,'是否校园客户')"/>是否校园客户
+                                    <input name="是否校园客户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否校园客户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否校园客户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                                <li class="condition_level_3">
+                                    <input type="checkbox" name="usr_complt_record_attr" value="是否超套餐流量客户" onchange="tiaojian_radio(this,'是否超套餐流量客户')"/>是否超套餐流量客户
+                                    <input name="是否超套餐流量客户" type="radio" disabled="disabled" checked="checked" value="全选"/>全选
+                                    <input name="是否超套餐流量客户" type="radio" disabled="disabled" value="是"/>是
+                                    <input name="是否超套餐流量客户" type="radio" disabled="disabled" value="否"/>否
+                                </li>
+                            </ul>
+                    </li>
+                </ul>
+            </div>
+<!--------------------------------------------第四部分(条件结果集合)--------------------------------------------------------------->
+            <div class="condition_ul_div">
+                <p style="width: 100%;position: absolute;top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;查询条件集合</p>
+                <ul id="condition_ul" style="position:absolute;top:30px;">
 
-		   <div style="font-size: 14px;display: inline-block;margin-right: 30px;" class="fl">
-		   	<span class="fl timeslecet_title">区县：</span>
-		   	   <div class="xz_select_kuang fl">
-		   	   <div class=" time_select_kuang">
-                   <select id="city" class="city_district_select">
-                       <option>--请选择--</option>
-                    </select>
-		   	 		 <!--<span class="word_select fl">全部</span>-->
-		   	 	</div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li>长沙</li>
-								<li>株洲</li>
-								<li>湘潭</li>
-								<li>张家界</li>
-								<li class="select">怀化</li>
-								<li>常德</li>
-								<li>郴州</li>
-								<li>永州</li>
-							</ul>
-		   	 		</div>-->
-		   </div>
-		   </div>
+                </ul>
+            </div>
+            <div class="column_ul_div">
+                <p style="width: 100%;position: absolute;top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;查询字段集合</p>
+                <ul id="column_ul" style="position:absolute;top:30px;">
 
-		   <div style="font-size: 14px;display: inline-block;" class="fl">
-		   	<span class="fl timeslecet_title">上网行为：</span>
-		   	    <div class="xz_select_kuang fl">
-		   	   <div class=" time_select_kuang">
-		   	 		 <span class="word_select fl">浏览下载</span>
-		   	 		<a class="arrow_select fr"></a>
-		   	 	</div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li class="select">浏览下载</li>
-								<li>即时通信</li>
-								<li>微博社区</li>
-								<li>导航</li>
-								<li >视频</li>
-								<li>音乐</li>
-								<li>应用商店</li>
-								<li>游戏</li>
-								<li>支付</li>
-								<li>动漫</li>
-								<li>邮箱</li>
-								<li>P2P业务</li>
-								<li>VoIP业务</li>
-								<li>彩信</li>
-								<li>财经</li>
-								<li>安全杀毒</li>
-								<li>购物</li>
-								<li>出行旅游</li>
-								<li>网盘云服务</li>
-								<li>阅读</li>
-								<li>其他</li>
-							</ul>
-		   	 		</div>-->
-		   </div>
-		   </div>
-
-		   <div class="clear"></div>
-
-
-		 <div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" >
-		   	<span class="fl timeslecet_title">时间：</span>
-		   	    <div class="fl time_select_kuang">
-		   	 		 <input type="text" value="" id="start_datetimepicker" class="city_district_select"/>
-		   	 		<a class="arrow_select fr"></a>
-		   	 	</div>
-		   	 	<span class="fl" style="width: 10px;height: 1px;display: inline-block;background-color: rgba(255,255,255,0.25);margin: auto 5px;margin-top: 15px;"></span>
-		   	    <div class="fl time_select_kuang">
-		   	 		 <input type="text" value="" id="end_datetimepicker" class="city_district_select"/>
-		   	 		<a class="arrow_select fr"></a>
-		   	 	</div>
-		   </div>
-
-		      <div class="clear"></div>
-
-		   <div class="select_btn fl">
-		   	<span class="ico_xfnl fl"></span>
-		   	<span class="fl select_btn_word">消费能力指标</span>
-		   </div>
-
-
-
-		   <div class="select_btn fl">
-		   	<span class="ico_yhgz fl"></span>
-		   	<span class="fl select_btn_word">用户感知指标</span>
-		   </div>
-		    <div style="display: inline-block;margin-top: 16px;"class="fl">
-		   	 	<a class="search">查询</a>
-		   	 </div>
-
-          </div>
-		</div>
-
-
-
-		<div class="content_l">
-
-	          	 <div class="content_l_b   ">
-	           	   <div class="content_l_title">
-	           	   	<p class="fl">查询结果</p>
-		   	 	     <a class="search fr">导出</a>
-		   	 	   <div class="clear"></div>
-	           	   </div>
-
-	          	<div style="width:calc(100% - 80px);margin:0 40px;max-height: 660px;margin-bottom: 20px;">
-		    	 <div style="width:100%;max-height: 660px;overflow-y:hidden;overflow-x:auto;">
-
-		    	 <table style="width: 100%;">
-					<thead>
-					 <tr class="gl2_table_1 ">
-					  <td class="date">日期</td>
-					   <td class="ds">地市</td>
-					  <td class="qx">区县</td>
-					  <td class="id">用户电话</td>
-					  <td class="swxw">上网行为</td>
-					  <td class="xj">星级</td>
-					  <td class="xyyh">校园用户</td>
-					  <td class="fgl">覆盖率</td>
-					  <td class="dhl">掉话率</td>
-
-
-
-					 </tr>
-					</thead>
-				<!--	默认无数据-->
-					<!--<tbody>
-					 <tr class="gl2_table_2 ">
-					    <td class="zwsj"> 暂无数据</td>
-					 </tr>
-					</tbody>-->
-					<tbody>
-					 <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-					  <tr class="gl2_table_2 ">
-					   <td class="date">2019/08/31</td>
-					    <td class="ds">怀化</td>
-					   <td class="qx">中方县</td>
-					  <td class="id">13786985423</td>
-					   <td class="swxw">浏览下载</td>
-					    <td class="xj">1星</td>
-					   <td class="xyyh">是</td>
-					  <td class="fgl">好</td>
-					  <td class="dhl">好</td>
-					 </tr>
-
-
-
-					</tbody>
-				   </table>
-
+                </ul>
+            </div>
+<!--------------------------------------------第五部分（表格显示）--------------------------------------------------------------->
+            <div id="table_title" style="position: absolute;left:370px;top:380px;color:white;">
+                <p>
+                    <span>查询结果</span>
+                    <a class="search" href="/zdycx_export_excel/" style="position:absolute;top:0px;left:700px;width:50px;text-align: center;float:left;">导出</a>
+                </p>
+            </div>
+            <div id="table_display" >
+                <table id="export_table">
+                    <thead class="gl2_table_1 " id="export_table_thead">
+                    <tr></tr>
+                    </thead>
+                    <tbody class="gl2_table_2 " id="export_table_tbody">
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="position:absolute;width:850px;top:960px;left:370px;">
+	          	 <div id="pagiDiv" align="right" style="width:100%;color:white;">
+                    <span id="spanFirst">第一页</span>
+                    <span id="spanPre">上一页</span>
+                    <span id="spanNext">下一页</span>
+                    <span id="spanLast">最后一页</span>
+                    第&nbsp;<span id="spanPageNum"></span>&nbsp;页/总共&nbsp;<span id="spanTotalPage"></span>&nbsp;页
+                </div>
+			   <!--<div class="clear"></div>-->
+	       </div>
 
 				 </div>
 		    	</div>
-
-		    	<div style="width: 100%;">
-	          	<div class="page fr">
-				<a>上一页</a>
-				<a class="dq">3</a>
-				<a>4</a>
-				<a>5</a>
-				<a>6</a>
-				<a>7</a>
-				<a>下一页</a>
-			   </div>
-			   <div class="clear"></div>
-
-	       </div>
-	           </div>
+	           </div>-->
 		</div>
-	</div>
-
-
-
-
-
-
-   </div>
-
-
+        </div>
+ </div>
 
 </body>
 </html>
 <script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>
 <script src="../static/js/jquery.datetimepicker.full.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/time_picker.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/zdycx_define.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/shuxing_list.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/zdycx_select_option.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/zdycx_pagination.js"></script>
+<script type="text/javascript" src="../static/js/zdycx/zdycx_chaxun_daochu.js"></script>
 <script type="text/javascript">
-    $.datetimepicker.setLocale('zh');
-    $('#start_datetimepicker').datetimepicker({
-    dayOfWeekStart :1,
-    lang:'zh',
-    startDate:'2016/01/01',
-    value:"",
-    format:'Y/m/d',
-    timepicker:false,
-});
-    $('#end_datetimepicker').datetimepicker({
-    dayOfWeekStart :1,
-    lang:'zh',
-    startDate:'2016/01/01',
-    value:"",
-    format:'Y/m/d',
-    timepicker:false,
-});
+    //显示时间
+    var now_time=new Date;
+    var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
+    document.getElementById("time").innerText = time;
+    //显示条件框
+
 </script>

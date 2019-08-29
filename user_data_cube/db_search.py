@@ -17,15 +17,19 @@ def date_compare(start=(0,0,0),end=(0,0,0)):
     """
     :param start:起始时间
     :param end:结束时间
-    :return:起始时间小于结束时间则返回TRUE
+    :return:起始时间小于或者等于结束时间则返回TRUE
     """
     i = 0;
     while i<start.__len__():
-        if start[i]<=end[i]:
-            i += 1;
-        else:
+        if start[i]<end[i]:
+            return True;
+        elif start[i]>end[i]:
             return False;
-    return True;
+        elif start[i] == end[i]:
+            if i != start.__len__()-1:
+                i +=1;
+            else:
+                return True;
 
 
 

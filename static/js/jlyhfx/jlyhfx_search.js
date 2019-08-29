@@ -1,3 +1,11 @@
+function writeText(element,content){
+    if(typeof(element.innerText) === 'string'){
+        element.innerText=content;
+    }else{
+        element.textContent=content;
+    }
+}
+
 function chaxun(){
     var city_index=city_select.selectedIndex;//城市选择
     var city = city_select.options[city_index].text;//获得城市
@@ -32,14 +40,11 @@ function chaxun(){
                     td=document.createElement('td');
                     td.style.whiteSpace="nowrap";
                     td.style.width = "120px";
-                    //td.style.width = (jlyhfx_obj.table_head[table_head_col].length*40).toString()+"px";
-                    //width_list.push((jlyhfx_obj.table_head[table_head_col].length*40).toString()+"px");
                     table_width = table_width+120;
                     writeText(td,jlyhfx_obj.table_head[table_head_col]);
                     tr_head.appendChild(td);
                 }
                 export_table_thead.appendChild(tr_head);
-                alert(table_width);
                 export_table.style.width = (table_width*1.2).toString()+"px";
                 export_table.style.tableLayout = "fixed";
                 //至此写完了表头,写下来写分页的初始化和body

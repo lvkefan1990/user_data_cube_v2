@@ -44,7 +44,7 @@
 
 					<span class="fl hi">更新时间：<span id="time"></span></span>
 					<span class="fl hi">Hi，{{ user_name }}</span>
-					<a class="btn_xgmm fl">修改密码</a>
+					<a class="btn_xgmm fl" href="/xgmm/">修改密码</a>
 					<a class="btn_tc fr" href="/exit/">退出</a>
 				</div>
 
@@ -80,22 +80,7 @@
                     <option id="娄底市" value="12">娄底市</option>
                     <option id="湘西土家族苗族自治州" value="13">湘西自治州</option>
                 </select>
-		   	 		 <!--<span class="word_select fl">怀化</span>-->
-                   <!--怀化-->
 		   	 	</div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li>长沙</li>
-								<li>株洲</li>
-								<li>湘潭</li>
-								<li>张家界</li>
-								<li class="select">怀化</li>
-								<li>常德</li>
-								<li>郴州</li>
-								<li>永州</li>
-							</ul>
-		   	 		</div>-->
 		   	 	</div>
 		   </div>
 
@@ -106,21 +91,7 @@
                     <select id="district_select" class="city_district_select">
                         <option>--请选择--</option>
                     </select>
-		   	 		 <!--<span class="word_select fl">全部</span>-->
 		   	 	</div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li>长沙</li>
-								<li>株洲</li>
-								<li>湘潭</li>
-								<li>张家界</li>
-								<li class="select">怀化</li>
-								<li>常德</li>
-								<li>郴州</li>
-								<li>永州</li>
-							</ul>
-		   	 		</div>-->
 		   </div>
 		   </div>
 
@@ -152,47 +123,15 @@
                         </select>
 		   	 	    </div>
                 </div>
-		   	 	<!--下拉框-->
-		   	 		<!--<div class="xz_kuang">
-		   	 			<ul>
-								<li class="select">感知差的头部用户</li>
-								<li>超套餐流量感知优用户</li>
-								<li>超套餐流量感知差用户</li>
-								<li>校园网超套餐流量用户</li>
-								<li >感知好流量小用户</li>
-								<li>高价值感知差用户</li>
-							</ul>
-		   	 		</div>-->
 		   </div>
 		   </div>
 		   	 	<a class="search" id="search" onclick="chaxun()" style="position: relative;left: 15px">查询</a>
 		   <div class="clear"></div>
-
-
-
-		  <!--<div style="font-size: 14px;display: inline-block;margin-right: 30px;margin-top: 16px;" class="fl">
-		   	<span class="fl timeslecet_title">时间：</span>
-		   	    <div class="fl time_select_kuang">
-		   	 		 <input type="text" value="" id="start_datetimepicker" class="city_district_select"/>
-		   	 		<a class="arrow_select fr"></a>
-		   	 	</div>
-		   	 	<span class="fl" style="width: 10px;height: 1px;display: inline-block;background-color: rgba(255,255,255,0.25);margin: auto 5px;margin-top: 15px;"></span>
-		   	    <div class="fl time_select_kuang">
-		   	 		 <input type="text" value="" id="end_datetimepicker" class="city_district_select"/>
-		   	 		<a class="arrow_select fr"></a>
-		   	 	</div>
-		   </div>-->
-
-
-
           </div>
 		</div>
 
-
-
-
 		<div class="content_l" id="content_l">
-                <div class="content_l_b">
+            <div class="content_l_b">
 	           	   <div class="content_l_title">
 	           	   	<p class="fl">查询结果</p>
 		   	 	     <a class="search fr" href="/jlyhfx_export_excel/">导出</a>
@@ -205,12 +144,6 @@
                              <tr>
                              </tr>
                             </thead>
-                        <!--	默认无数据-->
-                            <!--<tbody>
-                             <tr class="gl2_table_2 ">
-                                <td class="zwsj"> 暂无数据</td>
-                             </tr>
-                            </tbody>-->
                             <tbody class="gl2_table_2 " id="export_table_tbody">
                              <tr>
                              </tr>
@@ -218,21 +151,18 @@
                            </table>
                  </div>
                     </div>
-
-		    	<div style="width: 100%;">
-	          	 <div id="pagiDiv" align="right" style="width:100%;position:relative;color:white;bottom:0px;left:-70px">
-                    <span id="spanFirst">第一页</span>
-                    <span id="spanPre">上一页</span>
-                    <span id="spanNext">下一页</span>
-                    <span id="spanLast">最后一页</span>
-                    第&nbsp;<span id="spanPageNum"></span>&nbsp;页/总共&nbsp;<span id="spanTotalPage"></span>&nbsp;页
-                </div>
-			   <!--<div class="clear"></div>-->
-	       </div>
+                    <div style="width: 100%;position:absolute;bottom:500px;left:-70px">
+                        <div id="pagiDiv" align="right" style="width:100%;;color:rgba(255,255,255,0.75);">
+                            <span id="spanFirst">第一页</span>
+                            <span id="spanPre">上一页</span>
+                            <span id="spanNext">下一页</span>
+                            <span id="spanLast">最后一页</span>
+                            第&nbsp;<span id="spanPageNum"></span>&nbsp;页/总共&nbsp;<span id="spanTotalPage"></span>&nbsp;页
+                        </div>
+                    </div>
 
 
 	           </div>
-
 		</div>
 
 	</div>
