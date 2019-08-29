@@ -10,7 +10,7 @@ portrait_option = {
         name: {
             textStyle: {
                 color: '#fff',
-                backgroundColor: '#000',
+                backgroundColor: '#282735',
                 padding: [3, 5]
            }
         },
