@@ -134,7 +134,7 @@
             <div class="content_l_b">
 	           	   <div class="content_l_title">
 	           	   	<p class="fl">查询结果</p>
-		   	 	     <a class="search fr" href="/jlyhfx_export_excel/">导出</a>
+		   	 	     <a class="search fr" href="/jlyhfx_export_excel/" id="export">导出</a>
 		   	 	   <div class="clear"></div>
 	           	   </div>
                     <div style="width:calc(100% - 40px);margin:0 20px;">
@@ -179,4 +179,5 @@
     var now_time=new Date;
     var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
     document.getElementById("time").innerText = time;
+    $("#export").attr("disabled",true).css("pointer-events","none");
 </script>

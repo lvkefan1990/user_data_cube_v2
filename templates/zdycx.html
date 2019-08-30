@@ -511,7 +511,8 @@
             <div id="table_title" style="position: absolute;left:370px;top:380px;color:white;">
                 <p>
                     <span>查询结果</span>
-                    <a class="search" href="/zdycx_export_excel/" style="position:absolute;top:0px;left:700px;width:50px;text-align: center;float:left;">导出</a>
+                    <a class="search" href="/zdycx_export_excel/" style="position:absolute;top:0px;left:700px;width:50px;text-align: center;float:left;"
+                     id = "export">导出</a>
                 </p>
             </div>
             <div id="table_display" >
@@ -558,5 +559,5 @@
     var time =now_time.getFullYear().toString()+"/"+(now_time.getMonth()+1).toString()+"/"+now_time.getDate().toString();
     document.getElementById("time").innerText = time;
     //显示条件框
-
+    $("#export").attr("disabled",true).css("pointer-events","none");
 </script>

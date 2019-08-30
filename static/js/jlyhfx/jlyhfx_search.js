@@ -27,6 +27,7 @@ function chaxun(){
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function () {
             if(xhr.readyState == 4){
+                $("#export").attr("disabled",false).css("pointer-events","auto");
                 $("#search").attr("disabled",false).css("pointer-events","auto");
             if(xhr.status == 200)
             {

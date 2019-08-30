@@ -13,6 +13,7 @@ function zdycx_chaxun(){
             url:'/zdycx_submit/',
             type:"POST",
             success:function (data) {
+                $("#export").attr("disabled",false).css("pointer-events","auto");
                 trs_head = export_table_thead.getElementsByTagName("tr");
                 export_table_thead.removeChild(trs_head[0]);//表头只有一个tr
                 tr_head = document.createElement('tr');

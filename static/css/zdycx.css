@@ -560,6 +560,27 @@ font {
     height: 32px;
 }
 
+/*- scrollbar -*/
+       ::-webkit-scrollbar {
+
+            background-color: #15131d;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color:#282735;
+        }
+        ::-webkit-scrollbar-thumb:vertical:hover{
+            background-color: #2c2d3b;
+        }
+        ::-webkit-scrollbar-thumb:vertical:active{
+            background-color: #2c2d3b;
+        }
+        ::-webkit-scrollbar-button{
+            display: none;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: none;
+        }
+ /*- scrollbar -*/
 
 
 

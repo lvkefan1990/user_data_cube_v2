@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.shortcuts import render,render_to_response,HttpResponseRedirect
 from user_data_cube.models import *
 from .db_search import *
 from .location import *
@@ -32,7 +31,7 @@ def login_submit(request):
     user = authenticate(username = username,password = password);
     if user is not None:
         login(request,user);
-        return render(request,"index.html",{"user_name": request.user.username});
+        return HttpResponseRedirect('/index/');
     else:
         return render(request, "login.html", {"error":"您用户名或者密码错误"});
 
