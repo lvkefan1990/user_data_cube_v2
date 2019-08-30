@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from . import models,db_search
 from user_data_cube.models import *
 from django.shortcuts import render_to_response
@@ -7,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
 import json
+
 
 #import inspect#用于得到model中所有的类
 # Create your views here.

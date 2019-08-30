@@ -58,7 +58,7 @@ var rsrp_option = {
 //第三个下载速率图，使用水球图
 var dl_speed_option = {
     tooltip : {
-        formatter: "{c}k/s"
+        formatter: "{c}k/S"
     },
     series:
         {

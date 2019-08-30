@@ -509,11 +509,11 @@ def yhty_db_search(get_value):
         i = 0;
         while i < score_list.__len__():
             yhty_dict["data"].append({"name": RONUD_LIST[i],
-                                      "value": [score_list[i].score_usr_worth,
-                                                score_list[i].score_usr_cover_pecpt,
-                                                score_list[i].score_usr_speed_pecpt,
-                                                score_list[i].score_usr_ete_pecpt,
-                                                score_list[i].score_usr_sensitivity]})
+                                      "value": [round(score_list[i].score_usr_worth,2),
+                                                round(score_list[i].score_usr_cover_pecpt,2),
+                                                round(score_list[i].score_usr_speed_pecpt,2),
+                                                round(score_list[i].score_usr_ete_pecpt,2),
+                                                round(score_list[i].score_usr_sensitivity,2)]})
             i += 1;
     yhty_dict["round"] = RONUD_LIST;
     try:
