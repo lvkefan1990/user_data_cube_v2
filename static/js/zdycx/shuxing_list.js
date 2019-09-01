@@ -1,3 +1,5 @@
+var reg = /^[0-9-]+$/;//用于确认为数字
+
 //定义显示和隐藏的函数
 function xianshi_yincang(checkbox,div_list_block,div_list_none) {
     if(checkbox.checked==true) {
@@ -35,7 +37,7 @@ function quanxuan(checkbox,name="",inputlist=[]){
             }
             for(j = 0; j < inputlist.length; j++){
                 var input_ele = document.getElementById(inputlist[j]);
-                input_ele.value = "";
+                input_ele.value = input_ele.defaultValue;
                 input_ele.disabled = true;
             }
         }
@@ -124,8 +126,9 @@ function quanxuan_radio(checkbox,name="",name_list=[],id_list=[]){
         }
     }
 }
-//条件的确认
-function tiaojian_queren(name_list=[]){
+
+//回到初始化
+function zdycx_init(){
     zdycx_json = {
         condition:{
         "地市":"",
@@ -134,14 +137,25 @@ function tiaojian_queren(name_list=[]){
         "终止时间":"",
         },
         result:['地市','区县','起始时间','终止时间','电话号码'],
-        change:0,}
-        //初始化json
-    console.log(zdycx_json);
+        change:0,
+    };
     condition_ul.innerHTML = "";
     column_ul.innerHTML= "";
+}
+
+//条件的确认
+function tiaojian_queren(name_list=[]){
+    zdycx_init();
+        //初始化json
+    console.log(zdycx_json);
     //获得市级名称
     var city_index=city_select.selectedIndex;//城市选择
     var city = city_select.options[city_index].text;//获得城市
+    if(city=="--请选择--"){
+        alert("城市不能为空");
+        zdycx_init();
+        return;
+    }
     city_condition_li=document.createElement('li');
     writeText(city_condition_li,"地市： "+city);
     condition_ul.appendChild(city_condition_li);
@@ -159,9 +173,24 @@ function tiaojian_queren(name_list=[]){
             districts_list.push(districts[i].value);
         }
     }
+    if(districts_list.length==0){
+        alert("区县不能为空");
+        zdycx_init();
+        return;
+    }
     condition_ul.appendChild(districts_condition_li);
     zdycx_json.condition["区县"] = districts_list;
     //获得起始和终止时间
+    if($("#start_datetimepicker").val()==""||$("#end_datetimepicker").val()==""){
+        alert("起始时间和终止时间不能为空");
+        zdycx_init();
+        return;
+    }
+    if($("#start_datetimepicker").val()>=$("#end_datetimepicker").val()){
+        alert("起始时间应当小于终止时间");
+        zdycx_init();
+        return;
+    }
     strat_time_condition_li = document.createElement('li');
     writeText(strat_time_condition_li,"起始时间："+$("#start_datetimepicker").val());
     condition_ul.appendChild(strat_time_condition_li);
@@ -170,6 +199,8 @@ function tiaojian_queren(name_list=[]){
     writeText(end_time_condition_li,"终止时间："+$("#end_datetimepicker").val());
     condition_ul.appendChild(end_time_condition_li);
     zdycx_json.condition["终止时间"] = $("#end_datetimepicker").val();
+    //判断用户输入是否正确
+
     //接下来写用户自定义的部分
     for(i=0;i<name_list.length;i++){
         var condition_items = document.getElementsByName(name_list[i]);
@@ -180,7 +211,30 @@ function tiaojian_queren(name_list=[]){
                     var linshi_condition_items=document.getElementsByName(condition_items[j].value);
                     console.log(linshi_condition_items);
                     if(linshi_condition_items[0].type=="text"){
-                        if(parseFloat(linshi_condition_items[0].value)<=parseFloat(linshi_condition_items[1].value)){
+                        if(linshi_condition_items[0].value=="" ||linshi_condition_items[1].value==""){
+                            alert(condition_items[j].value+"不能输入空值");
+                            zdycx_init();
+                            return;
+                        }
+                        else if((!reg.test(linshi_condition_items[0].value)) || (!reg.test(linshi_condition_items[1].value))){
+                            alert(condition_items[j].value+"必须为数字");
+                            zdycx_init();
+                            return;
+                        }
+                        else if(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[0].defaultValue)||
+                        parseFloat(linshi_condition_items[0].value)>parseFloat(linshi_condition_items[1].defaultValue)||
+                        parseFloat(linshi_condition_items[1].value)<parseFloat(linshi_condition_items[0].defaultValue)||
+                        parseFloat(linshi_condition_items[1].value)>parseFloat(linshi_condition_items[1].defaultValue)){
+                            alert(condition_items[j].value+"超出了范围");
+                            zdycx_init();
+                            return;
+                        }
+                        else if(parseFloat(linshi_condition_items[0].value)>=parseFloat(linshi_condition_items[1].value)){
+                            alert(condition_items[j].value+"起始值必须小于终止值");
+                            zdycx_init();
+                            return;
+                        }
+                        else if(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[1].value)){
                             var linshi_list =[];
                             linshi_list.push(linshi_condition_items[0].value);
                             linshi_list.push(linshi_condition_items[1].value);
@@ -188,9 +242,6 @@ function tiaojian_queren(name_list=[]){
                             writeText(condition_li,condition_items[j].value+"范围："+linshi_list[0].toString()+"-"+linshi_list[1].toString());
                              condition_ul.appendChild(condition_li);
                              zdycx_json.condition[condition_items[j].value] = linshi_list;
-                        }
-                        else{
-                            alert("起始值必须小于终止值")
                         }
                     }
                     else if(linshi_condition_items[0].type=="radio"){

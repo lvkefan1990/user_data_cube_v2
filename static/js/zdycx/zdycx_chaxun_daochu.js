@@ -1,7 +1,7 @@
 function zdycx_chaxun(){
     console.log(zdycx_json);
     if(zdycx_json.change == 0){
-        alert("请选择条件和查询字段");
+        alert("您所输入的条件未符合要求");
     }
     else{
         var table_width=0;
@@ -13,6 +13,11 @@ function zdycx_chaxun(){
             url:'/zdycx_submit/',
             type:"POST",
             success:function (data) {
+                console.log(data);
+                if(data.error !="正常"){
+                    alert(data.error);
+                }
+                else{
                 $("#export").attr("disabled",false).css("pointer-events","auto");
                 trs_head = export_table_thead.getElementsByTagName("tr");
                 export_table_thead.removeChild(trs_head[0]);//表头只有一个tr
@@ -54,7 +59,7 @@ function zdycx_chaxun(){
                     export_table_tbody.appendChild(tr_s);
                 }
                 firstPage();
-            },
+            }},
             error:function () {
                 alert("Ajax错误");
             },

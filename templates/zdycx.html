@@ -175,13 +175,13 @@
                                 <li class="condition_level_3"><input type="checkbox" name="usr_call_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_call_pecpt_attr',usr_call_pecpt_input)"/>全选</li>
                                 <li class="condition_level_3">
                                     <input type="checkbox" name="usr_call_pecpt_attr" value="接通率" onchange="tiaojian_shezhi(this,['paging_rate_start','paging_rate_end'])"/>接通率: 范围(0-100)
-                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_start">
-                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_end">%
+                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_start" value="0">
+                                    <input class="condition_input" type="text" disabled="disabled" name="接通率" id="paging_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3">
                                     <input type="checkbox" name="usr_call_pecpt_attr" value="掉话率" onchange="tiaojian_shezhi(this,['dc_rate_start','dc_rate_end'])"/>掉话率 范围(0-100):
-                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_start">
-                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_end">%
+                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_start" value="0">
+                                    <input class="condition_input" type="text" name="掉话率" disabled="disabled" id="dc_rate_end" value="100">%
                                 </li>
                             </ul>
                         <p class="condition_level_2" style="display: none" id="usr_app_pecpt_title">
@@ -230,25 +230,25 @@
                                 <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_speed_pecpt_attr',usr_speed_pecpt_input)"/>全选</li>
                                 <li class="condition_level_3" style="width: 390px;">
                                     <input type="checkbox" name="usr_speed_pecpt_attr" value="全业务下行速率" onchange="tiaojian_shezhi(this,['dl_speed_start','dl_speed_end'])"/>全业务下行速率 范围(大于0):
-                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_start">
-                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_end">kB/s
+                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_start" value="0">
+                                    <input class="condition_input" disabled="disabled" name="全业务下行速率" type="text" id="dl_speed_end" value="99999">kB/s
                                 </li>
                                 <li class="condition_level_3" style="width: 365px;">
                                     <input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行速率" onchange="tiaojian_shezhi(this,['bp_dl_speed_start','bp_dl_speed_end'])"/>大包下行速率&nbsp;&nbsp;&nbsp; 范围(大于0):
-                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_start">
-                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_end">kB/s
+                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_start" value="0">
+                                    <input class="condition_input" disabled="disabled" name="大包下行速率" type="text" id="bp_dl_speed_end" value="99999">kB/s
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行流量"/>大包下行流量</li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="大包下行时长"/>大包下行时长</li>
                                 <li class="condition_level_3" style="width: 390px;">
                                     <input type="checkbox" name="usr_speed_pecpt_attr" value="全业务上行速率" onchange="tiaojian_shezhi(this,['ul_speed_start','ul_speed_end'])"/>全业务上行速率 范围(大于0):
-                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_start">
-                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_end">kB/s
+                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_start" value="0">
+                                    <input class="condition_input" disabled="disabled" name="全业务上行速率" type="text" id="ul_speed_end" value="99999">kB/s
                                 </li>
                                 <li class="condition_level_3" style="width: 390px;">
                                     <input type="checkbox" name="usr_speed_pecpt_attr" value="大包上行速率" onchange="tiaojian_shezhi(this,['bp_ul_speed_start','bp_ul_speed_end'])"/>大包上行速率&nbsp;&nbsp;&nbsp; 范围(大于0):
-                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_start">
-                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_end">kB/s
+                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_start" value="0">
+                                    <input class="condition_input" disabled="disabled" name="大包上行速率" type="text" id="bp_ul_speed_end" value="99999">kB/s
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="小包下行时延"/>小包下行时延</li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_speed_pecpt_attr" value="小包上行时延"/>小包上行时延</li>
@@ -264,15 +264,15 @@
                                 <li class="condition_level_3" style="width: 380px"><input type="checkbox" name="usr_ete_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_ete_pecpt_attr',usr_ete_pecpt_input)"/>全选</li>
                                 <li class="condition_level_3" style="width:500px">
                                     <input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP响应成功率" onchange="tiaojian_shezhi(this,['http_res_rate_start','http_res_rate_end'])"/>HTTP响应成功率 范围(0-100):
-                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_start">
-                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_end">%
+                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_start" value="0">
+                                    <input class="condition_input" name="HTTP响应成功率" disabled="disabled" type="text" id="http_res_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP请求次数"/>HTTP请求次数</li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="HTTP响应时延"/>HTTP响应时延</li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_ete_pecpt_attr" value="TCP核心网成功率" onchange="tiaojian_shezhi(this,['tcp_core_rate_start','tcp_core_rate_end'])"/>TCP核心网成功率 范围(0-100):
-                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_start">
-                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_end">%
+                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_start" value="0">
+                                    <input class="condition_input" name="TCP核心网成功率" disabled="disabled" type="text" id="tcp_core_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP核心网时延"/>TCP核心网时延</li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP无线时延"/>TCP无线时延</li>
@@ -280,8 +280,8 @@
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="TCP上行重传率"/>TCP上行重传率</li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_ete_pecpt_attr" value="TCP重传率" onchange="tiaojian_shezhi(this,['tcp_radio_rate_start','tcp_radio_rate_end'])"/>TCP重传率&nbsp; 范围(0-100):
-                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_start">
-                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_end">%
+                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_start" value="0">
+                                    <input class="condition_input" name="TCP重传率" disabled="disabled" type="text" id="tcp_radio_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="页面响应时延"/>页面响应时延</li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_ete_pecpt_attr" value="页面响应次数"/>页面响应次数</li>
@@ -297,38 +297,38 @@
                                 <li class="condition_level_3" style="width: 380px"><input type="checkbox" name="usr_core_pecpt_attr" value="全选" onchange="quanxuan(this,'usr_core_pecpt_attr',usr_core_pecpt_input)"/>全选</li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="差RIP率" onchange="tiaojian_shezhi(this,['bad_rip_rate_start','bad_rip_rate_end'])"/>差RIP率 范围(0-100):
-                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_start">
-                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_end">%
+                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_start" value="0">
+                                    <input class="condition_input" name="差RIP率" disabled="disabled" type="text" id="bad_rip_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="切换成功率" onchange="tiaojian_shezhi(this,['ho_rate_start','ho_rate_end'])"/>切换成功率 范围(0-100):
-                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_start">
-                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_end">%
+                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_start" value="0">
+                                    <input class="condition_input" name="切换成功率" disabled="disabled" type="text" id="ho_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="服务请求成功率" onchange="tiaojian_shezhi(this,['sr_rate_start','sr_rate_end'])"/>服务请求成功率 范围(0-100):
-                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_start">
-                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_end">%
+                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_start" value="0">
+                                    <input class="condition_input" name="服务请求成功率" disabled="disabled" type="text" id="sr_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="附着成功率" onchange="tiaojian_shezhi(this,['attach_rate_start','attach_rate_end'])"/>附着成功率 范围(0-100):
-                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_start">
-                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_end">%
+                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_start" value="0">
+                                    <input class="condition_input" name="附着成功率" disabled="disabled" type="text" id="attach_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="PDN连接成功率" onchange="tiaojian_shezhi(this,['pdn_rate_start','pdn_rate_end'])"/>PDN连接成功率 范围(0-100):
-                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_start" >
-                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_end">%
+                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_start" value="0">
+                                    <input class="condition_input" name="PDN连接成功率" disabled="disabled" type="text" id="pdn_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="INITIAL成功率" onchange="tiaojian_shezhi(this,['initial_rate_start','initial_rate_end'])"/>INITIAL成功率 范围(0-100):
-                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_start">
-                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_end">%
+                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_start" value="0">
+                                    <input class="condition_input" name="INITIAL成功率" disabled="disabled" type="text" id="initial_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_core_pecpt_attr" value="TAU成功率" onchange="tiaojian_shezhi(this,['tau_rate_start','tau_rate_end'])"/>TAU成功率 范围(0-100):
-                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_start">
-                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_end">%
+                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_start" value="0">
+                                    <input class="condition_input" name="TAU成功率" disabled="disabled" type="text" id="tau_rate_end" value="100">%
                                 </li>
                             </ul>
                         <p class="condition_level_2" style="display: none" id="usr_cover_pecpt_title">
@@ -345,24 +345,24 @@
                                 <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="低于-100的采样点"/>低于-100的采样点</li>
                                 <li class="condition_level_3" style="width: 400px">
                                     <input type="checkbox" name="usr_cover_pecpt_attr" value="平均RSRP" onchange="tiaojian_shezhi(this,['avg_rsrp_start','avg_rsrp_end'])"/>平均RSRP 范围(-160至-40):
-                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_start">
-                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_end">dbm
+                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_start" value="-160">
+                                    <input class="condition_input" name="平均RSRP" disabled="disabled" type="text" id="avg_rsrp_end" value="-40">dbm
                                 </li>
                                 <li class="condition_level_3"><input type="checkbox" name="usr_cover_pecpt_attr" value="MR_RATE_100"/>MR_RATE_100</li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_cover_pecpt_attr" value="MR覆盖率" onchange="tiaojian_shezhi(this,['mr_rate_start','mr_rate_end'])"/>MR覆盖率 范围(0-100):
-                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_start">
-                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_end">%
+                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_start" value="0">
+                                    <input class="condition_input" name="MR覆盖率" disabled="disabled" type="text" id="mr_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_cover_pecpt_attr" value="脱网率" onchange="tiaojian_shezhi(this,['off_rate_start','off_rate_end'])"/>脱网率 范围(0-100):
-                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_start">
-                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_end">%
+                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_start" value="0">
+                                    <input class="condition_input" name="脱网率" disabled="disabled" type="text" id="off_rate_end" value="100">%
                                 </li>
                                 <li class="condition_level_3" style="width: 380px">
                                     <input type="checkbox" name="usr_cover_pecpt_attr" value="差PHR率" onchange="tiaojian_shezhi(this,['bad_phr_rate_start','bad_phr_rate_end'])"/>差PHR率 范围(0-100):
-                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_start">
-                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_end">%
+                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_start" value="0">
+                                    <input class="condition_input" name="差PHR率" disabled="disabled" type="text" id="bad_phr_rate_end" value="100">%
                                 </li>
                             </ul>
                     </li>

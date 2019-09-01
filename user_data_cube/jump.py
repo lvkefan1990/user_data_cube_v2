@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from . import models,db_search
 from user_data_cube.models import *
 from django.shortcuts import render_to_response
@@ -14,11 +12,14 @@ import json
 # Create your views here.
 
 def user_login(request):
+    #print(request.user.is_anonymous);判断是否匿名用户
+    #print(request.user.is_authenticated);判断是否登录
     request.session["phone_number"] = "";#清空phone_number
     return render(request, "login.html");
 
 @login_required
 def index(request):
+    print(request.user);
     return render_to_response("index.html",{"user_name":request.user.username});
 
 @login_required
@@ -93,4 +94,22 @@ def yhty_onload(request):
     print(request.session["phone_number"]);
     yhty_dict=db_search.yhty_db_search(request.session["phone_number"])
     return HttpResponse(json.dumps(yhty_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
+
+
+def pageNotFound(request,exception):
+    '''
+    404、500处理函数
+    '''
+    return render_to_response('404.html')
+
+def error_404(request):
+    '''
+    404、500处理函数
+    '''
+    if request.user.is_authenticated == True:
+        return HttpResponseRedirect(r'/index/');
+    else:
+        return HttpResponseRedirect("/");
+
+
 

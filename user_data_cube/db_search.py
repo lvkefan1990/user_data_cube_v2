@@ -306,7 +306,7 @@ def lssj_db_search(get_value):
         for call in call_list:
             page_list.append(round(call.paging_rate, 2));
             dc_list.append(round(call.dc_rate, 2));
-            call_l.append(round(call.paging_rate * (1 - call.dc_rate) / 100, 2));
+            call_l.append(round(call.paging_rate * (1 - call.dc_rate) / 100, 2)*100);
         lssj_dict["call_success"] = call_l;
         # 寻呼成功率,掉话率
     # 用户速率情况

@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render_to_response
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import render,render_to_response,HttpResponseRedirect
 from user_data_cube.models import *
 from .db_search import *
 from .location import *
@@ -17,6 +15,7 @@ import datetime
 from .select_option import *
 import decimal
 import pymysql
+import pandas
 
 # Create your views here.
 #Decimal错误解决办法
@@ -65,7 +64,7 @@ def change_password(request):
                         user = request.user
                         user.set_password(newpassword)
                         user.save()
-                        return render(request, "login.html")
+                        return HttpResponseRedirect("/")
                     else:
                         return render(request, "xgmm.html", {"error":"您输入的密码强度不足"})
             else:
@@ -175,6 +174,7 @@ def zdycx_submit(request):
     zdycx_table_dict = {
         "table_head": [],
         "table_body": [],
+        "error":"正常",
     };
     get_value = request.POST;
     print(get_value);
@@ -199,11 +199,14 @@ def zdycx_submit(request):
             result_list_linshi.append(col_linshi[0]);
     result_list = unique(result_list_linshi);
     print("所要查询的表为"+str(result_list));#result_list表示所要查询的表；
-    for result_table in result_list:
-        if result_table != 'usr_basic_info':
-            inner_join = "inner join " + result_table + " ";
-            zdycx_sql = zdycx_sql+ inner_join;
-    zdycx_sql = zdycx_sql + "on ";
+    if result_list.__len__()==1 and result_list[0]=='usr_basic_info':
+        zdycx_sql = zdycx_sql + "where "
+    else:
+        for result_table in result_list:
+            if result_table != 'usr_basic_info':
+                inner_join = "inner join " + result_table + " ";
+                zdycx_sql = zdycx_sql+ inner_join;
+        zdycx_sql = zdycx_sql + "on ";
     for result_table in result_list:
         if result_table != 'usr_basic_info':
             on = "usr_basic_info.MSISDN = " + result_table + ".MSISDN and ";
@@ -229,9 +232,12 @@ def zdycx_submit(request):
     ronud_list = RONUD_LIST[start_index:end_index];#round_list是根据时间选择轮次
     if ronud_list.__len__()==1:
         zdycx_sql = zdycx_sql + "usr_basic_info.rounds in ('" + ronud_list[0] + "') and ";
-    else:
+    elif ronud_list.__len__()>1:
         round_str = str(tuple(ronud_list));
         zdycx_sql = zdycx_sql + "usr_basic_info.rounds in " + round_str + " and ";
+    elif ronud_list.__len__() ==0:
+        zdycx_table_dict["error"] = "您的所查询的时间段内没有数据"
+        return HttpResponse(json.dumps(zdycx_table_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
     #写内联的rounds
 
     for result_table in result_list:
@@ -271,7 +277,7 @@ def zdycx_submit(request):
         #将结果表分为有条件选择的和没有条件选择的，不同对待
         if (result_table not in condition_table and result_table !='usr_resident_cell'):
             inner_join = " inner join "+result_table+" on cte.MSISDN = "+result_table+".MSISDN and cte.rounds ="+ result_table\
-                        +".rounds  "
+                        +".rounds  "#如果没加空格会出现andinner的情况
             print(inner_join);
             zdycx_sql = zdycx_sql + inner_join;
         elif result_table == 'usr_resident_cell':
@@ -281,13 +287,15 @@ def zdycx_submit(request):
                         + ".rounds and "
 
             for key in condition_dict:
+                #范围类
                 if key not in ["地市","区县","起始时间","终止时间","轮次"] and user_data_cube_fleld[key].split(".")[0] == result_table\
                         and type(condition_dict[key]) == list:
                     left_condition = user_data_cube_fleld[key]+" BETWEEN "+str(condition_dict[key][0])+" and "+ str(condition_dict[key][1])+" and ";
                     inner_join = inner_join + left_condition;
+                #单选类
                 elif  key not in ["地市","区县","起始时间","终止时间","轮次"] and user_data_cube_fleld[key].split(".")[0] == result_table\
                         and type(condition_dict[key]) == str and condition_dict[key] !="全选":
-                    left_condition = user_data_cube_fleld[key] + " = " + yes_or_no[str(condition_dict[key])]+ " and ";
+                    left_condition = user_data_cube_fleld[key] + " in " + yes_or_no[str(condition_dict[key])]+ " and ";
                     inner_join = inner_join + left_condition;
             inner_join = inner_join.rstrip("and ")
             print(inner_join);
@@ -307,7 +315,7 @@ def zdycx_submit(request):
     result = cur.fetchall();
     conn.close();
     #写导出的表格
-    wb = xlwt.Workbook(encoding='utf8');
+    """wb = xlwt.Workbook(encoding='utf8');
     sheet = wb.add_sheet('查询结果');
     #写表头
     i = 0;
@@ -324,17 +332,41 @@ def zdycx_submit(request):
             col_index += 1
         data_row += 1;
     global zdycx_export;
-    zdycx_export = wb;
+    zdycx_export = wb;"""
+    """out = BytesIO();
+    excel = pandas.ExcelWriter(out, engine='xlsxwriter');
+    summary_df = pandas.DataFrame({});
+    summary_df.to_excel(excel, sheet_name="查询内容", index=False, header=False);
+    worksheet = excel.sheets["查询内容"];
+    excel.save();
+    #以上6行代码表示将xlsx保存到out中"""
+    out = BytesIO();
+    excel = pandas.ExcelWriter(out, engine='xlsxwriter');
+    summary_df = pandas.DataFrame({});
+    summary_df.to_excel(excel, sheet_name="查询内容", index=False, header=False);
+    worksheet = excel.sheets["查询内容"];
+    # 写表头
+    i = 0;
+    while i < col_list.__len__():
+        worksheet.write(0, i, col_list[i]);
+        i += 1;
+    # 写表体
+    data_row = 1;
+    for row in result:
+        zdycx_table_dict["table_body"].append(list(row));  # 写入字典
+        col_index = 0;
+        while col_index < result[0].__len__():
+            worksheet.write(data_row, col_index, row[col_index]);
+            col_index += 1
+        data_row += 1;
+    excel.save();
+    global zdycx_export;
+    zdycx_export = HttpResponse(out.getvalue(), content_type='application/vnd.ms-excel');
     return HttpResponse(json.dumps(zdycx_table_dict, ensure_ascii=False), content_type="application/json,charset=utf-8");
 
 #自定义查询页面的表格导出
 @login_required
 @csrf_exempt
 def zdycx_export_excel(request):
-    response = HttpResponse(content_type='application/vnd.ms-excel');
-    response['Content-Disposition'] = 'attachment;filename=自定义查询.xls';
-    output = BytesIO();
-    zdycx_export.save(output);
-    output.seek(0);
-    response.write(output.getvalue());
-    return response;
+    zdycx_export['Content-Disposition'] = 'attachment;filename=自定义查询.xlsx',
+    return zdycx_export;

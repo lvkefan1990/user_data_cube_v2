@@ -47,4 +47,7 @@ urlpatterns = [
     path(r'jlyhfx_submit/',submit.jlyhfx_submit),#用户聚类分析的提交
     path(r'zdycx_submit/',submit.zdycx_submit),#用户自定义查询的提交
     path(r'zdycx_export_excel/',submit.zdycx_export_excel),#表的导出
+    path(r'error_404/',jump.error_404),#表的导出
 ]
+
+handler404 = jump.pageNotFound

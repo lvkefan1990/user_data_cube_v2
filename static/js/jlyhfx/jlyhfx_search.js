@@ -14,7 +14,6 @@ function chaxun(){
     var formwork_index = formwork_select.selectedIndex;
     var formwork = formwork_select[formwork_index].text;//获取模板类型
     var round_index = round_select.selectedIndex;
-    alert(round_index);
     if(city=="--请选择--" || district =="--请选择--" || district ==""){
         alert("地市和区县不能为空")
     }
