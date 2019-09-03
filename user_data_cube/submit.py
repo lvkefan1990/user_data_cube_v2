@@ -115,6 +115,7 @@ def jlyhfx_submit(request):
     jlyhfx_dict={
         "table_head":[],
         "table_body":[],
+        "error": "正常",
     }
     #首先，获得用户输入的值
     if request.method =="POST":
@@ -137,33 +138,33 @@ def jlyhfx_submit(request):
     for row in result:
         jlyhfx_dict["table_body"].append(list(row));
     #以上生成了返回页面的json数据，接下来写excel表格
-    wb = xlwt.Workbook(encoding='utf8');
-    sheet = wb.add_sheet('查询结果');
+    out = BytesIO();
+    excel = pandas.ExcelWriter(out, engine='xlsxwriter');
+    summary_df = pandas.DataFrame({});
+    summary_df.to_excel(excel, sheet_name="查询内容", index=False, header=False);
+    worksheet = excel.sheets["查询内容"];
     i = 0;
     while i < formwork_dict[formwork].__len__():
-        sheet.write(0, i, formwork_dict[formwork][i]);
+        worksheet.write(0, i, formwork_dict[formwork][i]);
         i += 1;
+    # 写表体
     data_row = 1;
     while data_row<result.__len__()+1:
         col_index = 0;
         while col_index<result[0].__len__():
-            sheet.write(data_row,col_index,result[data_row-1][col_index]);
+            worksheet.write(data_row,col_index,result[data_row-1][col_index]);
             col_index+=1
         data_row +=1;
+    excel.save();
     global export_excel;
-    export_excel = wb;
+    export_excel = HttpResponse(out.getvalue(), content_type='application/vnd.ms-excel');
     return HttpResponse(json.dumps(jlyhfx_dict,cls=DecimalEncoder ,ensure_ascii=False), content_type="application/json,charset=utf-8");
 
 @login_required
 @csrf_exempt
 def jlyhfx_export_excel(request):
-    response = HttpResponse(content_type='application/vnd.ms-excel');
-    response['Content-Disposition'] = 'attachment;filename=search_result.xls';
-    output = BytesIO();
-    export_excel.save(output);
-    output.seek(0);
-    response.write(output.getvalue());
-    return response;
+    export_excel['Content-Disposition'] = 'attachment;filename=聚类用户分析.xlsx',
+    return export_excel;
 
 
 #自定义查询提交

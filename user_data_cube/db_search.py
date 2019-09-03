@@ -243,7 +243,7 @@ def lssj_db_search(get_value):
         telphone.append(get_value);
     lssj_dict["xaxis"] = RONUD_LIST;
     try:
-        cover_list = UsrCoverPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        cover_list = UsrCoverPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass
     except UsrCoverPecpt.DoesNotExist:
@@ -294,7 +294,7 @@ def lssj_db_search(get_value):
 
     # 用户通话信息
     try:
-        call_list = UsrCallPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        call_list = UsrCallPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass
     except UsrCallPecpt.DoesNotExist:
@@ -311,7 +311,7 @@ def lssj_db_search(get_value):
         # 寻呼成功率,掉话率
     # 用户速率情况
     try:
-        speed_list = UsrSpeedPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        speed_list = UsrSpeedPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass
     except UsrSpeedPecpt.DoesNotExist:
@@ -332,7 +332,7 @@ def lssj_db_search(get_value):
 
         # 用户消费情况
         try:
-            expense_list = UsrExpenses.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+            expense_list = UsrExpenses.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
         except ValueError:
             pass
         except UsrExpenses.DoesNotExist:
@@ -348,7 +348,7 @@ def lssj_db_search(get_value):
 
     # 核心网感知
     try:
-        ete_list = UsrEtePecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        ete_list = UsrEtePecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass;
     except UsrEtePecpt.DoesNotExist:
@@ -369,7 +369,7 @@ def lssj_db_search(get_value):
             ymxysy_list.append(ete.page_res_delay);
     # 核心网数据
     try:
-        core_list = UsrCorePecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        core_list = UsrCorePecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass
     except UsrCorePecpt.DoesNotExist:

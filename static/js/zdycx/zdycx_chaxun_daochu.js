@@ -63,6 +63,12 @@ function zdycx_chaxun(){
             error:function () {
                 alert("Ajax错误");
             },
+            beforeSend:function () {
+                $("#zdycx_search").attr("disabled",true).css("pointer-events","none");
+            },
+            complete: function () {
+                $("#zdycx_search").attr("disabled",false).css("pointer-events","auto");
+            },
         })
     }
 }
