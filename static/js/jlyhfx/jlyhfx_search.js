@@ -78,3 +78,24 @@ function chaxun(){
         $("#search").attr("disabled",true).css("pointer-events","none");
     }
 }
+
+function onload(){
+     var xhr;
+     if(window.XMLHttpRequest){
+         xhr= new XMLHttpRequest();
+     }else{xhr = new ActiveXObject("Microsoft.XMLHTTP")};
+     xhr.open(methon="POST",url='/jlyhfx_onload/',async=true);
+     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+     xhr.onreadystatechange=function () {
+         if(xhr.readyState == 4 && xhr.status == 200){
+             jlyhfx_onload_obj= JSON.parse(xhr.responseText);
+             for(var i=0;i<jlyhfx_onload_obj["times"].length;i++){
+                 var opEle=document.createElement("option");
+                 var textNode=document.createTextNode(jlyhfx_onload_obj["times"][i]);
+                 opEle.appendChild(textNode);
+                 round_select.appendChild(opEle);
+             }
+         }
+     };
+     xhr.send();
+}

@@ -3,6 +3,7 @@ function chaxun() {
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
         //+ now_time.getHours()+"时"+now_time.getMinutes()+"分";
         var phone_number = document.getElementById("phone_number").value;
+        alert(phone_number);
         var xhr;
         if(window.XMLHttpRequest){
             xhr= new XMLHttpRequest();
@@ -105,7 +106,7 @@ function scpg_onload(){
                 call_time.innerHTML="";
                 call_time.innerHTML=(scpg_obj.call_time).toString();
                 writeText(date_td,time);
-                writeText(yhdh_td,phone_number);
+                writeText(yhdh_td,scpg_obj.phonemuber);
                 writeText(ztcmc_td,scpg_obj.ztcmc);
                 writeText(lldy500M_td,scpg_obj.lldy500M);
                 writeText(xykh_td,scpg_obj.xykh);

@@ -13,7 +13,7 @@ for ronud_item in rounds_nomean:
 RECENT_ROUND = RONUD_LIST[-1];#最近的轮次
 RECENT_TIME = STATE_LITE[-1];#最近一轮的时间
 
-def date_compare(start=(0,0,0),end=(0,0,0)):
+def start_date_compare(start=(0,0,0),end=(0,0,0)):
     """
     :param start:起始时间
     :param end:结束时间
@@ -29,7 +29,27 @@ def date_compare(start=(0,0,0),end=(0,0,0)):
             if i != start.__len__()-1:
                 i +=1;
             else:
+                #相等的情况,如果日期相等返回True
                 return True;
+
+def end_date_compare(start=(0,0,0),end=(0,0,0)):
+    """
+    :param start:起始时间
+    :param end:结束时间
+    :return:起始时间小于或者等于结束时间则返回False
+    """
+    i = 0;
+    while i<start.__len__():
+        if start[i]<end[i]:
+            return True;
+        elif start[i]>end[i]:
+            return False;
+        elif start[i] == end[i]:
+            if i != start.__len__()-1:
+                i +=1;
+            else:
+                #相等的情况,如果日期相等返回True
+                return False;
 
 
 

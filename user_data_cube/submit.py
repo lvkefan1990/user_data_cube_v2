@@ -123,7 +123,7 @@ def jlyhfx_submit(request):
         city = request.POST["city"];
         district = request.POST["district"];
         formwork = request.POST["formwork"];
-        round = int(request.POST["round"]);
+        round = RONUD_LIST.__len__()-1-int(request.POST["round"]);
         jlyhfx_dict["table_head"]=formwork_dict[formwork];
         print(jlyhfx_dict["table_head"]);
     conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
@@ -152,7 +152,8 @@ def jlyhfx_submit(request):
     while data_row<result.__len__()+1:
         col_index = 0;
         while col_index<result[0].__len__():
-            worksheet.write(data_row,col_index,result[data_row-1][col_index]);
+            if data_row<1048570:
+                worksheet.write(data_row,col_index,result[data_row-1][col_index]);
             col_index+=1
         data_row +=1;
     excel.save();
@@ -165,6 +166,17 @@ def jlyhfx_submit(request):
 def jlyhfx_export_excel(request):
     export_excel['Content-Disposition'] = 'attachment;filename=聚类用户分析.xlsx',
     return export_excel;
+
+@login_required
+@csrf_exempt
+def jlyhfx_onload(request):
+    date_list = [];
+    for state in STATE_LITE:
+        date_str = str(state.year)+"-"+str(state.month)+"-"+str(state.day);
+        date_list.append(date_str);
+    date_list.reverse();#逆序输出
+    jlyhfx_onload_dict = {"times":date_list}
+    return HttpResponse(json.dumps(jlyhfx_onload_dict, ensure_ascii=False),content_type="application/json,charset=utf-8");
 
 
 #自定义查询提交
@@ -216,14 +228,14 @@ def zdycx_submit(request):
     start_index = 0;
     j=STATE_LITE.__len__()-1;
     while start_index<STATE_LITE.__len__():
-        if date_compare((int(condition_dict["起始时间"][0:4]),int(condition_dict["起始时间"][5:7]),int(condition_dict["起始时间"][8:10])),
+        if start_date_compare((int(condition_dict["起始时间"][0:4]),int(condition_dict["起始时间"][5:7]),int(condition_dict["起始时间"][8:10])),
                         (STATE_LITE[start_index].year,STATE_LITE[start_index].month,STATE_LITE[start_index].day)):
             break;
         else:
             start_index = start_index+1;
     #获得启示下标
-    while j>0:
-        if date_compare((int(condition_dict["终止时间"][0:4]),int(condition_dict["终止时间"][5:7]),int(condition_dict["终止时间"][8:10])),
+    while j>=0:
+        if end_date_compare((int(condition_dict["终止时间"][0:4]),int(condition_dict["终止时间"][5:7]),int(condition_dict["终止时间"][8:10])),
                         (STATE_LITE[j].year,STATE_LITE[j].month,STATE_LITE[j].day)):
             j = j-1;
         else:
@@ -289,12 +301,16 @@ def zdycx_submit(request):
 
             for key in condition_dict:
                 #范围类
-                if key not in ["地市","区县","起始时间","终止时间","轮次"] and user_data_cube_fleld[key].split(".")[0] == result_table\
+                if key not in ["地市","区县","起始时间","终止时间","轮次","平均RSRP"] and user_data_cube_fleld[key].split(".")[0] == result_table\
                         and type(condition_dict[key]) == list:
                     left_condition = user_data_cube_fleld[key]+" BETWEEN "+str(condition_dict[key][0])+" and "+ str(condition_dict[key][1])+" and ";
                     inner_join = inner_join + left_condition;
+                elif key =="平均RSRP" and user_data_cube_fleld[key].split(".")[0] == result_table\
+                        and type(condition_dict[key]) == list:
+                    left_condition = user_data_cube_fleld[key]+" BETWEEN "+str(float(condition_dict[key][0])+140)+" and "+ str(float(condition_dict[key][1])+140)+" and ";
+                    inner_join = inner_join + left_condition;
                 #单选类
-                elif  key not in ["地市","区县","起始时间","终止时间","轮次"] and user_data_cube_fleld[key].split(".")[0] == result_table\
+                elif  key not in ["地市","区县","起始时间","终止时间","轮次","平均RSRP"] and user_data_cube_fleld[key].split(".")[0] == result_table\
                         and type(condition_dict[key]) == str and condition_dict[key] !="全选":
                     left_condition = user_data_cube_fleld[key] + " in " + yes_or_no[str(condition_dict[key])]+ " and ";
                     inner_join = inner_join + left_condition;
@@ -357,7 +373,8 @@ def zdycx_submit(request):
         zdycx_table_dict["table_body"].append(list(row));  # 写入字典
         col_index = 0;
         while col_index < result[0].__len__():
-            worksheet.write(data_row, col_index, row[col_index]);
+            if col_index<1048570:
+                worksheet.write(data_row, col_index, row[col_index]);
             col_index += 1
         data_row += 1;
     excel.save();
