@@ -1,5 +1,6 @@
 portrait_option = {
-    tooltip: {},
+    tooltip: {
+ },
     legend: {
         data: ['R_1'],
         top:'0px',
@@ -10,7 +11,7 @@ portrait_option = {
         name: {
             textStyle: {
                 color: '#fff',
-                backgroundColor: '#282735',
+                backgroundColor: '#000',
                 padding: [3, 5]
            }
         },
@@ -20,7 +21,8 @@ portrait_option = {
            { name: '速率评估', max: 100},
            { name: '端到端评估', max: 100},
            { name: '敏感性评估', max: 100},
-        ]
+        ],
+        triggerEvent: true,
     },
     series: {
         type: 'radar',
@@ -30,6 +32,7 @@ portrait_option = {
                 value : [],
                 name : 'R_1'
             }
-        ]
+        ],
+        triggerEvent: false,
     }
 };

@@ -271,7 +271,7 @@ def zdycx_submit(request):
         xuqian_str = str(tuple(xuqian));
     zdycx_sql = zdycx_sql+ xuqian_str+")";
     #头部部分完成
-    zdycx_sql = zdycx_sql + " select cte.city, cte.area, cte.msisdn, cte.rounds, ";
+    zdycx_sql = zdycx_sql + " select substring(cte.city,3), substring(cte.area,3), cte.msisdn, cte.rounds, ";
     co = 4;
     while co<col_list.__len__():
         zdycx_sql = zdycx_sql + user_data_cube_fleld[col_list[co]]+", ";
@@ -295,6 +295,9 @@ def zdycx_submit(request):
             zdycx_sql = zdycx_sql + inner_join;
         elif result_table == 'usr_resident_cell':
             zdycx_sql = zdycx_sql +" inner join usr_resident_cell on cte.MSISDN = usr_resident_cell.MSISDN";
+            if "用户常驻基站" in condition_dict and condition_dict[key]!="":
+                left_condition = " and "+user_data_cube_fleld[key] + " LIKE '%" + str(condition_dict[key]) + "%' ";
+            zdycx_sql = zdycx_sql + left_condition;
         elif result_table != 'usr_basic_info' and (result_table in condition_table):
             inner_join = " inner join " + result_table + " on cte.MSISDN = " + result_table + ".MSISDN and cte.rounds =" + result_table \
                         + ".rounds and "
@@ -320,8 +323,8 @@ def zdycx_submit(request):
 
     print(zdycx_sql[0:300]);
     print(zdycx_sql[300:600]);
-    print(zdycx_sql[600:]);
-
+    print(zdycx_sql[600:900]);
+    print(zdycx_sql[900:]);
     #以下是数据导出部分
     conn = pymysql.connect(host='127.0.0.1', user='root', password='user_data_cube2019', database='user_data_cube');
     cur = conn.cursor();

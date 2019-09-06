@@ -113,12 +113,13 @@
                             <span style="position: relative;left:20px;font-weight: lighter;font-family:'微软雅黑'">用户常驻基站表</span>
                             </p>
                             <ul style="display:none" id="usr_resident_cell">
-                                <li class="condition_level_3"><input type="checkbox" name="usr_resident_cell_attr" value="全选" onchange="quanxuan(this,'usr_resident_cell_attr')"/>全选</li>
-                                <li class="condition_level_3">
-                                    <input type="checkbox" name="usr_resident_cell_attr" value="用户常驻基站"/>用户常驻基站
+                                <li class="condition_level_3"><input type="checkbox" name="usr_resident_cell_attr" value="全选" onchange="quanxuan(this,'usr_resident_cell_attr',['usr_resident_cell_name','usr_resident_cell_id'])"/>全选</li>
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_resident_cell_attr" value="用户常驻基站" onchange="tiaojian_shezhi(this,['usr_resident_cell_name'])"/>用户常驻基站
+                                    <input class="condition_input" style="width:120px" type="text" disabled="disabled" name="用户常驻基站" id="usr_resident_cell_name" value="">
                                 </li>
-                                <li class="condition_level_3">
-                                    <input type="checkbox" name="usr_resident_cell_attr" value="基站ID"/>基站ID
+                                <li class="condition_level_3" style="width: 380px">
+                                    <input type="checkbox" name="usr_resident_cell_attr" value="基站ID" onchange="tiaojian_shezhi(this,['usr_resident_cell_id'])"/>基站ID
                                 </li>
                             </ul>
                     </li>

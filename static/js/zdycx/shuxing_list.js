@@ -1,4 +1,5 @@
 var reg = /^[0-9-]+$/;//用于确认为数字
+var illegal = /[~!@#$%^&*() \/]/;//用于禁止用户输入非法字符
 
 //定义显示和隐藏的函数
 function xianshi_yincang(checkbox,div_list_block,div_list_none) {
@@ -210,31 +211,31 @@ function tiaojian_queren(name_list=[]){
                 if(condition_list.indexOf(condition_items[j].value)>=0){
                     var linshi_condition_items=document.getElementsByName(condition_items[j].value);
                     console.log(linshi_condition_items);
-                    if(linshi_condition_items[0].type=="text"){
+                    if(linshi_condition_items.length==2&&linshi_condition_items[0].type=="text"){
                         if(linshi_condition_items[0].value=="" ||linshi_condition_items[1].value==""){
                             alert(condition_items[j].value+"不能输入空值");
                             zdycx_init();
                             return;
                         }
-                        else if((!reg.test(linshi_condition_items[0].value)) || (!reg.test(linshi_condition_items[1].value))){
+                        else if(linshi_condition_items.length==2&&((!reg.test(linshi_condition_items[0].value)) || (!reg.test(linshi_condition_items[1].value)))){
                             alert(condition_items[j].value+"必须为数字");
                             zdycx_init();
                             return;
                         }
-                        else if(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[0].defaultValue)||
+                        else if(linshi_condition_items.length==2&&(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[0].defaultValue)||
                         parseFloat(linshi_condition_items[0].value)>parseFloat(linshi_condition_items[1].defaultValue)||
                         parseFloat(linshi_condition_items[1].value)<parseFloat(linshi_condition_items[0].defaultValue)||
-                        parseFloat(linshi_condition_items[1].value)>parseFloat(linshi_condition_items[1].defaultValue)){
+                        parseFloat(linshi_condition_items[1].value)>parseFloat(linshi_condition_items[1].defaultValue))){
                             alert(condition_items[j].value+"超出了范围");
                             zdycx_init();
                             return;
                         }
-                        else if(parseFloat(linshi_condition_items[0].value)>=parseFloat(linshi_condition_items[1].value)){
+                        else if(linshi_condition_items.length==2&&(parseFloat(linshi_condition_items[0].value)>=parseFloat(linshi_condition_items[1].value))){
                             alert(condition_items[j].value+"起始值必须小于终止值");
                             zdycx_init();
                             return;
                         }
-                        else if(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[1].value)){
+                        else if(linshi_condition_items.length==2&&(parseFloat(linshi_condition_items[0].value)<parseFloat(linshi_condition_items[1].value))){
                             var linshi_list =[];
                             linshi_list.push(linshi_condition_items[0].value);
                             linshi_list.push(linshi_condition_items[1].value);
@@ -253,6 +254,21 @@ function tiaojian_queren(name_list=[]){
                                  zdycx_json.condition[condition_items[j].value] = linshi_condition_items[k].value;
                             }
                         }
+                    }
+                    else if(linshi_condition_items.length==1&&linshi_condition_items[0].type=="text"&&linshi_condition_items[0].value!=""){
+                        single_condition=(linshi_condition_items[0].value).trim();
+                        if(illegal.test(single_condition)){
+                            alert(condition_items[j].value+"输入了非法字符");
+                            zdycx_init();
+                            return;
+                        }
+                        if(single_condition!=""){
+                        var linshi_list =[];
+                        linshi_list.push(linshi_condition_items[0].value);
+                        condition_li = document.createElement('li');
+                        writeText(condition_li,condition_items[j].value+" ："+linshi_list[0].toString());
+                        condition_ul.appendChild(condition_li);
+                        zdycx_json.condition[condition_items[j].value] = linshi_condition_items[0].value;}
                     }
                 }
              }

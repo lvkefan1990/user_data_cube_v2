@@ -135,3 +135,24 @@
 <script type="text/javascript" src="../static/js/yhty/yhty_define.js"></script>
 <script type="text/javascript" src="../static/js/yhty/yhty_option.js"></script>
 <script type="text/javascript" src="../static/js/yhty/yhty_setoption.js"></script>
+<script type="text/javascript">
+portrait.on('click',function (params) {
+ //params.name="用户的月消费价值"
+data=params.name
+if(data=="价值评估"){
+    alert("价值评估：是根据用户月消费套餐，通话话时长所进行加权估算得分")
+}
+if(data=="覆盖评估"){
+    alert("覆盖评估：是根据用户与小区基站距离，当前区域的大包下载速率所进行加权估算得分")
+}
+if(data=="速率评估"){
+    alert("速率评估：是根据用户全业务包上下行速率和时延所进行加权估算得分")
+}
+if(data=="端到端评估"){
+    alert("端到端评估：是根据用户操作的Http请求次数和Http的响应成功率，以及TCP核心网成功率所进行加权估算得分")
+}
+if(data=="敏感性评估"){
+    alert("敏感性评估：是根据用户核心网感知，用户平均DOU，用户平均APRU所进行加权估算得分")
+}
+});
+</script>
