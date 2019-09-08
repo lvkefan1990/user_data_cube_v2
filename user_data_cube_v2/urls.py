@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from user_data_cube import jump
 from user_data_cube import submit
+from django.views import static
+from django.conf import settings
+from django.conf.urls import url
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),#跳转至admin管理页面
@@ -49,6 +52,8 @@ urlpatterns = [
     path(r'zdycx_export_excel/',submit.zdycx_export_excel),#表的导出
     path(r'jlyhfx_onload/',submit.jlyhfx_onload),#聚类用户分析的onload事件
     path(r'error_404/',jump.error_404),#404页面
+##　以下是新增
+  url(r'^static/(?P<path>.*)$', static.serve,{'document_root': settings.STATIC_ROOT}, name='static'),
 ]
 
 handler404 = jump.pageNotFound
