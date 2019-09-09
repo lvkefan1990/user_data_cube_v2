@@ -261,7 +261,7 @@ def lssj_db_search(get_value):
     telphone = [];
     for ronud_item in rounds:
         telphone.append(get_value);
-    lssj_dict["xaxis"] = RONUD_LIST;
+    lssj_dict["xaxis"] = RONUD_LIST[-6:];
     try:
         cover_list = UsrCoverPecpt.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
@@ -324,9 +324,18 @@ def lssj_db_search(get_value):
         page_list = [];
         dc_list = [];
         for call in call_list:
-            page_list.append(round(call.paging_rate, 2));
-            dc_list.append(round(call.dc_rate, 2));
-            call_l.append(round(call.paging_rate * (1 - call.dc_rate) / 100, 2)*100);
+            try:
+                page_list.append(round(call.paging_rate, 2));
+            except:
+                page_list.append("");
+            try:
+                dc_list.append(round(call.dc_rate, 2));
+            except:
+                dc_list.append("");
+            try:
+                call_l.append(round(call.paging_rate * (1 - call.dc_rate) / 100, 2)*100);
+            except:
+                call_l.append("");
         lssj_dict["call_success"] = call_l;
         # 寻呼成功率,掉话率
     # 用户速率情况
@@ -406,7 +415,7 @@ def lssj_db_search(get_value):
             tau_list.append(core.tau_rate);
     # lssj_table表示使用{row0：[各个数据]}，的形式表示各行的数据,顺序不能乱了
     print(locals());
-    lssj_table_1.append(RONUD_LIST);
+    lssj_table_1.append(RONUD_LIST[-6:]);
     lssj_table_1.append(telphone);
     lssj_table_1.append(user_enodeb);
     lssj_table_1.append(cover_table_list);
@@ -520,26 +529,73 @@ def yhty_db_search(get_value):
         "data": [],
     };
     try:
-        score_list = UsrScoreReturn.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST);
+        score_list = UsrScoreReturn.objects.filter(msisdn=get_value, rounds__in=RONUD_LIST[-6:]);
     except ValueError:
         pass;
     except UsrScoreReturn.DoesNotExist:
         pass;
     else:
         i = 0;
+        num=5;
+        #使用try+except的方法展示
         while i < score_list.__len__():
-            yhty_dict["data"].append({"name": RONUD_LIST[i],
-                                      "value": [round(score_list[i].score_usr_worth,2),
-                                                round(score_list[i].score_usr_cover_pecpt,2),
-                                                round(score_list[i].score_usr_speed_pecpt,2),
-                                                round(score_list[i].score_usr_ete_pecpt,2),
-                                                round(score_list[i].score_usr_sensitivity,2)]})
+            try:
+                worth = round(score_list[i].score_usr_worth, 2);
+            except:
+                worth=0;
+            try:
+                cover = round(score_list[i].score_usr_cover_pecpt, 2);
+            except:
+                cover=0;
+            try:
+                speed = round(score_list[i].score_usr_speed_pecpt, 2);
+            except:
+                speed=0;
+            try:
+                ete = round(score_list[i].score_usr_ete_pecpt, 2);
+            except:
+                ete=0;
+            try:
+                sensitivity = round(score_list[i].score_usr_sensitivity, 2);
+            except:
+                sensitivity = 0;
+            yhty_dict["data"].append({"name": RONUD_LIST[RONUD_LIST.__len__()-score_list.__len__()+i],
+                                      "value": [worth,cover,speed,ete,sensitivity]})
             i += 1;
-    yhty_dict["round"] = RONUD_LIST;
-    try:
-        yhty_dict["avg_score"] = round((score_list[i-1].score_usr_worth + score_list[i-1].score_usr_cover_pecpt + \
-                                        score_list[i-1].score_usr_speed_pecpt + score_list[i-1].score_usr_ete_pecpt + score_list[i-1].score_usr_sensitivity) / 5);
-    except:
+    yhty_dict["round"] = RONUD_LIST[-6:];
+    #接下来将计算最后一轮平均分
+    if score_list:
+        try:
+            last_worth=round(score_list[i-1].score_usr_worth);
+        except TypeError:
+            last_worth = 0;
+            num = num -1;
+        try:
+            last_cover = round(score_list[i-1].score_usr_cover_pecpt);
+        except TypeError:
+            last_cover = 0;
+            num = num - 1;
+        try:
+            last_speed = round(score_list[i-1].score_usr_speed_pecpt);
+        except TypeError:
+            last_speed = 0;
+            num = num - 1;
+        try:
+            last_ete = round(score_list[i-1].score_usr_ete_pecpt);
+        except TypeError:
+            last_ete = 0;
+            num = num - 1;
+        try:
+            last_sensitivity = round(score_list[i-1].score_usr_sensitivity);
+        except TypeError:
+            last_sensitivity = 0;
+            num = num - 1;
+
+        if num !=0:
+            yhty_dict["avg_score"] = round((last_worth+last_cover+last_speed+last_ete+last_sensitivity)/ 5);
+        else:
+            yhty_dict["avg_score"]=0;
+    else:
         yhty_dict["avg_score"] = 0;
     yhty_dict.update(user_basic_info_dict);
     return yhty_dict;

@@ -297,11 +297,11 @@ def zdycx_submit(request):
             zdycx_sql = zdycx_sql +" inner join usr_resident_cell on cte.MSISDN = usr_resident_cell.MSISDN";
             if "用户常驻基站" in condition_dict and condition_dict["用户常驻基站"]!="":
                 left_condition = " and "+user_data_cube_fleld["用户常驻基站"] + " LIKE '%" + str(condition_dict["用户常驻基站"]) + "%' ";
-            zdycx_sql = zdycx_sql + left_condition;
+                zdycx_sql = zdycx_sql + left_condition;
+            print(zdycx_sql);
         elif result_table != 'usr_basic_info' and (result_table in condition_table):
             inner_join = " inner join " + result_table + " on cte.MSISDN = " + result_table + ".MSISDN and cte.rounds =" + result_table \
                         + ".rounds and "
-
             for key in condition_dict:
                 #范围类
                 if key not in ["地市","区县","起始时间","终止时间","轮次","平均RSRP"] and user_data_cube_fleld[key].split(".")[0] == result_table\
