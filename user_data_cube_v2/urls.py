@@ -53,7 +53,7 @@ urlpatterns = [
     path(r'jlyhfx_onload/',submit.jlyhfx_onload),#聚类用户分析的onload事件
     path(r'error_404/',jump.error_404),#404页面
 ##　以下是新增
-  #url(r'^static/(?P<path>.*)$', static.serve,{'document_root': settings.STATIC_ROOT}, name='static'),
+  url(r'^static/(?P<path>.*)$', static.serve,{'document_root': settings.STATIC_ROOT}, name='static'),
 ]
 
 handler404 = jump.pageNotFound
