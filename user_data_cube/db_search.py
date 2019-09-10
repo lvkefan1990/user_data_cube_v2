@@ -333,7 +333,7 @@ def lssj_db_search(get_value):
             except:
                 dc_list.append("");
             try:
-                call_l.append(round(call.paging_rate * (1 - call.dc_rate) / 100, 2)*100);
+                call_l.append(round(call.paging_rate * (100 - call.dc_rate) / 10000, 2)*100);
             except:
                 call_l.append("");
         lssj_dict["call_success"] = call_l;
