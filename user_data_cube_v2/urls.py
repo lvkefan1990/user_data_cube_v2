@@ -35,8 +35,6 @@ urlpatterns = [
     path(r'exit/', jump.exit),#跳转至退出
     path(r'xgmm/', jump.xgmm),#跳转至修改密码
     path(r'jlyhfx/',jump.jlyhfx),#跳转至聚类用户分析页面
-    path(r'zdycx/',jump.zdycx),#跳转至聚类用户分析页面
-    path(r'change_password/', submit.change_password),#修改密码
     path(r'login_submit/', submit.login_submit),#提交用户名和密码
     path(r'wlgz_submit/', submit.wlgz_submit),#无线感知提交用户名和密码
     path(r'scpg_submit/', submit.scpg_submit),  # 市场评估提交用户名和密码
