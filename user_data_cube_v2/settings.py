@@ -129,11 +129,12 @@ STATIC_URL = '/static/'
 #STATIC_ROOT = 'static' ## 新增行
 
 STATIC_ROOT = os.path.join(BASE_DIR,"static")
-STATICFILES_DIRS = (os.path.join(BASE_DIR,"/static/"),)
+#STATICFILES_DIRS = (os.path.join(BASE_DIR,"/static/"),)
 #STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 LOGIN_URL ='login/';
 
 #session设置
 SESSION_COOKIE_AGE = 7200;
+
 
