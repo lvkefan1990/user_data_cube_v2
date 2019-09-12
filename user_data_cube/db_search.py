@@ -108,7 +108,7 @@ def user_basic_info(phone_number):
     except UsrExpenses.DoesNotExist:
         pass;
     else:
-        if single_UsrExpenses.if_30_arpu != 1:
+        if single_UsrExpenses.if_30_arpu != 1 and single_UsrExpenses.if_30_arpu != "是":
             dict_user_basic["is_header_user"] = "否";
         else:
             dict_user_basic["is_header_user"] = "是";
@@ -120,15 +120,15 @@ def user_basic_info(phone_number):
     except UsrCompltRecord.DoesNotExist:
         pass;
     else:
-        if single_UsrCompltRecord.if_risk_user != 1:
+        if single_UsrCompltRecord.if_risk_user != 1 and single_UsrCompltRecord.if_risk_user !="是":
             dict_user_basic["is_risk_user"] = "否";
         else:
             dict_user_basic["is_risk_user"] = "是";
-        if single_UsrCompltRecord.if_complaint_user != 1:
+        if single_UsrCompltRecord.if_complaint_user != 1 and single_UsrCompltRecord.if_complaint_user !="是":
             dict_user_basic["is_complaint_user"] = "否";
         else:
             dict_user_basic["is_complaint_user"] = "是";
-        if single_UsrCompltRecord.if_discontent_user != 1:
+        if single_UsrCompltRecord.if_discontent_user != 1 and single_UsrCompltRecord.if_discontent_user !="是":
             dict_user_basic["is_discontent_user"] = "否";
         else:
             dict_user_basic["is_discontent_user"] = "是";
@@ -224,9 +224,18 @@ def wlgz_db_search(get_value):
     except UsrCallPecpt.DoesNotExist:
         pass;
     else:
-        dict_single_user["xhcgl"] = round(single_UsrCallPecpt.paging_rate, 2);
-        dict_single_user["dxl"] = round(single_UsrCallPecpt.dc_rate, 2);
-        dict_single_user["call_success"] = round(single_UsrCallPecpt.paging_rate*(1-single_UsrCallPecpt.dc_rate),2);
+        try:
+            dict_single_user["xhcgl"] = round(single_UsrCallPecpt.paging_rate, 2);
+        except:
+            pass;
+        try:
+            dict_single_user["dxl"] = round(single_UsrCallPecpt.dc_rate, 2);
+        except:
+            pass;
+        try:
+            dict_single_user["call_success"] = round(single_UsrCallPecpt.paging_rate*(100-single_UsrCallPecpt.dc_rate)/10000,2);
+        except:
+            pass;
     #查询用户端到端数据
     try:
         single_UsrEtePecpt = UsrEtePecpt.objects.get(msisdn=get_value,rounds=RECENT_ROUND);
@@ -493,23 +502,29 @@ def scpg_db_search(get_value):
     except UsrExpenses.DoesNotExist:
         pass;
     else:
-        scpg_dict["arpu"] = [single_UsrExpenses.last3m_avg_arpu / 500];
-        scpg_dict["dou"] = [single_UsrExpenses.last3m_avg_dou / 30000];
+        try:
+            scpg_dict["arpu"] = [single_UsrExpenses.last3m_avg_arpu / 500];
+        except:
+            pass;
+        try:
+            scpg_dict["dou"] = [single_UsrExpenses.last3m_avg_dou / 30000];
+        except:
+            pass;
         scpg_dict["call_time"] = "3000min";
         scpg_dict["ztcmc"] = single_UsrExpenses.packages_name;
         scpg_dict["lldy500M"] = single_UsrExpenses.up_500m_user;
-        if single_UsrExpenses.college_user == 1:
+        if single_UsrExpenses.college_user == 1 or single_UsrExpenses.college_user == "是":
             scpg_dict["xykh"] = "是";
         else:
             scpg_dict["xykh"] = "否";
         scpg_dict["ctcyh"] = single_UsrExpenses.over_packges_user;
         scpg_dict["yjarpu"] = single_UsrExpenses.last3m_avg_arpu;
-        if single_UsrExpenses.if_30_arpu == 1:
+        if single_UsrExpenses.if_30_arpu == 1 or single_UsrExpenses.if_30_arpu == "是":
             scpg_dict["qarpuyh"] = "是";
         else:
             scpg_dict["qarpuyh"] = "否";
         scpg_dict["yjdou"] = single_UsrExpenses.last3m_avg_dou;
-        if single_UsrExpenses.if_30_dou == 1:
+        if single_UsrExpenses.if_30_dou == 1 or single_UsrExpenses.if_30_dou =="是":
             scpg_dict["doupm"] = "是";
         else:
             scpg_dict["doupm"] = "否";
