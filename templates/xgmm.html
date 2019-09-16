@@ -14,11 +14,12 @@
 
 <body>
 <div class="content">
-	
+
 	<div class="login">
 		<div  style="display:inline-block;height: 60px;margin-bottom: 80px;">
 			<div class="logo fl"></div>
-		<p class="title fl">用户数据魔方</p>
+		    <p class="title fl">用户数据魔方</p>
+            <a class="btn_tc" href="/index/" style="position: absolute;left:720px;top:-85px">返回主页</a>
 		</div>
     <form action="/change_password/" method="post">{% csrf_token %}
         <div class="login_k">
