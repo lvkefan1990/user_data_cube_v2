@@ -87,7 +87,7 @@ var lssj_ete_option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ["round1,round2,round3"]
+        data: []
     },
     yAxis: {
         type: 'value'
@@ -96,12 +96,12 @@ var lssj_ete_option = {
         {
             name:'优',
             type:'line',
-            data:[120, 132, 101, 134, 90, 230, 210]
+            data:[]
         },
         {
             name:'差',
             type:'line',
-            data:[220, 182, 191, 234, 290, 330, 310]
+            data:[]
         }
     ]
 };
@@ -115,7 +115,7 @@ var lssj_core_option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ["round1,round2,round3"]
+        data: []
     },
     yAxis: {
         type: 'value'
@@ -124,12 +124,12 @@ var lssj_core_option = {
         {
             name:'优',
             type:'line',
-            data:[120, 132, 101, 134, 90, 230, 210]
+            data:[]
         },
         {
             name:'差',
             type:'line',
-            data:[220, 182, 191, 234, 290, 330, 310]
+            data:[]
         }
     ]
 };
@@ -156,6 +156,35 @@ var lssj_expense_option = {
         },
         {
             name:'用户月均消费量',
+            type:'line',
+            data:[],
+        }
+    ]
+};
+
+var lssj__cover_option_init = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['优','差']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'优',
+            type:'line',
+            data:[],
+        },
+        {
+            name:'差',
             type:'line',
             data:[],
         }

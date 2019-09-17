@@ -1,3 +1,123 @@
+function init(){
+    //用于初始化和复原
+    $("#fggz_li").removeClass("content_l_t_tabs_select");
+    $("#thgz_li").removeClass("content_l_t_tabs_select");
+    $("#slgz_li").removeClass("content_l_t_tabs_select");
+    $("#zfnl_li").removeClass("content_l_t_tabs_select");
+    $("#fggz_li").addClass("content_l_t_tabs_select");
+    lssj_echarts.clear();
+    lssj_echarts.setOption(lssj__cover_option_init);
+    lssj__cover_option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['优','差']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'优',
+            type:'line',
+            data:[],
+        },
+        {
+            name:'差',
+            type:'line',
+            data:[],
+        }
+    ]
+};
+    lssj_call_option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['通话成功率']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'通话成功率',
+            type:'line',
+            data:[]
+        },
+    ]
+};
+    lssj_speed_option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['全业务上行速率','全业务下行速率']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'全业务上行速率',
+            type:'line',
+            data:[]
+        },
+        {
+            name:'全业务下行速率',
+            type:'line',
+            data:[]
+        }
+    ]
+};lssj_expense_option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['用户月均流量','用户月均消费量']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'用户月均流量',
+            type:'line',
+            data:[],
+        },
+        {
+            name:'用户月均消费量',
+            type:'line',
+            data:[],
+        }
+    ]
+};
+
+}
+
+
+
 function chaxun() {
         var now_time=new Date;
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
@@ -57,7 +177,26 @@ function chaxun() {
                      }
                 }
                 else{
-                    writeText(error_td,wlgz_obj.error_text);
+                    writeText(error_td,lssj_obj.error_text);
+                    writeText(phonemuber_td,"");
+                    writeText(city_td,"");
+                    writeText(district_td,"");
+                    writeText(county_td,"");
+                    writeText(citizen_or_villager_td,"");
+                    writeText(star_td,"");
+                    writeText(begin_td,"");
+                    writeText(length_of_time_td,"");
+                    writeText(phone_brand_td,"");
+                    writeText(is_header_user_td,"");
+                    writeText(is_risk_user_td,"");
+                    writeText(phone_type_td,"");
+                    init();
+                    trs = lssj_table_tbody.getElementsByTagName("tr");
+                    for(i=trs.length-1;i>=0;i--){
+                    lssj_table_tbody.removeChild(trs[i]);
+                    tr=document.createElement('tr');
+                    lssj_table_tbody.appendChild(tr);
+                    }
                 }
             }
     }}
@@ -159,7 +298,7 @@ function lssj_onload() {
                      }
                 }
                 else{
-                    writeText(error_td,wlgz_obj.error_text);
+                    //writeText(error_td,lssj_obj.error_text);
                 }
             }
     }}

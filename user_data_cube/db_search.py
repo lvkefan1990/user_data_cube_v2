@@ -255,6 +255,7 @@ def wlgz_db_search(get_value):
 
 def lssj_db_search(get_value):
     dict_user_basic = user_basic_info(get_value);
+
     lssj_dict = {"xaxis": [],
                  "good_cover": [],
                  "bad_cover": [],
@@ -265,6 +266,9 @@ def lssj_db_search(get_value):
                  "arpu": [],
                  "export_table": {},
                  };
+    if dict_user_basic["error_text"] != "正常":
+        lssj_dict.update(dict_user_basic);
+        return lssj_dict;
     rounds = RoundsLog.objects.filter();
     lssj_table_1 = [];  # lssj_table是历史数据尾部表格的数据
     telphone = [];

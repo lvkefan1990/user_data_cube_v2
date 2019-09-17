@@ -3,7 +3,6 @@ function chaxun() {
         var time=now_time.getFullYear().toString()+"年"+(now_time.getMonth()+1).toString()+"月"+now_time.getDate().toString()+"日";
         //+ now_time.getHours()+"时"+now_time.getMinutes()+"分";
         var phone_number = document.getElementById("phone_number").value;
-        alert(phone_number);
         var xhr;
         if(window.XMLHttpRequest){
             xhr= new XMLHttpRequest();
@@ -58,6 +57,37 @@ function chaxun() {
                 }
                 else{
                     writeText(error_td,scpg_obj.error_text);
+                    writeText(phonemuber_td,"");
+                    writeText(city_td,"");
+                    writeText(district_td,"");
+                    writeText(county_td,"");
+                    writeText(citizen_or_villager_td,"");
+                    writeText(star_td,"");
+                    writeText(begin_td,"");
+                    writeText(length_of_time_td,"");
+                    writeText(phone_brand_td,"");
+                    writeText(is_header_user_td,"");
+                    writeText(is_risk_user_td,"");
+                    writeText(phone_type_td,"");
+                    app.clear();
+                    apru.clear();
+                    dou.clear();
+                    call_time.innerHTML="";
+                    writeText(date_td,"");
+                    writeText(yhdh_td,"");
+                    writeText(ztcmc_td,"");
+                    writeText(lldy500M_td,"");
+                    writeText(xykh_td,"");
+                    writeText(ctcyh_td,"");
+                    writeText(yjarpu_td,"");
+                    writeText(qarpuyh_td,"");
+                    writeText(yjdou_td,"");
+                    writeText(doupm_td,"");
+                    writeText(zdpp_td,"");
+                    writeText(zdxh_td,"");
+                    writeText(lwyj_td,"");
+                    writeText(tsyh_td,"");
+                    writeText(bmyyh_td,"");
                 }
             }
     }}

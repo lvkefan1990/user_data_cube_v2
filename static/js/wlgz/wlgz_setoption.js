@@ -63,6 +63,46 @@ function chaxun() {
                 }
                 else{
                     writeText(error_td,wlgz_obj.error_text);
+                    writeText(phonemuber_td,"");
+                    writeText(city_td,"");
+                    writeText(district_td,"");
+                    writeText(county_td,"");
+                    writeText(citizen_or_villager_td,"");
+                    writeText(star_td,"");
+                    writeText(begin_td,"");
+                    writeText(length_of_time_td,"");
+                    writeText(phone_brand_td,"");
+                    writeText(is_header_user_td,"");
+                    writeText(is_risk_user_td,"");
+                    writeText(phone_type_td,"");
+                    cover.clear();
+                    rsrp.clear();
+                    dl_speed.clear();
+                    call_success.clear();
+                    writeText(date_td,"");
+                    writeText(yhdh_td,"");
+                    writeText(yhczxq_td,"");
+                    writeText(pjrsrp_td,"");
+                    writeText(fgl_td,"");
+                    writeText(cphrl_td,"");
+                    writeText(xhcgl_td,"");
+                    writeText(dxl_td,"");
+                    writeText(qywsxsl_td,"");
+                    writeText(qywxxsl_td,"");
+                    //writeText(dbsxsl_td,wlgz_obj.dl_speed);
+                    //writeText(dbxxsl_td,wlgz_obj.dl_speed);
+                    writeText(http_td,"");
+                    writeText(tcpcgl_td,"");
+                    writeText(tcpsy_td,"");
+                    writeText(tcpwxcgl_td,"");
+                    writeText(tcpwxsy_td,"");
+                    writeText(tcpwxsy_td,"");
+                    writeText(tcpwxsy_td,"");
+                    writeText(ymxysy_td,"");
+                    writeText(qhcgl_td,"");
+                    writeText(fwqqcgl_td,"");
+                    writeText(fzcgl_td,"");
+                    writeText(tau_td,"");
                 }
                 }
             }

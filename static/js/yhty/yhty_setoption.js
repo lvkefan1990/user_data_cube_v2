@@ -36,6 +36,20 @@ function chaxun() {
                 }
                 else{
                     writeText(error_td,yhty_obj.error_text);
+                    writeText(phonenumber_td,"");
+                    writeText(city_td,"");
+                    writeText(district_td,"");
+                    writeText(county_td,"");
+                    writeText(citizen_or_villager_td,"");
+                    writeText(star_td,"");
+                    writeText(begin_td,"");
+                    writeText(length_of_time_td,"");
+                    writeText(phone_brand_td,"");
+                    writeText(is_header_user_td,"");
+                    writeText(is_risk_user_td,"");
+                    writeText(phone_type_td,"");
+                    portrait.clear();
+                    writeText(pjdf_f,"");
                 }
             }
     }}
